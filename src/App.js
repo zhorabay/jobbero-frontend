@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess } from './redux/slices/authSlice';
 import SignInForm from './components/signin';
 import SignUpForm from './components/signup';
+import Navigation from './components/Navigation';
 import Home from './components/Home';
 // import Schools from './components/Schools';
 // import Courses from './components/Courses';
@@ -31,6 +32,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
+        <Navigation />
         <Routes>
           {isAuthenticated ? (
             <>
@@ -38,7 +40,8 @@ const App = () => {
               <Route path="/home" element={<Home />} />
               {/* <Route path="/schools" element={<Schools />} />
               <Route path="schools/:schoolId/courses" element={<Courses />} />
-              <Route path="schools/:schoolId/courses/:courseId/lessons/:lessonId" element={<Lesson />} />
+              <Route path="schools/:schoolId/courses/:courseId/lessons/:lessonId"
+                element={<Lesson />} />
               <Route path="/lesson_statistics" element={<LessonStatistics />} />
               <Route path="/schools/:schoolId" element={<SchoolDetails />} />
               <Route path="/schools/:schoolId/courses/:courseId" element={<CourseDetails />} />

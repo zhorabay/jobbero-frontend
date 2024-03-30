@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
-  const [photo, setPhoto] = useState('');
+  const [photo, setPhoto] = useState(null);
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -27,21 +28,20 @@ const SignUpForm = () => {
         return;
       }
 
-      const dataToSend = {
-        user: {
-          name,
-          photo,
-          email,
-          password,
-        },
-      };
+      const formData = new FormData();
+      formData.append('user[name]', name);
+      formData.append('user[photo]', photo);
+      formData.append('user[email]', email);
+      formData.append('user[password]', password);
+      formData.append('user[password_confirmation]', confirmPassword);
+      formData.append('user[role]', role);
 
       await axios.post(
-        'http://127.0.0.1:4000/api/v1/users',
-        dataToSend,
+        'http://127.0.0.1:3000/api/v1/users',
+        formData,
         {
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
           },
         },
       );
@@ -49,7 +49,7 @@ const SignUpForm = () => {
       navigate('/');
 
       setName('');
-      setPhoto('');
+      setPhoto(null);
       setEmail('');
       setPassword('');
       setConfirmPassword('');
@@ -65,6 +65,10 @@ const SignUpForm = () => {
         setError('An error occurred');
       }
     }
+  };
+
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]);
   };
 
   return (
@@ -97,8 +101,7 @@ const SignUpForm = () => {
               <input
                 type="file"
                 id="photo"
-                value={name}
-                onChange={(e) => setPhoto(e.target.value)}
+                onChange={handlePhotoChange}
                 className="mt-1 p-2 w-full border rounded-md"
                 placeholder="Choose file"
               />
@@ -157,6 +160,25 @@ const SignUpForm = () => {
               />
             </label>
             {error && <div className="text-red-500">{error}</div>}
+          </div>
+
+          <div>
+            <label
+              htmlFor="role"
+              className="block text-sm font-medium text-gray-500 text-left"
+            >
+              Role
+              <select
+                id="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="mt-1 p-2 w-full border rounded-md"
+                placeholder="Role"
+              >
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+              </select>
+            </label>
           </div>
 
           <div className="mt-6">
