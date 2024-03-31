@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess } from './redux/slices/authSlice';
 import SignInForm from './components/signin';
 import SignUpForm from './components/signup';
+import Navigation1 from './components/Navigation1';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 // import Schools from './components/Schools';
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
+        <Navigation1 />
         <Navigation />
         <Routes>
           {isAuthenticated ? (

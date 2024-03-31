@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.homepage-container {
+  min-height: 72vh;
+  background-image: url(../media/world.png), url(../media/inno.png);
+  background-position: left bottom, right top;
+  background-repeat: no-repeat;
+  width: 100%;
+  color: white;
+  padding: 100px;
+  background-color: #0b001a;
+}
+
+.home-text {
+  width: 55%;
+}
+
+.home-h1 {
+  font-size: 54px;
+  font-weight: 800;
+}
+
+.home-p {
+  color: #22c0db;
+  font-size: 35px;
+}
+
+.white {
+  color: white;
+  font-size: 35px;
+  padding: 0 5px;
+}
+
+.home-form {
+  margin-top: 100px;
+}
+
+.search-form {
+  border-radius: 70px;
+  background-color: white;
+  border: none;
+  font-size: 15px;
+  color: black;
+  font-family: "Inter", sans-serif;
+  padding: 25px 30px;
+  width: 90%;
+}
+
+.home-search-btn {
+  background-color: #f6c61b;
+  color: black;
+  border-radius: 70px;
+  border: none;
+  font-size: 22px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  margin: 8px 10px;
+  padding: 12px 20px;
+  position: absolute;
+  margin-left: 34%;
+}
+
+.home-search-btn:hover {
+  background-color: #0b001a;
+  color: #f6c61b;
+}

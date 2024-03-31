@@ -1,10 +1,12 @@
 // import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
-// import '../styles/Home.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import '../styles/Home.css';
 
-const Homepage = () => {
-  // const [hotelItems, setHotelItems] = useState([]);
-  // const [isMenuOpen, setMenuOpen] = useState(true);
+const Homepage = () =>
+// const [hotelItems, setHotelItems] = useState([]);
+// const [isMenuOpen, setMenuOpen] = useState(true);
 
   // const toggleMenu = () => {
   //   setMenuOpen(!isMenuOpen);
@@ -20,14 +22,37 @@ const Homepage = () => {
   //   };
   //   fetchHotelItems();
   // }, []);
-  return (
+  (
     <>
       <div className="homepage-container">
-        <h1>Latest Hotels</h1>
-        <p>Please select a hotel</p>
+        <div className="home-text">
+          <div className="home-title">
+            <h1 className="home-h1">Discover Your Potential:</h1>
+            <p className="home-p">
+              Acquire In-Demand
+              <span className="white">
+                Skills
+              </span>
+              and Land Your Dream
+              <span className="white">
+                Career
+              </span>
+              Today!
+            </p>
+          </div>
+          <div className="home-form">
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search courses, instructors..."
+                className="me-2 search-form"
+                aria-label="Search"
+              />
+              <Button type="button" className="home-search-btn">Search</Button>
+            </Form>
+          </div>
+        </div>
       </div>
     </>
   );
-};
-
 export default Homepage;
