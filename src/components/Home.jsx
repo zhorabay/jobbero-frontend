@@ -2,7 +2,16 @@
 // import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Infograph from './Infograph';
+import CategoryCarousel from './Carousel';
 import '../styles/Home.css';
+import Prospects from './Prospects';
+import Vision from './Vision';
+import FeaturedCourses from './FeaturedCourses';
+import ExpertTutors from './ExpertTutors';
+import Invitation from './Invitation';
+import Partners from './Partners';
+import Footer from './Footer';
 
 const Homepage = () =>
 // const [hotelItems, setHotelItems] = useState([]);
@@ -53,6 +62,15 @@ const Homepage = () =>
           </div>
         </div>
       </div>
+      <Infograph />
+      <Prospects />
+      <CategoryCarousel />
+      <Vision />
+      <FeaturedCourses />
+      <ExpertTutors />
+      <Invitation />
+      <Partners />
+      <Footer />
     </>
   );
 export default Homepage;

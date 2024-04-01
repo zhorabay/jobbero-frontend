@@ -37,14 +37,14 @@ function Navigation() {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#features">Home</Nav.Link>
-            <Nav.Link href="#pricing">Courses</Nav.Link>
-            <Nav.Link href="#pricing">Instructors</Nav.Link>
-            <Nav.Link href="#pricing">Forum</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/course">Courses</Nav.Link>
+            <Nav.Link href="/instructors">Instructors</Nav.Link>
+            <Nav.Link href="/forum">Forum</Nav.Link>
           </Nav>
           <Nav>
             <Button type="button" className="nav-btn">Start Learning</Button>
-            <Nav.Link to="https://www.jobbero.com/" eventKey={2} href="#memes">
+            <Nav.Link href="https://www.jobbero.com/" eventKey={2}>
               Powered By:
               <img src={jobbero} alt="google" className="brand-img" id="brand" />
             </Nav.Link>
