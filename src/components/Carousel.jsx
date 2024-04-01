@@ -31,7 +31,14 @@ const CategoryCarousel = () => {
   return (
     <div className="category-section">
       <h2 className="category-h2">Browse Skills By Categories</h2>
-      <Slider {...settings} className="carousel">
+      <Slider
+        dots={settings.dots}
+        infinite={settings.infinite}
+        speed={settings.speed}
+        slidesToShow={settings.slidesToShow}
+        slidesToScroll={settings.slidesToScroll}
+        className="carousel"
+      >
         {categories.map((category) => (
           <div key={category.id}>
             <img src={category.image} alt="category" className="category-img" />

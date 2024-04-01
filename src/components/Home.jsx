@@ -2,6 +2,8 @@
 // import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Navigation1 from './Navigation1';
+import Navigation from './Navigation';
 import Infograph from './Infograph';
 import CategoryCarousel from './Carousel';
 import '../styles/Home.css';
@@ -33,6 +35,8 @@ const Homepage = () =>
   // }, []);
   (
     <>
+      <Navigation1 />
+      <Navigation />
       <div className="homepage-container">
         <div className="home-text">
           <div className="home-title">

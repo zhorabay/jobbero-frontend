@@ -18,7 +18,7 @@ function Invitation() {
               <br />
               with in-demand skills that set you apart in today&apos;s
               <br />
-            competitive job market
+              competitive job market
             </p>
           </div>
         </div>

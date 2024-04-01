@@ -76,7 +76,7 @@
 .homepage-container-2,
 .featured-container,
 .expert-container {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   display: flex;
   justify-content: center;
 }
@@ -112,7 +112,7 @@
 }
 
 .prospects-container {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   background-image: url(../media/arrow.png);
   background-repeat: no-repeat;
   background-position: left bottom;
@@ -168,35 +168,35 @@
 
 .card-img-1 {
   width: 35%;
-  background-color: #22DBAF;
+  background-color: #22dbaf;
   padding: 20px;
   border-radius: 8px;
 }
 
 .card-img-2 {
   width: 35%;
-  background-color: #D722DB;
+  background-color: #d722db;
   padding: 20px;
   border-radius: 8px;
 }
 
 .card-img-3 {
   width: 35%;
-  background-color: #EDA2A2;
+  background-color: #eda2a2;
   padding: 20px;
   border-radius: 8px;
 }
 
 .card-img-4 {
   width: 35%;
-  background-color: #CCDB22;
+  background-color: #ccdb22;
   padding: 20px;
   border-radius: 8px;
 }
 
 .card-img-5 {
   width: 35%;
-  background-color: #98DDF2;
+  background-color: #98ddf2;
   padding: 20px;
   border-radius: 8px;
 }
@@ -220,7 +220,7 @@
 }
 
 .category-section {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   text-align: center;
   padding: 50px;
 }
@@ -238,7 +238,7 @@
 }
 
 .vision-container {
-  background-color: #0B001A;
+  background-color: #0b001a;
   display: flex;
   justify-content: space-between;
 }
