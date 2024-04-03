@@ -7,6 +7,7 @@ import { loginSuccess } from './redux/slices/authSlice';
 import SignInForm from './components/signin';
 import SignUpForm from './components/signup';
 import Home from './components/Home';
+import EmailConfirmation from './components/EmailConfirmation';
 import './i18n';
 // import Schools from './components/Schools';
 // import Courses from './components/Courses';
@@ -37,6 +38,7 @@ const App = () => {
             <>
               <Route path="/*" element={<Navigate to="/home" />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/email-confirmation" element={<EmailConfirmation />} />
               {/* <Route path="/schools" element={<Schools />} />
               <Route path="schools/:schoolId/courses" element={<Courses />} />
               <Route path="schools/:schoolId/courses/:courseId/lessons/:lessonId"
@@ -53,6 +55,7 @@ const App = () => {
               <Route path="/login" element={<SignInForm />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/*" element={<Home />} />
+              <Route path="/email-confirmation" element={<EmailConfirmation />} />
             </>
           )}
         </Routes>
