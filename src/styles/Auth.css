@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.signin-container {
+  background-color: #483F50;
+}
+
+.signin-flex {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  padding: 65px 0;
+  padding-bottom: 115px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.signin-girl {
+  width: 90%;
+  padding: 20px;
+}
+
+.signin-form {
+  background-color: #fff;
+  border-radius: 60px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin-right: 5%;
+}
+
+.signin-h2 {
+  font-size: 20px;
+  font-weight: 500;
+  align-self: center;
+  padding-bottom: 30px;
+}
+
+.signin-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+  padding-top: 15px;
+}
+
+.signin-label-p {
+  display: grid;
+  grid-template-columns: 30% 104%;
+  gap: 5%;
+}
+
+.signin-input,
+.signin-input-p,
+.signin-input-p2 {
+  border-radius: 20px;
+  background-color: #d9d9d9;
+  padding: 8px;
+  margin: 8px 0;
+  width: 100%;
+  border: none;
+}
+
+.signin-input-p {
+  padding: 8px 20px;
+  background-color: #fff;
+  border: 1px solid #483F50;
+}
+
+.signin-btn {
+  border-radius: 14px;
+  border: none;
+  background-color: #f6c61b;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  padding: 10px 30px;
+}
+
+.mt-6 {
+  align-self: end;
+  padding: 25px 0;
+}
+
+.sigin-forgot,
+.sigin-dont-have,
+.sigin-up {
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.sigin-forgot {
+  font-weight: 400;
+  padding-bottom: 8px;
+}
+
+.sigin-up {
+  color: #f6c61b;
+  padding-left: 8px;
+}
+
+.signup-checkbox {
+  padding-top: 20px;
+}
+
+.signup-btn {
+  padding: 25px 0;
+  align-self: center;
+}
+
+/* select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+} */

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import girl from '../media/girl.png';
+import '../styles/Auth.css';
+import Navigation2 from './Navigation2';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
-  const [photo, setPhoto] = useState(null);
+  const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +34,7 @@ const SignUpForm = () => {
 
       const formData = new FormData();
       formData.append('user[name]', name);
-      formData.append('user[photo]', photo);
+      formData.append('user[phone]', phone);
       formData.append('user[email]', email);
       formData.append('user[password]', password);
       formData.append('user[password_confirmation]', confirmPassword);
@@ -49,7 +53,7 @@ const SignUpForm = () => {
       navigate('/');
 
       setName('');
-      setPhoto(null);
+      setPhone(null);
       setEmail('');
       setPassword('');
       setConfirmPassword('');
@@ -67,131 +71,165 @@ const SignUpForm = () => {
     }
   };
 
-  const handlePhotoChange = (e) => {
-    setPhoto(e.target.files[0]);
+  const handlePhoneChange = (countryCode, phoneNumber) => {
+    setPhone(`${countryCode}${phoneNumber}`);
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full bg-opacity-90">
-        <form className="space-y-3" onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Name
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Name"
-              />
-            </label>
+    <>
+      <Navigation2 />
+      <div className="signin-container">
+        <div className="signin-flex">
+          <div className="signin-img">
+            <img src={girl} alt="student" className="signin-girl" />
           </div>
-
-          <div>
-            <label
-              htmlFor="photo"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Photo
-              <input
-                type="file"
-                id="photo"
-                onChange={handlePhotoChange}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Choose file"
-              />
-            </label>
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Email
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Email"
-              />
-            </label>
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Password
-              <input
-                type="password"
-                id="password"
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Password"
-                autoComplete="new-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            {error && <div className="text-red-500">{error}</div>}
-          </div>
-
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Confirm Password
-              <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Confirm Password"
-              />
-            </label>
-            {error && <div className="text-red-500">{error}</div>}
-          </div>
-
-          <div>
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Role
-              <select
-                id="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Role"
+          <form className="signin-form" onSubmit={handleSubmit}>
+            <h2 className="signin-h2">Get Started!</h2>
+            <div>
+              <label
+                htmlFor="email"
+                className="signin-label"
               >
-                <option value="student">Student</option>
-                <option value="instructor">Instructor</option>
-              </select>
-            </label>
-          </div>
+                Email
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="signin-input"
+                />
+              </label>
+            </div>
 
-          <div className="mt-6">
-            <button
-              type="submit"
-              className="w-full p-2 text-center text-white rounded-md bg-blue-600"
-            >
-              Sign up
-            </button>
-          </div>
-        </form>
+            <div>
+              <label
+                htmlFor="phone"
+                className="signin-label"
+              >
+                Phone
+                <div className="signin-label-p">
+                <select
+                  id="phone-coutry"
+                  className="signin-input-p"
+                  onClick={(e) => handlePhoneChange(e.target.value, document.getElementById('phone').value)}
+                  placeholder="+1"
+                >
+                  <option value="phone">+1</option>
+                  <option value="phone">+40</option>
+                </select>
+                <input
+                  type="number"
+                  id="phone"
+                  className="signin-input-p2"
+                />
+                </div>
+              </label>
+            </div>
+
+            <div>
+              <label
+                htmlFor="name"
+                className="signin-label"
+              >
+                Full Name
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="signin-input"
+                />
+              </label>
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="signin-label"
+              >
+                Password
+                <input
+                  type="password"
+                  id="password"
+                  className="signin-input"
+                  autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+              {error && <div className="text-red-500">{error}</div>}
+            </div>
+
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="signin-label"
+              >
+                Retype Password
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="signin-input"
+                />
+              </label>
+              {error && <div className="text-red-500">{error}</div>}
+            </div>
+
+            <div>
+              <label
+                htmlFor="role"
+                className="signin-label"
+              >
+                Role
+                <select
+                  id="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="signin-input"
+                >
+                  <option value="student">Student</option>
+                  <option value="instructor">Instructor</option>
+                </select>
+              </label>
+            </div>
+
+            <div>
+              <Form.Check
+                type="checkbox"
+                className="signup-checkbox"
+                label={(
+                  <>
+                    Agree to Origin8Lab Company&apos;s
+                    {' '}
+                    <Link to="/terms">Terms of Use</Link>
+                    {' '}
+                    and
+                    {' '}
+                    <Link to="/terms">Privacy Policy</Link>
+                    .
+                  </>
+                )}
+              />
+            </div>
+
+            <div className="signup-btn">
+              <button
+                type="submit"
+                className="signin-btn"
+              >
+                Sign Up
+              </button>
+            </div>
+            <p className="sigin-dont-have">
+              Have an account?
+              <Link to="/login" className="sigin-up">Log In</Link>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

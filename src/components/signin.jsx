@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginSuccess, loginFailure } from '../redux/slices/authSlice';
+import girl from '../media/girl.png';
+import '../styles/Auth.css';
+import Navigation2 from './Navigation2';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -52,55 +55,63 @@ const SignIn = () => {
   };
 
   return (
-    <div
-      className="bg-gray-100 min-h-screen flex items-center justify-center"
-    >
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full bg-opacity-90">
-        <form className="space-y-4" onSubmit={handleLogin}>
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Email
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Email"
-              />
-            </label>
+    <>
+      <Navigation2 />
+      <div className="signin-container">
+        <div className="signin-flex">
+          <div className="signin-img">
+            <img src={girl} alt="student" className="signin-girl" />
           </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Password
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Password"
-              />
-            </label>
-            {error && <div className="text-red-500">{error}</div>}
-          </div>
-          <div className="mt-6">
-            <button
-              type="submit"
-              className="w-full p-2 text-center text-white rounded-md bg-blue-600"
-            >
-              Sign In
-            </button>
-          </div>
-        </form>
+          <form className="signin-form" onSubmit={handleLogin}>
+            <h2 className="signin-h2">Sign In To Origin8Lab</h2>
+            <div className="signin-form-li">
+              <label
+                htmlFor="email"
+                className="signin-label"
+              >
+                Email
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="signin-input"
+                />
+              </label>
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="signin-label"
+              >
+                Password
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="signin-input"
+                />
+              </label>
+              {error && <div className="text-red-500">{error}</div>}
+            </div>
+            <div className="mt-6">
+              <button
+                type="submit"
+                className="signin-btn"
+              >
+                Log In
+              </button>
+            </div>
+            <Link to="/forget-a-password" className="sigin-forgot">Forgot you password?</Link>
+            <p className="sigin-dont-have">
+              Don&apos;t have an account?
+              <Link to="/signup" className="sigin-up">Sign Up</Link>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
