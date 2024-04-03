@@ -7,6 +7,7 @@ import { loginSuccess } from './redux/slices/authSlice';
 import SignInForm from './components/signin';
 import SignUpForm from './components/signup';
 import Home from './components/Home';
+import './i18n';
 // import Schools from './components/Schools';
 // import Courses from './components/Courses';
 // import LessonStatistics from './components/LessonStatistics';

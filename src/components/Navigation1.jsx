@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -9,21 +11,32 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Navbar.css';
 
 function Navigation1() {
+  const [showCurrencies, setShowCurrencies] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  const handleCurrencyClick = () => {
+    setShowCurrencies(!showCurrencies);
+  };
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Nav>
-          <NavDropdown title="USD($)" id="navbarScrollingDropdown">
-            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+          <NavDropdown title="USD($)" id="navbarScrollingDropdown" show={showCurrencies} onClick={handleCurrencyClick}>
+            <NavDropdown.Item>Euro (€)</NavDropdown.Item>
+            <NavDropdown.Item>Pound (£)</NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="English" id="navbarScrollingDropdown">
-            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
+          <NavDropdown title={t('navbar.english')} id="navbarLanguageDropdown">
+            <NavDropdown.Item onClick={() => changeLanguage('en')}>
+              {t('navbar.english')}
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => changeLanguage('fr')}>
+              {t('navbar.french')}
+            </NavDropdown.Item>
           </NavDropdown>
           <Form className="d-flex">
             <Form.Control
