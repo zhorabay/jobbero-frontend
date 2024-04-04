@@ -119,8 +119,44 @@
   align-self: center;
 }
 
-/* select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-} */
+.confirmation-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #483f50;
+}
+
+.confirmation-flex {
+  border: none;
+  border-radius: 60px;
+  margin: 35px;
+  padding: 200px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 95%;
+  text-align: center;
+}
+
+.confirmation-h2 {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.confirmation-p {
+  font-size: 18px;
+}
+
+.confirmation-resend {
+  font-size: 20px;
+  color: #ffbf00;
+  font-weight: 600;
+}
+
+.red-part {
+  color: #ff0000;
+  font-size: 18px;
+}

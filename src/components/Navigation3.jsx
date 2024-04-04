@@ -15,7 +15,7 @@ function Navigation3() {
           <img src={origin8lab2} alt="origin8lab2" className="brand-img" id="brand" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-between">
+        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
           <Nav>
             <Nav.Link href="/login" eventKey={2}>
               <img src={signin} alt="signin" className="brand-img" id="brand" />
