@@ -32,10 +32,10 @@ function Footer() {
         </ul>
         <ul className="footer-links">
           <li className="footer-link">
-            <Link to="/about" className="footer-link-a">About Us</Link>
+            <Link to="/about-us" className="footer-link-a">About Us</Link>
           </li>
           <li className="footer-link">
-            <Link to="/policy" className="footer-link-a">Privacy policy</Link>
+            <Link to="/privacy-policy" className="footer-link-a">Privacy policy</Link>
           </li>
           <li className="footer-link">
             <Link to="/terms" className="footer-link-a">Terms</Link>

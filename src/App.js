@@ -10,6 +10,8 @@ import Home from './components/Home';
 import EmailConfirmation from './components/EmailConfirmation';
 import './i18n';
 import Account from './components/Account';
+import About from './components/About';
+import Policy from './components/Policy';
 // import Schools from './components/Schools';
 // import Courses from './components/Courses';
 // import LessonStatistics from './components/LessonStatistics';
@@ -41,6 +43,8 @@ const App = () => {
               <Route path="/home" element={<Home />} />
               <Route path="/email-confirmation" element={<EmailConfirmation />} />
               <Route path="/my-profile" element={<Account />} />
+              <Route path="/about-us" element={<About />} />
+              <Route path="/privacy-policy" element={<Policy />} />
               {/* <Route path="/schools" element={<Schools />} />
               <Route path="schools/:schoolId/courses" element={<Courses />} />
               <Route path="schools/:schoolId/courses/:courseId/lessons/:lessonId"
@@ -57,7 +61,8 @@ const App = () => {
               <Route path="/login" element={<SignInForm />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/*" element={<Home />} />
-              <Route path="/my-profile" element={<Account />} />
+              <Route path="/about-us" element={<About />} />
+              <Route path="/privacy-policy" element={<Policy />} />
             </>
           )}
         </Routes>

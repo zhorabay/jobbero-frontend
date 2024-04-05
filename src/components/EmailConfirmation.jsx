@@ -20,7 +20,7 @@ function EmailConfirmation({ users }) {
                 {user.email}
               </span>
             </p>
-            <p className="confirmation-p">Check your spam folder if you don’t see the email immediately</p>
+            <p className="confirmation-p">Check your spam folder if you don&apos;t see the email immediately</p>
             <p className="confirmation-resend">RESEND EMAIL</p>
           </div>
         ))}
