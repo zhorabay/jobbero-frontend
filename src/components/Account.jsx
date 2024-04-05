@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import down from '../media/down.png';
 import signin from '../media/sign-blue.png';
 import '../styles/Auth.css';
@@ -6,6 +7,17 @@ import Navigation3 from './Navigation3';
 
 function Account() {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/v1/users')
+      .then(response => {
+        setUser(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -17,9 +29,19 @@ function Account() {
         <div className="account-flex">
           <div className="account-section1">
             <h2 className="account-h2">Welcome to Origin8Lab Africa, Here is your dashboard</h2>
-            <div className="account-section2">
-              <img src={signin} alt="signin" className="account-signin" />
-              <p className="account-user">Edwin Clark</p>
+            <div className="account-section2">        
+              {user ? (
+                <>
+                  {user.photo ? (
+                    <img src={user.photo} alt="Profile" className="account-signin" />
+                  ) : (
+                    <img src={signin} alt="signin" className="account-signin" />
+                  )}
+                  <p className="account-user">{user.name}</p>
+                </>
+              ) : (
+                <p>Loading...</p>
+              )}
             </div>
             <div className="account-section21">
               <div className="account-text">
