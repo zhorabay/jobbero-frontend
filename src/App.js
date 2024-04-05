@@ -12,6 +12,7 @@ import './i18n';
 import Account from './components/Account';
 import About from './components/About';
 import Policy from './components/Policy';
+import Courses from './components/Courses';
 // import Schools from './components/Schools';
 // import Courses from './components/Courses';
 // import LessonStatistics from './components/LessonStatistics';
@@ -45,6 +46,7 @@ const App = () => {
               <Route path="/my-profile" element={<Account />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
+              <Route path="/courses" element={<Courses />} />
               {/* <Route path="/schools" element={<Schools />} />
               <Route path="schools/:schoolId/courses" element={<Courses />} />
               <Route path="schools/:schoolId/courses/:courseId/lessons/:lessonId"
@@ -63,6 +65,7 @@ const App = () => {
               <Route path="/*" element={<Home />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
+              <Route path="/courses" element={<Courses />} />
             </>
           )}
         </Routes>
