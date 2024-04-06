@@ -13,6 +13,7 @@ import Account from './components/Account';
 import About from './components/About';
 import Policy from './components/Policy';
 import Courses from './components/Courses';
+import Cart from './components/Cart';
 // import Schools from './components/Schools';
 // import Courses from './components/Courses';
 // import LessonStatistics from './components/LessonStatistics';
@@ -47,6 +48,7 @@ const App = () => {
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/cart" element={<Cart />} />
               {/* <Route path="/schools" element={<Schools />} />
               <Route path="schools/:schoolId/courses" element={<Courses />} />
               <Route path="schools/:schoolId/courses/:courseId/lessons/:lessonId"

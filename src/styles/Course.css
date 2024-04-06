@@ -17,11 +17,77 @@
   color: #fff;
 }
 
-.courses-flex {
+.courses-flex,
+.cart-flex {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   width: 85%;
   margin: auto;
+}
+
+.cart-flex {
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 12px;
+  min-height: 100vh;
+}
+
+.cart-list-info {
+  display: flex;
+  gap: 16px;
+  padding-top: 10px;
+}
+
+.cart-list-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cart-img {
+  width: 20%;
+}
+
+.cart-h2,
+.cart-total-price {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.cart-h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cart-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #F6C61B;
+  padding-left: 30px;
+}
+
+.cart-hours {
+  font-size: 18px;
+  color: #F6C61B;
+}
+
+.cart-hr {
+  border: 1px solid #fff;
+  color: #fff;
+  transform: rotate(90deg);
+  width: 13%;
+  margin-top: 110px;
+}
+
+.cart-remove,
+.cart-remove:hover {
+  background-color: transparent;
+  color: #F6C61B;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
 }

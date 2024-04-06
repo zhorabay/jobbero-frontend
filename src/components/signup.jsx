@@ -207,7 +207,7 @@ const SignUpForm = () => {
                     {' '}
                     and
                     {' '}
-                    <Link to="/terms">Privacy Policy</Link>
+                    <Link to="/privacy-policy">Privacy Policy</Link>
                     .
                   </>
                 )}

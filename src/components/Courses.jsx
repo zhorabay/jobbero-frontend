@@ -6,7 +6,7 @@ import '../styles/Course.css';
 import Navigation3 from './Navigation3';
 
 function Courses() {
-    const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
