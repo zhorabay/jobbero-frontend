@@ -22,7 +22,7 @@ function Cart() {
               <p className="cart-price">$32</p>
             </div>
           </div>
-          <hr className="cart-hr"/>
+          <hr className="cart-hr" />
           <div>
             <h2 className="cart-h2">Total:</h2>
             <p className="cart-total-price">$32</p>

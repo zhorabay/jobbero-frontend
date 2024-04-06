@@ -54,7 +54,7 @@
 }
 
 .section2-imgs {
-  border: 10px solid #FFD233;
+  border: 10px solid #ffd233;
   border-radius: 18px;
   background-color: transparent;
   width: 43%;
@@ -88,7 +88,7 @@
 .about-h4 {
   font-size: 27px;
   font-weight: 500;
-  color: #F6C61B;
+  color: #f6c61b;
 }
 
 .about-h3 {
@@ -97,7 +97,7 @@
 }
 
 .about-section3 {
-  color: #F6C61B;
+  color: #f6c61b;
   font-size: 40px;
   font-weight: bold;
   width: 80%;
@@ -128,7 +128,7 @@
 }
 
 .about-about3 {
-  border: 15px solid #F6C61B;
+  border: 15px solid #f6c61b;
   border-radius: 50px;
   z-index: 1;
   position: absolute;
@@ -136,7 +136,7 @@
 }
 
 .about-btn {
-  background-color: #F6C61B;
+  background-color: #f6c61b;
   border: none;
   padding: 4px 10px;
   margin: 10px 0;

@@ -14,7 +14,7 @@ import About from './components/About';
 import Policy from './components/Policy';
 import Courses from './components/Courses';
 import Cart from './components/Cart';
-// import Schools from './components/Schools';
+import Modules from './components/Modules';
 // import Courses from './components/Courses';
 // import LessonStatistics from './components/LessonStatistics';
 // import SchoolDetails from './components/SchoolDetails';
@@ -49,6 +49,7 @@ const App = () => {
               <Route path="/privacy-policy" element={<Policy />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/modules" element={<Modules />} />
               {/* <Route path="/schools" element={<Schools />} />
               <Route path="schools/:schoolId/courses" element={<Courses />} />
               <Route path="schools/:schoolId/courses/:courseId/lessons/:lessonId"
@@ -68,6 +69,7 @@ const App = () => {
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/modules" element={<Modules />} />
             </>
           )}
         </Routes>

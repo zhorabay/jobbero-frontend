@@ -9,7 +9,7 @@
 }
 
 .signin-container {
-  background-color: #483F50;
+  background-color: #483f50;
 }
 
 .signin-flex {
@@ -72,7 +72,7 @@
 .signin-input-p {
   padding: 8px 20px;
   background-color: #fff;
-  border: 1px solid #483F50;
+  border: 1px solid #483f50;
 }
 
 .signin-btn {
@@ -157,7 +157,7 @@
 }
 
 .red-part {
-  color: #ff0000;
+  color: #f00;
   font-size: 18px;
 }
 
@@ -262,9 +262,9 @@
 }
 
 .account-hr {
-  color: #22C0DB;
+  color: #22c0db;
   width: 100%;
-  border: 1px solid #22C0DB;
+  border: 1px solid #22c0db;
 }
 
 .account-course-list {
@@ -285,7 +285,7 @@
   margin: 0;
 }
 
-.button-prt2,
+.button-prt1,
 .button-prt2 {
   display: flex;
   align-items: center;

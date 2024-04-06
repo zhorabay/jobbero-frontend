@@ -108,20 +108,20 @@ const SignUpForm = () => {
               >
                 Phone
                 <div className="signin-label-p">
-                <select
-                  id="phone-coutry"
-                  className="signin-input-p"
-                  onClick={(e) => handlePhoneChange(e.target.value, document.getElementById('phone').value)}
-                  placeholder="+1"
-                >
-                  <option value="phone">+1</option>
-                  <option value="phone">+40</option>
-                </select>
-                <input
-                  type="number"
-                  id="phone"
-                  className="signin-input-p2"
-                />
+                  <select
+                    id="phone-coutry"
+                    className="signin-input-p"
+                    onClick={(e) => handlePhoneChange(e.target.value, document.getElementById('phone').value)}
+                    placeholder="+1"
+                  >
+                    <option value="phone">+1</option>
+                    <option value="phone">+40</option>
+                  </select>
+                  <input
+                    type="number"
+                    id="phone"
+                    className="signin-input-p2"
+                  />
                 </div>
               </label>
             </div>

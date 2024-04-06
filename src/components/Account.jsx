@@ -11,10 +11,10 @@ function Account() {
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/v1/users')
-      .then(response => {
+      .then((response) => {
         setUser(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching user data:', error);
       });
   }, []);
@@ -22,6 +22,7 @@ function Account() {
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
   return (
     <>
       <Navigation3 />
@@ -29,7 +30,7 @@ function Account() {
         <div className="account-flex">
           <div className="account-section1">
             <h2 className="account-h2">Welcome to Origin8Lab Africa, Here is your dashboard</h2>
-            <div className="account-section2">        
+            <div className="account-section2">
               {user ? (
                 <>
                   {user.photo ? (
@@ -90,7 +91,7 @@ function Account() {
               </div>
             )}
           </div>
-      </div>
+        </div>
       </div>
     </>
   );

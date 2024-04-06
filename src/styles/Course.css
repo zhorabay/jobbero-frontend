@@ -65,13 +65,13 @@
 .cart-price {
   font-size: 18px;
   font-weight: 600;
-  color: #F6C61B;
+  color: #f6c61b;
   padding-left: 30px;
 }
 
 .cart-hours {
   font-size: 18px;
-  color: #F6C61B;
+  color: #f6c61b;
 }
 
 .cart-hr {
@@ -85,9 +85,103 @@
 .cart-remove,
 .cart-remove:hover {
   background-color: transparent;
-  color: #F6C61B;
+  color: #f6c61b;
   border: none;
   padding: 0;
   margin: 0;
   font-size: 18px;
+}
+
+.modules-container {
+  padding: 100px 0;
+  background-color: #483f50;
+}
+
+.modules-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 85%;
+  margin: auto;
+  background-color: #fff;
+  color: #000;
+  border-radius: 60px;
+  padding: 120px 100px;
+  min-height: 200vh;
+}
+
+.modules-choose {
+  display: flex;
+  gap: 30px;
+  padding-top: 30px;
+}
+
+.modules-choose-t {
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.modules-section3 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.modules-expand {
+  display: flex;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: space-between;
+  width: 15%;
+  border: none;
+  border-radius: 20px;
+  background-color: #f6c61b;
+}
+
+.modules-btn-prt1 {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: flex-start;
+}
+
+.modules-btn-prt2 {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.modules-lessons {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.modules-expand-lessons {
+  border: none;
+  background: transparent;
+  color: #22c0db;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.modules-list {
+  position: absolute;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 60%;
 }
