@@ -61,7 +61,6 @@ const FeaturedCourses = () => {
                   <Button variant="primary">Add to Cart</Button>
                 </Card.Body>
               </Card>
-
             </div>
           ))}
         </div>
