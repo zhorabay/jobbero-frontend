@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../redux/slices/authSlice';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,6 +12,20 @@ import origin8lab2 from '../media/origin8lab2.png';
 import signin from '../media/signin.png';
 
 function Navigation3() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [logoutMessage, setLogoutMessage] = useState('');
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout());
+      setLogoutMessage('Logout successful');
+      navigate('/');
+    } catch (error) {
+      setLogoutMessage('Logout failed');
+    }
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" className="navbar2">
       <Container>
@@ -17,12 +35,13 @@ function Navigation3() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link href="/login" eventKey={2}>
+            <Nav.Link href="/my-profile" eventKey={2}>
               <img src={signin} alt="signin" className="brand-img" id="brand" />
             </Nav.Link>
           </Nav>
           <Nav>
-            <Button type="button" className="nav-btn">Start Learning</Button>
+            <Button type="button" className="nav-btn" onClick={handleLogout}>Logout</Button>
+            {logoutMessage && <p>{logoutMessage}</p>}
           </Nav>
         </Navbar.Collapse>
       </Container>

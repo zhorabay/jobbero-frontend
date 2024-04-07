@@ -26,7 +26,7 @@ function Cart() {
           <div>
             <h2 className="cart-h2">Total:</h2>
             <p className="cart-total-price">$32</p>
-            <Button>Make a Payment</Button>
+            <Button type="button" href="/registration">Make a Payment</Button>
           </div>
         </div>
       </div>

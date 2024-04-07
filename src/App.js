@@ -15,6 +15,8 @@ import Policy from './components/Policy';
 import Courses from './components/Courses';
 import Cart from './components/Cart';
 import Modules from './components/Modules';
+import Registration from './components/Registration';
+import Payment from './components/Payment';
 // import Courses from './components/Courses';
 // import LessonStatistics from './components/LessonStatistics';
 // import SchoolDetails from './components/SchoolDetails';
@@ -70,6 +72,8 @@ const App = () => {
               <Route path="/privacy-policy" element={<Policy />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/modules" element={<Modules />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/payment" element={<Payment />} />
             </>
           )}
         </Routes>
