@@ -11,7 +11,6 @@ const SignUpForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -38,7 +37,6 @@ const SignUpForm = () => {
       formData.append('user[email]', email);
       formData.append('user[password]', password);
       formData.append('user[password_confirmation]', confirmPassword);
-      formData.append('user[role]', role);
 
       await axios.post(
         'http://127.0.0.1:3000/api/v1/users',
@@ -50,7 +48,7 @@ const SignUpForm = () => {
         },
       );
 
-      navigate('/');
+      navigate('/courses');
 
       setName('');
       setPhone(null);
@@ -175,24 +173,6 @@ const SignUpForm = () => {
                 />
               </label>
               {error && <div className="text-red-500">{error}</div>}
-            </div>
-
-            <div>
-              <label
-                htmlFor="role"
-                className="signin-label"
-              >
-                Role
-                <select
-                  id="role"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                  className="signin-input"
-                >
-                  <option value="student">Student</option>
-                  <option value="instructor">Instructor</option>
-                </select>
-              </label>
             </div>
 
             <div>

@@ -33,10 +33,12 @@ function Courses() {
                 <Card style={{ width: '18rem' }}>
                   <Card.Img variant="top" src={course.image} />
                   <Card.Body>
+                    <Link href="/:courseId/modules" className="courses-link">
                     <Card.Title>{course.title}</Card.Title>
                     <Card.Text>{course.description}</Card.Text>
                     <Card.Text>{course.duration}</Card.Text>
                     <Card.Text>{course.price}</Card.Text>
+                    </Link>
                     <Button variant="primary">Add to Cart</Button>
                   </Card.Body>
                 </Card>
