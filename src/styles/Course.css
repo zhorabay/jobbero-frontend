@@ -17,6 +17,68 @@
   color: #fff;
 }
 
+.course-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  list-style: none;
+  flex-wrap: wrap;
+  width: 85%;
+}
+
+.course-card {
+  border-radius: 39px;
+  margin: 70px 20px;
+}
+
+.course-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.course-card-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.course-card-desc,
+.course-card-dur {
+  font-size: 12px;
+}
+
+.course-card-price {
+  color: #0EBF20;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.courses-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.course-card-flex {
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.course-card-btn {
+  background-color: #f6c61b;
+  border: none;
+  padding: 8px 18px;
+  margin: 10px 0;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: black;
+  align-self: center;
+}
+
 .courses-flex,
 .cart-flex {
   display: flex;

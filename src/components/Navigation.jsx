@@ -1,15 +1,46 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { fetchCategories } from '../redux/actions/categoryActions';
 import '../styles/Navbar.css';
 import origin8lab from '../media/origin8lab.png';
 import jobbero from '../media/jobbero.png';
 import Vector from '../media/Vector.png';
 
 function Navigation() {
+  const dispatch = useDispatch();
+  const { categories, loading, error } = useSelector((state) => state.categories.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        Error:
+        {error}
+      </div>
+    );
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" className="navbar">
       <Container>
@@ -29,13 +60,9 @@ function Navigation() {
               )}
               id="collapsible-nav-dropdown"
             >
-              <NavDropdown.Item href="#action/3.1">Full-Stack</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Frontend</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Backend</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
+              {Array.isArray(categories) && categories.map((category) => (
+                <NavDropdown.Item href={`/${category.id}/courses`} key={category.id}>{category.title}</NavDropdown.Item>
+              ))}
             </NavDropdown>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/courses">Courses</Nav.Link>

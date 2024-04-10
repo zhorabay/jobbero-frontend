@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginSuccess, loginFailure } from '../redux/slices/authSlice';
+import { login } from '../redux/actions/authActions';
 import girl from '../media/girl.png';
 import '../styles/Auth.css';
 import Navigation2 from './Navigation2';
@@ -16,40 +16,15 @@ const SignIn = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      if (!email || !password) {
-        setError('Email and password are required');
-        return;
-      }
-      const response = await fetch('http://localhost:4000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user: {
-            email,
-            password,
-          },
-        }),
-      });
-      const responseJson = await response.json();
-      const { status } = responseJson;
-      if (status.code === 200) {
-        const tokenHeader = response.headers.get('Authorization');
-        const token = tokenHeader ? tokenHeader.split(' ')[1] : null;
-        if (token) {
-          const { data } = responseJson;
-          const { id, email } = data;
-          dispatch(loginSuccess({ user: { id, email }, token }));
-          navigate('/homepage');
-        } else {
-          dispatch(loginFailure());
-          setError('Login failed');
-        }
+      setError('');
+      const response = await dispatch(login(email, password));
+      if (response.success) {
+        navigate('/homepage');
+      } else {
+        setError(response.message);
       }
     } catch (error) {
-      console.error('Error parsing JSON:', error);
-      dispatch(loginFailure());
+      console.error('An error occurred while logging in:', error);
       setError('An error occurred');
     }
   };
@@ -76,6 +51,7 @@ const SignIn = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="signin-input"
+                  required
                 />
               </label>
             </div>
@@ -91,6 +67,7 @@ const SignIn = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="signin-input"
+                  required
                 />
               </label>
               {error && <div className="text-red-500">{error}</div>}
@@ -103,7 +80,7 @@ const SignIn = () => {
                 Log In
               </button>
             </div>
-            <Link to="/forget-a-password" className="sigin-forgot">Forgot you password?</Link>
+            <Link to="/forget-a-password" className="sigin-forgot">Forgot your password?</Link>
             <p className="sigin-dont-have">
               Don&apos;t have an account?
               <Link to="/signup" className="sigin-up">Sign Up</Link>

@@ -10,36 +10,25 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-
     loginSuccess: (state, action) => {
       const { user, token } = action.payload;
-      sessionStorage.setItem('token', token); // Store token in sessionStorage
+      sessionStorage.setItem('token', token);
       sessionStorage.setItem('user', JSON.stringify(user));
       toast.success(`Successful login. Welcome, ${user.name}`);
-      return {
-        ...state,
-        user,
-        isAuthenticated: true,
-      };
+      state.user = user;
+      state.isAuthenticated = true;
     },
     loginFailure: (state) => {
-      sessionStorage.removeItem('token'); // Remove token from sessionStorage on login failure
-      // Potentially handle any other necessary actions for login failure
+      sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
-      return {
-        ...state,
-        user: null,
-        isAuthenticated: false,
-      };
+      state.user = null;
+      state.isAuthenticated = false;
     },
     logout: (state) => {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
-      return {
-        ...state,
-        user: null,
-        isAuthenticated: false,
-      };
+      state.user = null;
+      state.isAuthenticated = false;
     },
   },
 });

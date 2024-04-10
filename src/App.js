@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router, Routes, Route, Navigate,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginSuccess } from './redux/slices/authSlice';
+import { loginSuccess } from './redux/reducers/authReducer';
 import SignInForm from './components/signin';
 import SignUpForm from './components/signup';
 import Home from './components/Home';
@@ -49,7 +49,7 @@ const App = () => {
               <Route path="/my-profile" element={<Account />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
-              <Route path="/courses" element={<Courses />} />
+              <Route path="/:categoryId/courses" element={<Courses />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/modules" element={<Modules />} />
               <Route path="/courses/:courseId/modules" element={<Modules />} />
@@ -71,10 +71,12 @@ const App = () => {
               <Route path="/*" element={<Home />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
+              <Route path="/:categoryId/courses" element={<Courses />} />
               <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:courseId/modules" element={<Modules />} />
+              <Route path="/:categoryId/courses/:courseId/modules" element={<Modules />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/payment" element={<Payment />} />
+              <Route path="/cart" element={<Cart />} />
             </>
           )}
         </Routes>

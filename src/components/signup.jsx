@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import { postUser } from '../redux/actions/userActions';
 import girl from '../media/girl.png';
 import '../styles/Auth.css';
 import Navigation2 from './Navigation2';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState(null);
+  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -31,31 +33,19 @@ const SignUpForm = () => {
         return;
       }
 
-      const formData = new FormData();
-      formData.append('user[name]', name);
-      formData.append('user[phone]', phone);
-      formData.append('user[email]', email);
-      formData.append('user[password]', password);
-      formData.append('user[password_confirmation]', confirmPassword);
-
-      await axios.post(
-        'http://127.0.0.1:3000/api/v1/users',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+      const userData = {
+        user: {
+          name,
+          phone_number: phone,
+          email,
+          password,
+          password_confirmation: confirmPassword,
         },
-      );
+      };
+
+      await dispatch(postUser(userData));
 
       navigate('/courses');
-
-      setName('');
-      setPhone(null);
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-      setError('');
     } catch (error) {
       if (
         error.response
@@ -95,6 +85,8 @@ const SignUpForm = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="signin-input"
+                  autoComplete="username"
+                  required
                 />
               </label>
             </div>
@@ -117,8 +109,11 @@ const SignUpForm = () => {
                   </select>
                   <input
                     type="number"
+                    value={phone}
                     id="phone"
                     className="signin-input-p2"
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
                   />
                 </div>
               </label>
@@ -136,6 +131,7 @@ const SignUpForm = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="signin-input"
+                  required
                 />
               </label>
             </div>
@@ -150,9 +146,10 @@ const SignUpForm = () => {
                   type="password"
                   id="password"
                   className="signin-input"
-                  autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
+                  required
                 />
               </label>
               {error && <div className="text-red-500">{error}</div>}
@@ -170,6 +167,7 @@ const SignUpForm = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="signin-input"
+                  required
                 />
               </label>
               {error && <div className="text-red-500">{error}</div>}
@@ -191,6 +189,7 @@ const SignUpForm = () => {
                     .
                   </>
                 )}
+                required
               />
             </div>
 

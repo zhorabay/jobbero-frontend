@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCourses } from '../redux/actions/courseActions';
+import { fetchCourseModules } from '../redux/actions/courseModuleActions';
+import { fetchReviews } from '../redux/actions/reviewActions';
 import down from '../media/down.png';
 import downblue from '../media/downblue.png';
 import book from '../media/book.png';
@@ -8,23 +11,20 @@ import '../styles/Course.css';
 import Navigation3 from './Navigation3';
 
 function Modules() {
-  const [courses, setCourses] = useState([]);
+  const dispatch = useDispatch();
+  const courses = useSelector((state) => state.courses.courses);
+  const modules = useSelector((state) => state.modules.modules);
+  const reviews = useSelector((state) => state.reviews.reviews);
+
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
   const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/v1/courses');
-        setCourses(response.data.courses);
-      } catch (error) {
-        console.error('Error fetching courses:', error);
-      }
-    };
-
-    fetchCourses();
-  }, []);
+    dispatch(fetchCourses());
+    dispatch(fetchCourseModules());
+    dispatch(fetchReviews());
+  }, [dispatch]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -57,32 +57,38 @@ function Modules() {
                 Feedback
               </button>
             </div>
-            {showDescription && <div className="modules-course-description">{course.description}</div>}
-            {showComments && <div className="modules-course-comments">{course.reviews}</div>}
+            {showDescription && <div className="modules-course-description">{course.about}</div>}
+            {showComments && reviews.map((review) => (
+              <div key={review.id} className="modules-course-comments">
+                <p>Rating: {review.rating}</p>
+                <p>Comment: {review.comment}</p>
+              </div>
+            ))}
             <div className="modules-section3">
               <p className="account-courses">Course Content</p>
               <button type="button" className="modules-expand" onClick={toggleExpand}>
                 <img src={down} alt="down" className="account-down" />
                 Expand All
               </button>
-              {isExpanded && (
-              <div className="modules-list">
-                <h3>{course.module}</h3>
-                <button type="button" className="account-course-list">
-                  <div className="modules-btn-prt1">
-                    <h4 className="account-h4">{course.module.title}</h4>
-                    <p className="modules-lessons">
-                      {course.total.module}
-                      Lessons
-                    </p>
-                  </div>
-                  <button type="button" className="modules-expand-lessons modules-btn-prt2">
-                    <img src={downblue} alt="down" className="account-down" />
-                    <p className="account-down">Expand</p>
+              {isExpanded && modules.map((module) => (
+                <div className="modules-list" key={module.id}>
+                  <h3>{module.week}</h3>
+                  <button type="button" className="account-course-list">
+                    <div className="modules-btn-prt1">
+                      <h4 className="account-h4">{module.title}</h4>
+                      <p className="modules-lessons">
+                        {total.lessons}
+                        {' '}
+                        Topics
+                      </p>
+                    </div>
+                    <button type="button" className="modules-expand-lessons modules-btn-prt2">
+                      <img src={downblue} alt="down" className="account-down" />
+                      <p className="account-down">Expand</p>
+                    </button>
                   </button>
-                </button>
-              </div>
-              )}
+                </div>
+              ))}
             </div>
           </div>
         ))}

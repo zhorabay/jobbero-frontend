@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { fetchCategories } from '../redux/actions/categoryActions';
 
 const CategoryCarousel = () => {
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+  const { categories, loading, error } = useSelector((state) => state.categories.categories);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/v1/categories');
-        setCategories(response.data.categories);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   const settings = {
     dots: true,
@@ -27,6 +21,19 @@ const CategoryCarousel = () => {
     slidesToShow: 5,
     slidesToScroll: 1,
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        Error:
+        {error}
+      </div>
+    );
+  }
 
   return (
     <div className="category-section">
@@ -38,13 +45,20 @@ const CategoryCarousel = () => {
         slidesToShow={settings.slidesToShow}
         slidesToScroll={settings.slidesToScroll}
         className="carousel"
+        inline
       >
-        {categories.map((category) => (
-          <div key={category.id}>
-            <img src={category.image} alt="category" className="category-img" />
-            <h3 className="category-h3">{category.name}</h3>
-          </div>
-        ))}
+        <ul className="category-list">
+          {Array.isArray(categories) && categories.map((category) => (
+            <li key={category.id} className="category-list-id">
+              <img src={category.image} alt="category" className="category-img" />
+              <h3 className="category-h3">
+                <Link to={`/${category.id}/courses`} className="category-h3">
+                {category.title}
+                </Link>
+              </h3>
+            </li>
+          ))}
+        </ul>
       </Slider>
     </div>
   );
