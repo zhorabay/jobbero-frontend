@@ -1,37 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
+import { createReducer } from '@reduxjs/toolkit';
+import { loginSuccess, loginFailure, logout } from '../actions/authActions';
 
 const initialState = {
   user: null,
   isAuthenticated: false,
 };
 
-const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    loginSuccess: (state, action) => {
-      const { user, token } = action.payload;
-      sessionStorage.setItem('token', token);
-      sessionStorage.setItem('user', JSON.stringify(user));
-      toast.success(`Successful login. Welcome, ${user.name}`);
-      state.user = user;
-      state.isAuthenticated = true;
-    },
-    loginFailure: (state) => {
+const authReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loginSuccess, (state, action) => {
+      const userData = action.payload?.data;
+      if (userData) {
+        const { id, email, created_at } = userData;
+        sessionStorage.setItem('user', JSON.stringify(userData));
+        state.user = { id, email, created_at };
+        state.isAuthenticated = true;
+      } else {
+        console.error('Login success payload is invalid:', action.payload);
+      }
+    })
+    .addCase(loginFailure, (state) => {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
       state.user = null;
       state.isAuthenticated = false;
-    },
-    logout: (state) => {
+    })
+    .addCase(logout, (state) => {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
       state.user = null;
       state.isAuthenticated = false;
-    },
-  },
+    });
 });
 
-export const { loginSuccess, loginFailure, logout } = authSlice.actions;
-export default authSlice.reducer;
+export default authReducer;

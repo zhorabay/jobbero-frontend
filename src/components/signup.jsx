@@ -23,6 +23,14 @@ const SignUpForm = () => {
     try {
       setError('');
 
+      console.log('Form Data:', {
+        name,
+        email,
+        phone,
+        password,
+        confirmPassword,
+      });
+
       if (password.trim() === '') {
         setError("Password can't be blank");
         return;
@@ -33,19 +41,18 @@ const SignUpForm = () => {
         return;
       }
 
-      const userData = {
-        user: {
-          name,
-          phone_number: phone,
-          email,
-          password,
-          password_confirmation: confirmPassword,
-        },
-      };
+      const formData = new FormData();
+      formData.append('user[name]', name);
+      formData.append('user[email]', email);
+      formData.append('user[phone_number]', phone);
+      formData.append('user[password]', password);
+      formData.append('user[password_confirmation]', confirmPassword);
 
-      await dispatch(postUser(userData));
+      console.log('FormData:', formData);
 
-      navigate('/courses');
+      await dispatch(postUser(formData));
+
+      navigate('/');
     } catch (error) {
       if (
         error.response

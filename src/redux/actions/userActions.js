@@ -39,9 +39,10 @@ export const fetchUsers = () => (dispatch) => {
     });
 };
 
-export const postUser = (userData) => (dispatch) => {
+export const postUser = (FormData) => (dispatch) => {
   dispatch(postUserRequest());
-  axios.post('http://localhost:3000/api/v1/users', userData)
+  const queryParams = new URLSearchParams(FormData);
+  axios.post('http://localhost:3000/api/v1/users?' + queryParams)
     .then((response) => {
       dispatch(postUserSuccess(response.data));
     })

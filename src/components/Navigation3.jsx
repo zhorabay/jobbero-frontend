@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../redux/reducers/authReducer';
+import { logoutUser } from '../redux/actions/authActions';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -18,7 +18,7 @@ function Navigation3() {
 
   const handleLogout = async () => {
     try {
-      await dispatch(logout());
+      await dispatch(logoutUser());
       setLogoutMessage('Logout successful');
       navigate('/');
     } catch (error) {

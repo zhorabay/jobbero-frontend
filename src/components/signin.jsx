@@ -19,7 +19,7 @@ const SignIn = () => {
       setError('');
       const response = await dispatch(login(email, password));
       if (response.success) {
-        navigate('/homepage');
+        navigate('/');
       } else {
         setError(response.message);
       }
