@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { loginSuccess } from './authActions';
 
 export const fetchUsersRequest = () => ({
   type: 'FETCH_USERS_REQUEST',
@@ -14,17 +15,17 @@ export const fetchUsersFailure = (error) => ({
   payload: error,
 });
 
-export const postUserRequest = () => ({
-  type: 'POST_USER_REQUEST',
+export const signUpRequest = () => ({
+  type: 'SIGN_UP_REQUEST',
 });
 
-export const postUserSuccess = (user) => ({
-  type: 'POST_USER_SUCCESS',
+export const signUpSuccess = (user) => ({
+  type: 'SIGN_UP_SUCCESS',
   payload: user,
 });
 
-export const postUserFailure = (error) => ({
-  type: 'POST_USER_FAILURE',
+export const signUpFailure = (error) => ({
+  type: 'SIGN_UP_FAILURE',
   payload: error,
 });
 
@@ -39,14 +40,26 @@ export const fetchUsers = () => (dispatch) => {
     });
 };
 
-export const postUser = (FormData) => (dispatch) => {
-  dispatch(postUserRequest());
-  const queryParams = new URLSearchParams(FormData);
-  axios.post('http://localhost:3000/api/v1/users?' + queryParams)
-    .then((response) => {
-      dispatch(postUserSuccess(response.data));
-    })
-    .catch((error) => {
-      dispatch(postUserFailure(error.message));
-    });
+export const signUp = (userData) => async (dispatch) => {
+  try {
+    const response = await axios.post('http://localhost:3000/api/v1/users', { user: userData });
+    if (response.status === 201 || response.status === 200) {
+      const { user, token } = response.data;
+      if (token) {
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('user', JSON.stringify(user));
+        dispatch(loginSuccess({ user, token }));
+        return true;
+      }
+      console.error('Token not found in response data');
+      dispatch(signUpFailure('Token not found in response data'));
+      return false;
+    }
+    dispatch(signUpFailure('Sign-up failed'));
+    return false;
+  } catch (error) {
+    console.error('An error occurred during sign-up:', error);
+    dispatch(signUpFailure('An error occurred during sign-up'));
+    return false;
+  }
 };

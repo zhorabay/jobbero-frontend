@@ -1,73 +1,46 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
-import { postUser } from '../redux/actions/userActions';
-import girl from '../media/girl.png';
+import 'react-phone-input-2/lib/style.css';
 import '../styles/Auth.css';
+import PhoneInput from 'react-phone-input-2';
+import girl from '../media/girl.png';
 import Navigation2 from './Navigation2';
+import { signUp } from '../redux/actions/userActions';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    name: '',
+    phone_number: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
+
+  console.log(userData);
+
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      setError('');
-
-      console.log('Form Data:', {
-        name,
-        email,
-        phone,
-        password,
-        confirmPassword,
-      });
-
-      if (password.trim() === '') {
-        setError("Password can't be blank");
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        setError('Passwords do not match');
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('user[name]', name);
-      formData.append('user[email]', email);
-      formData.append('user[phone_number]', phone);
-      formData.append('user[password]', password);
-      formData.append('user[password_confirmation]', confirmPassword);
-
-      console.log('FormData:', formData);
-
-      await dispatch(postUser(formData));
-
-      navigate('/');
-    } catch (error) {
-      if (
-        error.response
-        && error.response.data
-        && error.response.data.message[0]
-      ) {
-        setError(error.response.data.message[0]);
-      } else {
-        setError('An error occurred');
-      }
-    }
+  const error = useSelector((state) => state.user.error);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const formattedValue = value.trim();
+    setUserData({ ...userData, [name]: formattedValue });
   };
 
-  const handlePhoneChange = (countryCode, phoneNumber) => {
-    setPhone(`${countryCode}${phoneNumber}`);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (userData.password !== userData.password_confirmation) {
+      console.error('Passwords do not match');
+    } else {
+      console.log('Submitting data:', userData);
+      dispatch(signUp(userData)).then((success) => {
+        if (success) {
+          navigate('/');
+        }
+      });
+    }
   };
 
   return (
@@ -81,105 +54,82 @@ const SignUpForm = () => {
           <form className="signin-form" onSubmit={handleSubmit}>
             <h2 className="signin-h2">Get Started!</h2>
             <div>
-              <label
-                htmlFor="email"
-                className="signin-label"
-              >
+              <label htmlFor="email" className="signin-label">
                 Email
                 <input
                   type="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={userData.email}
+                  onChange={handleChange}
                   className="signin-input"
                   autoComplete="username"
                   required
                 />
               </label>
             </div>
-
             <div>
-              <label
-                htmlFor="phone"
-                className="signin-label"
-              >
+              <label htmlFor="phone_number" className="signin-label">
                 Phone
                 <div className="signin-label-p">
-                  <select
-                    id="phone-coutry"
-                    className="signin-input-p"
-                    onClick={(e) => handlePhoneChange(e.target.value, document.getElementById('phone').value)}
-                    placeholder="+1"
-                  >
-                    <option value="phone">+1</option>
-                    <option value="phone">+40</option>
-                  </select>
-                  <input
-                    type="number"
-                    value={phone}
-                    id="phone"
-                    className="signin-input-p2"
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
+                  <PhoneInput
+                    country="us"
+                    type="text"
+                    name="phone_number"
+                    value={userData.phone_number}
+                    onChange={(value, data) => handleChange({ target: { name: 'phone_number', value } })}
+                    inputProps={{
+                      id: 'phone_number',
+                      required: true,
+                    }}
                   />
                 </div>
               </label>
             </div>
-
             <div>
-              <label
-                htmlFor="name"
-                className="signin-label"
-              >
+              <label htmlFor="name" className="signin-label">
                 Full Name
                 <input
                   type="text"
                   id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
+                  value={userData.name}
+                  onChange={handleChange}
                   className="signin-input"
                   required
                 />
               </label>
             </div>
-
             <div>
-              <label
-                htmlFor="password"
-                className="signin-label"
-              >
+              <label htmlFor="password" className="signin-label">
                 Password
                 <input
                   type="password"
                   id="password"
                   className="signin-input"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
                   autoComplete="new-password"
                   required
                 />
               </label>
-              {error && <div className="text-red-500">{error}</div>}
             </div>
-
             <div>
-              <label
-                htmlFor="confirmPassword"
-                className="signin-label"
-              >
+              <label htmlFor="confirmPassword" className="signin-label">
                 Retype Password
                 <input
                   type="password"
-                  id="confirmPassword"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  id="password_confirmation"
+                  name="password_confirmation"
+                  value={userData.password_confirmation}
+                  onChange={handleChange}
                   className="signin-input"
                   required
                 />
               </label>
               {error && <div className="text-red-500">{error}</div>}
             </div>
-
             <div>
               <Form.Check
                 type="checkbox"
@@ -199,17 +149,14 @@ const SignUpForm = () => {
                 required
               />
             </div>
-
             <div className="signup-btn">
-              <button
-                type="submit"
-                className="signin-btn"
-              >
+              <button type="submit" className="signin-btn">
                 Sign Up
               </button>
             </div>
             <p className="sigin-dont-have">
               Have an account?
+              {' '}
               <Link to="/login" className="sigin-up">Log In</Link>
             </p>
           </form>

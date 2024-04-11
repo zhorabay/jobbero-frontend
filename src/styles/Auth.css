@@ -53,9 +53,7 @@
 }
 
 .signin-label-p {
-  display: grid;
-  grid-template-columns: 40% 95%;
-  gap: 5%;
+  width: 100%;
 }
 
 .signin-input,
@@ -73,6 +71,30 @@
   padding: 8px 20px;
   background-color: #fff;
   border: 1px solid #483f50;
+}
+
+.react-tel-input {
+  border-radius: 20px !important;
+  background-color: #d9d9d9 !important;
+  padding: 4px !important;
+  margin: 8px 0 !important;
+  width: 100% !important;
+  border: none !important;
+  height: auto !important;
+}
+
+.flag-dropdown {
+  height: auto !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-right: 1px solid #fff !important;
+}
+
+.form-control,
+.form-control:focus {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent;
 }
 
 .signin-btn {
@@ -383,7 +405,6 @@
 .registration-section3 {
   display: flex;
   flex-direction: column;
-  align-items: space-between;
   justify-content: center;
   padding: 40px 0;
   width: 65%;
@@ -415,7 +436,6 @@
 .registration-section4 {
   display: flex;
   flex-direction: column;
-  align-items: space-between;
   justify-content: center;
   padding: 40px 0;
   padding-bottom: 80px;

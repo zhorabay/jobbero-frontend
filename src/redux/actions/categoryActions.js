@@ -28,28 +28,24 @@ export const postCategoryFailure = (error) => ({
   payload: error,
 });
 
-export const fetchCategories = () => {
-  return (dispatch) => {
-    dispatch(fetchCategoriesRequest());
-    axios.get('http://localhost:3000/api/v1/categories')
-      .then(response => {
-        dispatch(fetchCategoriesSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchCategoriesFailure(error.message));
-      });
-  };
+export const fetchCategories = () => (dispatch) => {
+  dispatch(fetchCategoriesRequest());
+  axios.get('http://localhost:3000/api/v1/categories')
+    .then((response) => {
+      dispatch(fetchCategoriesSuccess(response.data));
+    })
+    .catch((error) => {
+      dispatch(fetchCategoriesFailure(error.message));
+    });
 };
 
-export const postCategories = (categoryData) => {
-  return (dispatch) => {
-    dispatch(postCategoryRequest());
-    axios.post('http://localhost:3000/api/v1/categories', categoryData)
-      .then(response => {
-        dispatch(postCategorySuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(postCategoryFailure(error.message));
-      });
-  };
+export const postCategories = (categoryData) => (dispatch) => {
+  dispatch(postCategoryRequest());
+  axios.post('http://localhost:3000/api/v1/categories', categoryData)
+    .then((response) => {
+      dispatch(postCategorySuccess(response.data));
+    })
+    .catch((error) => {
+      dispatch(postCategoryFailure(error.message));
+    });
 };

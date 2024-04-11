@@ -1,7 +1,7 @@
 const initialState = {
-  users: [],
-  loading: false,
+  user: null,
   error: null,
+  loading: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -17,26 +17,23 @@ const userReducer = (state = initialState, action) => {
         ...state,
         users: action.payload,
         loading: false,
+        error: null,
       };
-    case 'FETCH_USERS_FAILURE':
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-    case 'POST_USER_REQUEST':
+    case 'SIGN_UP_REQUEST':
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case 'POST_USER_SUCCESS':
+    case 'SIGN_UP_SUCCESS':
       return {
         ...state,
         user: action.payload,
         loading: false,
+        error: null,
       };
-    case 'POST_USER_FAILURE':
+    case 'FETCH_USERS_FAILURE':
+    case 'SIGN_UP_FAILURE':
       return {
         ...state,
         loading: false,

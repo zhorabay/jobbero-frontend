@@ -60,8 +60,14 @@ function Modules() {
             {showDescription && <div className="modules-course-description">{course.about}</div>}
             {showComments && reviews.map((review) => (
               <div key={review.id} className="modules-course-comments">
-                <p>Rating: {review.rating}</p>
-                <p>Comment: {review.comment}</p>
+                <p>
+                  Rating:
+                  {review.rating}
+                </p>
+                <p>
+                  Comment:
+                  {review.comment}
+                </p>
               </div>
             ))}
             <div className="modules-section3">

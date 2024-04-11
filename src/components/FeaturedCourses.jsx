@@ -39,30 +39,30 @@ const FeaturedCourses = () => {
         </div>
         <ul className="featured-courses">
           {courses.map((course) => (
-              <li key={course.id}>
-                <Card style={{ width: "18rem" }} className="course-card">
-                  <Card.Img variant="top" src={course.image} className="course-card-img" />
-                  <Card.Body className="course-card-body">
-                    <Link to={`${course.id}/modules`} className="courses-link">
-                      <Card.Title className="course-card-title">{course.title}</Card.Title>
-                      <Card.Text className="course-card-desc">{course.description}</Card.Text>
-                      <div className="course-card-flex">
-                        <Card.Text className="course-card-dur">
-                          <img src={time} alt="time" className="course-card-time" />
-                          {course.duration}
-                          {' '}
-                          Hours
-                        </Card.Text>
-                        <Card.Text className="course-card-price">
-                          $
-                          {course.price}
-                        </Card.Text>
-                      </div>
-                    </Link>
-                    <Button variant="primary" onClick={() => handleAddToCart(course)} className="course-card-btn">Add to Cart</Button>
-                  </Card.Body>
-                </Card>
-              </li>
+            <li key={course.id}>
+              <Card style={{ width: '18rem' }} className="course-card">
+                <Card.Img variant="top" src={course.image} className="course-card-img" />
+                <Card.Body className="course-card-body">
+                  <Link to={`${course.id}/modules`} className="courses-link">
+                    <Card.Title className="course-card-title">{course.title}</Card.Title>
+                    <Card.Text className="course-card-desc">{course.description}</Card.Text>
+                    <div className="course-card-flex">
+                      <Card.Text className="course-card-dur">
+                        <img src={time} alt="time" className="course-card-time" />
+                        {course.duration}
+                        {' '}
+                        Hours
+                      </Card.Text>
+                      <Card.Text className="course-card-price">
+                        $
+                        {course.price}
+                      </Card.Text>
+                    </div>
+                  </Link>
+                  <Button variant="primary" onClick={() => handleAddToCart(course)} className="course-card-btn">Add to Cart</Button>
+                </Card.Body>
+              </Card>
+            </li>
           ))}
         </ul>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  BrowserRouter as Router, Routes, Route, Navigate,
+  BrowserRouter as Router, Routes, Route,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess } from './redux/actions/authActions';
@@ -22,6 +22,7 @@ const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   console.log('appauthentication', isAuthenticated);
+
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     const userString = sessionStorage.getItem('user');
@@ -31,22 +32,23 @@ const App = () => {
       dispatch(loginSuccess({ user, token }));
     }
   }, [dispatch]);
+
   return (
     <Router>
       <div className="App">
         <Routes>
           {isAuthenticated ? (
             <>
-              <Route path="/*" element={<Navigate to="/home" />} />
-              <Route path="/home" element={<Home />} />
+              <Route path="/*" element={<Home />} />
               <Route path="/email-confirmation" element={<EmailConfirmation />} />
               <Route path="/my-profile" element={<Account />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
               <Route path="/:categoryId/courses" element={<Courses />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/modules" element={<Modules />} />
-              <Route path="/courses/:courseId/modules" element={<Modules />} />
+              <Route path="/:categoryId/courses/:courseId/modules" element={<Modules />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/payment" element={<Payment />} />
             </>
           ) : (
             <>
@@ -58,9 +60,6 @@ const App = () => {
               <Route path="/:categoryId/courses" element={<Courses />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/:categoryId/courses/:courseId/modules" element={<Modules />} />
-              <Route path="/registration" element={<Registration />} />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/cart" element={<Cart />} />
             </>
           )}
         </Routes>

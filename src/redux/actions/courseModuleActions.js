@@ -28,28 +28,24 @@ export const postCourseModuleFailure = (error) => ({
   payload: error,
 });
 
-export const fetchCourseModules = () => {
-  return (dispatch) => {
-    dispatch(fetchCourseModulesRequest());
-    axios.get('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules')
-      .then(response => {
-        dispatch(fetchCourseModulesSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchCourseModulesFailure(error.message));
-      });
-  };
+export const fetchCourseModules = () => (dispatch) => {
+  dispatch(fetchCourseModulesRequest());
+  axios.get('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules')
+    .then((response) => {
+      dispatch(fetchCourseModulesSuccess(response.data));
+    })
+    .catch((error) => {
+      dispatch(fetchCourseModulesFailure(error.message));
+    });
 };
 
-export const postCourseModule = (courseModuleData) => {
-  return (dispatch) => {
-    dispatch(postCourseModuleRequest());
-    axios.post('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules', courseModuleData)
-      .then(response => {
-        dispatch(postCourseModuleSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(postCourseModuleFailure(error.message));
-      });
-  };
+export const postCourseModule = (courseModuleData) => (dispatch) => {
+  dispatch(postCourseModuleRequest());
+  axios.post('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules', courseModuleData)
+    .then((response) => {
+      dispatch(postCourseModuleSuccess(response.data));
+    })
+    .catch((error) => {
+      dispatch(postCourseModuleFailure(error.message));
+    });
 };

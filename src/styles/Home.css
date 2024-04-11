@@ -233,10 +233,11 @@
 
 .category-list {
   list-style: none;
-  margin: 0 12px
+  margin: 0 12px;
 }
 
-.slick-prev:before, .slick-next:before {
+.slick-prev::before,
+.slick-next::before {
   color: #22c0db !important;
   font-size: 60px !important;
 }
@@ -325,7 +326,6 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  list-style: none;
   flex-wrap: wrap;
   list-style: none;
   width: 85%;

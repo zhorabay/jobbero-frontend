@@ -12,7 +12,7 @@ import time from '../media/time.png';
 function Courses() {
   const dispatch = useDispatch();
   const coursesState = useSelector((state) => state.courses.courses);
-  console.log("Courses:", coursesState);
+  console.log('Courses:', coursesState);
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -33,7 +33,6 @@ function Courses() {
     dispatch(addToCart(course));
   };
 
-
   return (
     <>
       <Navigation3 />
@@ -43,7 +42,7 @@ function Courses() {
           <ul className="course-list">
             {courses.map((course) => (
               <li key={course.id}>
-                <Card style={{ width: "18rem" }} className="course-card">
+                <Card style={{ width: '18rem' }} className="course-card">
                   <Card.Img variant="top" src={course.image} className="course-card-img" />
                   <Card.Body className="course-card-body">
                     <Link to={`/${course.id}/modules`} className="courses-link">

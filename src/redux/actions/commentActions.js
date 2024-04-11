@@ -28,28 +28,24 @@ export const postCommentFailure = (error) => ({
   payload: error,
 });
 
-export const fetchComments = () => {
-  return (dispatch) => {
-    dispatch(fetchCommentsRequest());
-    axios.get('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments')
-      .then(response => {
-        dispatch(fetchCommentsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchCommentsFailure(error.message));
-      });
-  };
+export const fetchComments = () => (dispatch) => {
+  dispatch(fetchCommentsRequest());
+  axios.get('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments')
+    .then((response) => {
+      dispatch(fetchCommentsSuccess(response.data));
+    })
+    .catch((error) => {
+      dispatch(fetchCommentsFailure(error.message));
+    });
 };
 
-export const postComment = (commentData) => {
-  return (dispatch) => {
-    dispatch(postCommentRequest());
-    axios.post('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments', commentData)
-      .then(response => {
-        dispatch(postCommentSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(postCommentFailure(error.message));
-      });
-  };
+export const postComment = (commentData) => (dispatch) => {
+  dispatch(postCommentRequest());
+  axios.post('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments', commentData)
+    .then((response) => {
+      dispatch(postCommentSuccess(response.data));
+    })
+    .catch((error) => {
+      dispatch(postCommentFailure(error.message));
+    });
 };

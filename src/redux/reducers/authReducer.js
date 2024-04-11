@@ -1,36 +1,39 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { loginSuccess, loginFailure, logout } from '../actions/authActions';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: null,
   isAuthenticated: false,
 };
 
-const authReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(loginSuccess, (state, action) => {
-      const userData = action.payload?.data;
-      if (userData) {
-        const { id, email, created_at } = userData;
-        sessionStorage.setItem('user', JSON.stringify(userData));
-        state.user = { id, email, created_at };
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    loginSuccess(state, action) {
+      const { user, token } = action.payload;
+      if (user && token) {
+        sessionStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('token', token);
+        state.user = user;
         state.isAuthenticated = true;
       } else {
         console.error('Login success payload is invalid:', action.payload);
       }
-    })
-    .addCase(loginFailure, (state) => {
+    },
+    loginFailure(state) {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
       state.user = null;
       state.isAuthenticated = false;
-    })
-    .addCase(logout, (state) => {
+    },
+    logout(state) {
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('user');
       state.user = null;
       state.isAuthenticated = false;
-    });
+    },
+  },
 });
 
-export default authReducer;
+export const { loginSuccess, loginFailure, logout } = authSlice.actions;
+export default authSlice.reducer;

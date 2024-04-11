@@ -13,26 +13,36 @@ export const login = (email, password) => async (dispatch) => {
       },
       body: JSON.stringify({ user: { email, password } }),
     });
-    const data = await response.json();
 
     if (response.ok) {
-      dispatch(loginSuccess(data));
-      return { success: true };
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
+      const { token } = responseData;
+      if (token) {
+        sessionStorage.setItem('token', token);
+        console.log('Token retrieved:', token);
+
+        const { data } = responseData;
+        const user = data ? { id: data.id, email: data.email } : null;
+
+        dispatch(loginSuccess(responseData));
+        return { success: true };
+      }
+      return { success: false, message: 'Token not found' };
     }
-    dispatch(loginFailure());
-    return { success: false, message: data.status.message };
+    const errorMessage = await response.text();
+    return { success: false, message: errorMessage || 'Login failed' };
   } catch (error) {
     console.error('An error occurred during login:', error);
-    dispatch(loginFailure());
     return { success: false, message: 'An error occurred' };
   }
 };
 
 export const logoutUser = () => async (dispatch) => {
   try {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+
     dispatch(logout());
   } catch (error) {
     console.error('An error occurred during logout:', error);

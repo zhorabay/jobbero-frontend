@@ -24,7 +24,7 @@ const reviewReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
-        case 'POST_REVIEW_REQUEST':
+    case 'POST_REVIEW_REQUEST':
       return {
         ...state,
         loading: true,
