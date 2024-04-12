@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { addToCart } from '../redux/actions/cartActions';
 import '../styles/Course.css';
 import Navigation3 from './Navigation3';
 import time from '../media/time.png';
 
-function Courses() {
+function Courses({ userId }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const coursesState = useSelector((state) => state.courses.courses);
   console.log('Courses:', coursesState);
 
@@ -31,6 +32,7 @@ function Courses() {
 
   const handleAddToCart = (course) => {
     dispatch(addToCart(course));
+    navigate(`/${userId}/cart`);
   };
 
   return (

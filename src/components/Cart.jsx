@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import about1 from '../media/about1.png';
-import '../styles/Course.css';
 import Navigation3 from './Navigation3';
+import '../styles/Course.css';
+import about1 from '../media/about1.png';
+import { removeFromCart } from '../redux/actions/cartActions';
 
 function Cart() {
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedCartItems = JSON.parse(sessionStorage.getItem('cartItems'));
+    if (storedCartItems) {
+      dispatch({ type: 'SET_CART_ITEMS', payload: storedCartItems });
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const handleRemoveFromCart = (courseId) => {
+    dispatch(removeFromCart(courseId));
+  };
+
   return (
     <>
       <Navigation3 />
@@ -12,20 +32,24 @@ function Cart() {
         <div className="cart-flex">
           <div className="cart-lists">
             <h2 className="cart-h2">Shopping Cart</h2>
-            <div className="cart-list-info">
-              <img src={about1} alt="course" className="cart-img" />
-              <div className="cart-list-details">
-                <h3 className="cart-h3">Virtual Assistant Fundamentals Course</h3>
-                <p className="cart-hours">Total Hours:</p>
-                <Button type="button" className="cart-remove">Remove</Button>
-              </div>
-              <p className="cart-price">$32</p>
-            </div>
+            <ul className="cart-list-ul">
+              {cartItems.map((item) => (
+                <li key={item.id} className="cart-list-item-li">
+                  <img src={about1} alt="course" className="cart-img" />
+                  <div className="cart-list-details">
+                    <h3 className="cart-h3">{item.title}</h3>
+                    <p className="cart-hours">Total Hours: {item.duration}</p>
+                    <Button type="button" onClick={() => handleRemoveFromCart(item.id)} className="cart-remove">Remove</Button>
+                  </div>
+                  <p className="cart-price">${item.price}</p>
+                </li>
+              ))}
+            </ul>
           </div>
           <hr className="cart-hr" />
           <div>
             <h2 className="cart-h2">Total:</h2>
-            <p className="cart-total-price">$32</p>
+            <p className="cart-total-price">${cartItems.reduce((acc, item) => acc + item.price, 0)}</p>
             <Button type="button" href="/registration">Make a Payment</Button>
           </div>
         </div>

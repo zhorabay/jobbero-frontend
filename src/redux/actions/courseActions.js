@@ -30,7 +30,7 @@ export const postCourseFailure = (error) => ({
 
 export const fetchCourses = () => (dispatch) => {
   dispatch(fetchCoursesRequest());
-  axios.get('http://localhost:3000/api/v1/categories/1/courses')
+  axios.get('http://localhost:3000/api/v1/categories/:category_id/courses')
     .then((response) => {
       dispatch(fetchCoursesSuccess(response.data));
     })

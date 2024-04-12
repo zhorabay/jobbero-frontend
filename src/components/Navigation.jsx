@@ -20,13 +20,13 @@ function Navigation() {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 5,
+  //   slidesToScroll: 1,
+  // };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -65,7 +65,7 @@ function Navigation() {
               ))}
             </NavDropdown>
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/courses">Courses</Nav.Link>
+            <Nav.Link href="/all-courses">Courses</Nav.Link>
             <Nav.Link href="/instructors">Instructors</Nav.Link>
             <Nav.Link href="/forum">Forum</Nav.Link>
           </Nav>

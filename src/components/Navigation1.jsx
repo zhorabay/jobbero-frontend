@@ -10,7 +10,7 @@ import bell from '../media/bell.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Navbar.css';
 
-function Navigation1() {
+function Navigation1({ userId }) {
   const [showCurrencies, setShowCurrencies] = useState(false);
   const { t, i18n } = useTranslation();
 
@@ -54,9 +54,11 @@ function Navigation1() {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="/cart">
-                <img src={cart} alt="Categories" className="icon-img" />
-              </Nav.Link>
+              {userId && (
+                <Nav.Link href={`/${userId}/cart`}>
+                  <img src={cart} alt="Categories" className="icon-img" />
+                </Nav.Link>
+              )}
               <Nav.Link href="/notifications">
                 <img src={bell} alt="Categories" className="icon-img" />
               </Nav.Link>

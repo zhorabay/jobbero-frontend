@@ -8,6 +8,7 @@ import reviewReducer from './reducers/reviewReducer';
 import lessonReducer from './reducers/lessonReducer';
 import commentReducer from './reducers/commentReducer';
 import cartReducer from './reducers/cartReducer';
+import searchReducer from './reducers/searchReducer';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     lesson: lessonReducer,
     comment: commentReducer,
     cart: cartReducer,
+    search: searchReducer,
   },
   // other store configurations
 });

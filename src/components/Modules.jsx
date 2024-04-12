@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { fetchCourseModules } from '../redux/actions/courseModuleActions';
 import { fetchReviews } from '../redux/actions/reviewActions';
@@ -12,6 +13,7 @@ import Navigation3 from './Navigation3';
 
 function Modules() {
   const dispatch = useDispatch();
+  const { categoryId, courseId } = useParams();
   const courses = useSelector((state) => state.courses.courses);
   const modules = useSelector((state) => state.modules.modules);
   const reviews = useSelector((state) => state.reviews.reviews);
@@ -22,9 +24,9 @@ function Modules() {
 
   useEffect(() => {
     dispatch(fetchCourses());
-    dispatch(fetchCourseModules());
+    dispatch(fetchCourseModules(categoryId, courseId));
     dispatch(fetchReviews());
-  }, [dispatch]);
+  }, [dispatch, categoryId, courseId]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -44,7 +46,7 @@ function Modules() {
     <>
       <Navigation3 />
       <div className="modules-container">
-        {courses.map((course) => (
+        {Array.isArray(courses) && courses.map((course) => (
           <div className="modules-flex" key={course.id}>
             <h2 className="courses-h2">{course.title}</h2>
             <div className="modules-choose">
@@ -57,7 +59,7 @@ function Modules() {
                 Feedback
               </button>
             </div>
-            {showDescription && <div className="modules-course-description">{course.about}</div>}
+            {showDescription && <div className="modules-course-description">about</div>}
             {showComments && reviews.map((review) => (
               <div key={review.id} className="modules-course-comments">
                 <p>
@@ -83,7 +85,7 @@ function Modules() {
                     <div className="modules-btn-prt1">
                       <h4 className="account-h4">{module.title}</h4>
                       <p className="modules-lessons">
-                        {total.lessons}
+                        3 lessons
                         {' '}
                         Topics
                       </p>

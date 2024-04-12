@@ -21,6 +21,7 @@ import Payment from './components/Payment';
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.auth.user?.id);
   console.log('appauthentication', isAuthenticated);
 
   useEffect(() => {
@@ -44,9 +45,10 @@ const App = () => {
               <Route path="/my-profile" element={<Account />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
-              <Route path="/:categoryId/courses" element={<Courses />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/:categoryId/courses/:courseId/modules" element={<Modules />} />
+              <Route path="/:categoryId/courses" element={<Courses userId={userId} />} />
+              <Route path="/all-courses" element={<Courses userId={userId} />} />
+              <Route path="/:userId/cart" element={<Cart />} />
+              <Route path=":courseId/modules" element={<Modules />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/payment" element={<Payment />} />
             </>
@@ -58,8 +60,8 @@ const App = () => {
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
               <Route path="/:categoryId/courses" element={<Courses />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/:categoryId/courses/:courseId/modules" element={<Modules />} />
+              <Route path="/all-courses" element={<Courses />} />
+              <Route path=":courseId/modules" element={<Modules />} />
             </>
           )}
         </Routes>

@@ -90,12 +90,12 @@
   border-right: 1px solid #fff !important;
 }
 
-.form-control,
+/* .form-control,
 .form-control:focus {
   background: transparent !important;
   border: none !important;
   border-color: transparent;
-}
+} */
 
 .signin-btn {
   border-radius: 14px;

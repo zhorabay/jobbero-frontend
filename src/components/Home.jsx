@@ -1,5 +1,5 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Navigation1 from './Navigation1';
@@ -14,28 +14,38 @@ import ExpertTutors from './ExpertTutors';
 import Invitation from './Invitation';
 import Partners from './Partners';
 import Footer from './Footer';
+import { searchInstructorsAndCourses } from '../redux/actions/searchActions';
 
-const Homepage = () =>
-// const [hotelItems, setHotelItems] = useState([]);
-// const [isMenuOpen, setMenuOpen] = useState(true);
+function Homepage() {
+  const user = useSelector((state) => state.auth.user);
+  const userId = user?.id;
+  const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(false);
+  const searchResults = useSelector((state) => state.search.results);
 
-  // const toggleMenu = () => {
-  //   setMenuOpen(!isMenuOpen);
-  // };
-  // useEffect(() => {
-  //   const fetchHotelItems = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:4000/api/v1/items');
-  //       setHotelItems(response.data.items);
-  //     } catch (error) {
-  //       console.error('Error fetching hotel items:', error);
-  //     }
-  //   };
-  //   fetchHotelItems();
-  // }, []);
-  (
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      if (searchQuery.trim() !== '') {
+        setLoading(true);
+        dispatch(searchInstructorsAndCourses(searchQuery));
+      }
+    }, 500);
+
+    return () => clearTimeout(timerId);
+  }, [searchQuery, dispatch]);
+
+  useEffect(() => {
+    console.log("Search results:", searchResults);
+  }, [searchResults]);
+  
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  return (
     <>
-      <Navigation1 />
+      <Navigation1 userId={userId ? userId.toString() : ''} />
       <Navigation />
       <div className="homepage-container">
         <div className="home-text">
@@ -60,8 +70,10 @@ const Homepage = () =>
                 placeholder="Search courses, instructors..."
                 className="me-2 search-form"
                 aria-label="Search"
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
-              <Button type="button" className="home-search-btn">Search</Button>
+              <Button type="button" className="home-search-btn" disabled={loading}>Search</Button>
             </Form>
           </div>
         </div>
@@ -75,6 +87,18 @@ const Homepage = () =>
       <Invitation />
       <Partners />
       <Footer />
+
+      {searchResults.length > 0 ? (
+        searchResults.map((result) => (
+          <div key={result.id}>
+            {result.name}
+          </div>
+        ))
+      ) : (
+        <div>No results found</div>
+      )}
     </>
   );
+}
+
 export default Homepage;

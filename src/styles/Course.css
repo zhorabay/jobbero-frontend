@@ -96,7 +96,11 @@
   min-height: 100vh;
 }
 
-.cart-list-info {
+.cart-list-ul {
+  list-style: none;
+}
+
+.cart-list-item-li {
   display: flex;
   gap: 16px;
   padding-top: 10px;
