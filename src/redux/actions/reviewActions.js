@@ -28,9 +28,9 @@ export const postReviewFailure = (error) => ({
   payload: error,
 });
 
-export const fetchReviews = () => (dispatch) => {
+export const fetchReviews = (categoryId, courseId) => (dispatch) => {
   dispatch(fetchReviewsRequest());
-  axios.get('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/reviews')
+  axios.get(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/reviews`)
     .then((response) => {
       dispatch(fetchReviewsSuccess(response.data));
     })
@@ -39,9 +39,9 @@ export const fetchReviews = () => (dispatch) => {
     });
 };
 
-export const postReview = (reviewData) => (dispatch) => {
+export const postReview = (reviewData, categoryId, courseId) => (dispatch) => {
   dispatch(postReviewRequest());
-  axios.post('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/reviews', reviewData)
+  axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/reviews`, reviewData)
     .then((response) => {
       dispatch(postReviewSuccess(response.data));
     })

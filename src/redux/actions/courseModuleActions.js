@@ -15,16 +15,16 @@ export const fetchCourseModulesFailure = (error) => ({
 });
 
 export const postCourseModuleRequest = () => ({
-  type: 'POST_COURSE_MODULES_REQUEST',
+  type: 'POST_COURSE_MODULE_REQUEST',
 });
 
 export const postCourseModuleSuccess = (courseModule) => ({
-  type: 'POST_COURSE_MODULES_SUCCESS',
+  type: 'POST_COURSE_MODULE_SUCCESS',
   payload: courseModule,
 });
 
 export const postCourseModuleFailure = (error) => ({
-  type: 'POST_COURSE_MODULES_FAILURE',
+  type: 'POST_COURSE_MODULE_FAILURE',
   payload: error,
 });
 

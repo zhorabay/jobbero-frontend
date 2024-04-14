@@ -15,7 +15,7 @@ function Modules() {
   const dispatch = useDispatch();
   const { categoryId, courseId } = useParams();
   const courses = useSelector((state) => state.courses.courses);
-  const modules = useSelector((state) => state.modules.modules);
+  const modules = useSelector((state) => state.modules.course_modules);
   const reviews = useSelector((state) => state.reviews.reviews);
 
   const [isExpanded, setIsExpanded] = useState(true);
@@ -25,7 +25,7 @@ function Modules() {
   useEffect(() => {
     dispatch(fetchCourses());
     dispatch(fetchCourseModules(categoryId, courseId));
-    dispatch(fetchReviews());
+    dispatch(fetchReviews(categoryId, courseId));
   }, [dispatch, categoryId, courseId]);
 
   const toggleExpand = () => {
@@ -42,11 +42,15 @@ function Modules() {
     setShowDescription(false);
   };
 
+  console.log('Fetched courses:', courses);
+  console.log('Fetched modules:', modules);
+  console.log('Fetched reviews:', reviews);
+
   return (
     <>
       <Navigation3 />
       <div className="modules-container">
-        {Array.isArray(courses) && courses.map((course) => (
+        {courses && courses.length > 0 && courses.map((course) => (
           <div className="modules-flex" key={course.id}>
             <h2 className="courses-h2">{course.title}</h2>
             <div className="modules-choose">
@@ -59,26 +63,27 @@ function Modules() {
                 Feedback
               </button>
             </div>
-            {showDescription && <div className="modules-course-description">about</div>}
-            {showComments && reviews.map((review) => (
+            {showDescription && <div className="modules-course-description">{course.about}</div>}
+            {showComments && reviews && reviews.length > 0 && reviews.map((review) => (
               <div key={review.id} className="modules-course-comments">
                 <p>
-                  Rating:
-                  {review.rating}
+                  Rating: {review.rating}
                 </p>
                 <p>
-                  Comment:
-                  {review.comment}
+                  Comment: {review.comment}
                 </p>
               </div>
             ))}
+            {showComments && reviews && reviews.length === 0 && (
+              <p>No reviews found.</p>
+            )}
             <div className="modules-section3">
               <p className="account-courses">Course Content</p>
               <button type="button" className="modules-expand" onClick={toggleExpand}>
                 <img src={down} alt="down" className="account-down" />
                 Expand All
               </button>
-              {isExpanded && modules.map((module) => (
+              {isExpanded && modules && modules.length > 0 && modules.map((module) => (
                 <div className="modules-list" key={module.id}>
                   <h3>{module.week}</h3>
                   <button type="button" className="account-course-list">

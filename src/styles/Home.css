@@ -234,6 +234,11 @@
 .category-list {
   list-style: none;
   margin: 0 12px;
+  display: flex !important;
+}
+
+.category-list-id {
+  margin: 0 15px;
 }
 
 .slick-prev::before,
@@ -243,7 +248,8 @@
 }
 
 .category-img {
-  width: 100%;
+  width: 185px;
+  height: 164px;
   border-radius: 14px;
 }
 
@@ -264,6 +270,21 @@
   width: 90%;
   margin: auto;
   padding: 30px 0;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-btn {
+  background-color: #22c0db;
+  color: #fff;
+  border: none;
+  padding: 0 20px;
+  font-size: 40px;
+  border-radius: 60px;
+}
+
+.carousel-inner {
+  display: flex;
 }
 
 .vision-container {

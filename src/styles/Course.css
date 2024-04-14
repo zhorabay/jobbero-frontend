@@ -36,11 +36,19 @@
   flex-direction: column;
   gap: 12px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .course-card-title {
   font-size: 13px;
   font-weight: 600;
+}
+
+.course-card-img {
+  width: 120%;
+  border-top-left-radius: 39px;
+  border-top-right-radius: 39px;
+  margin-top: -8%;
 }
 
 .course-card-desc,
@@ -57,11 +65,11 @@
 .courses-link {
   text-decoration: none;
   color: #000;
+  width: 100%;
 }
 
 .course-card-flex {
   display: flex;
-  gap: 50px;
   justify-content: space-between;
   align-items: center;
   margin-top: 14px;
@@ -161,6 +169,8 @@
 .modules-container {
   padding: 100px 0;
   background-color: #483f50;
+  min-height: 100vh;
+  color: #000;
 }
 
 .modules-flex {
