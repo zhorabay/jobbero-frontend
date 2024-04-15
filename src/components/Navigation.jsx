@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { fetchCategories } from '../redux/actions/categoryActions';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 import origin8lab from '../media/origin8lab.png';
 import jobbero from '../media/jobbero.png';
@@ -15,6 +15,7 @@ import Vector from '../media/Vector.png';
 
 function Navigation() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { categories, loading, error } = useSelector((state) => state.categories.categories);
 
   useEffect(() => {
@@ -33,6 +34,10 @@ function Navigation() {
       </div>
     );
   }
+
+  const handleClick = () => {
+    navigate('/all-courses');
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" className="navbar">
@@ -65,7 +70,7 @@ function Navigation() {
             <Nav.Link href="/forum">Forum</Nav.Link>
           </Nav>
           <Nav>
-            <Button type="button" className="nav-btn">Start Learning</Button>
+            <Button type="button" className="nav-btn" onClick={handleClick}>Start Learning</Button>
             <Nav.Link href="https://www.jobbero.com/" eventKey={2}>
               Powered By:
               <img src={jobbero} alt="google" className="brand-img" id="brand" />

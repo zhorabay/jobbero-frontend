@@ -5,8 +5,15 @@ import about3 from '../media/about3.png';
 import '../styles/About.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 
 function About() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/all-courses');
+  };
+
   return (
     <>
       <Navigation3 />
@@ -82,7 +89,7 @@ function About() {
               </p>
             </div>
           </div>
-          <button type="button" className="about-btn">Start Learning</button>
+          <button type="button" className="about-btn" onClick={handleClick}>Start Learning</button>
         </div>
       </div>
       <Footer />

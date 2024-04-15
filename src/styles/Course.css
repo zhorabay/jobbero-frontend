@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: center;
   color: #fff;
+  min-height: 100vh;
 }
 
 .course-list {
@@ -169,7 +170,6 @@
 .modules-container {
   padding: 100px 0;
   background-color: #483f50;
-  min-height: 100vh;
   color: #000;
 }
 
@@ -183,7 +183,7 @@
   color: #000;
   border-radius: 60px;
   padding: 120px 100px;
-  min-height: 200vh;
+  min-height: 150vh;
 }
 
 .modules-choose {
@@ -259,5 +259,24 @@ p {
   display: flex;
   flex-direction: column;
   gap: 26px;
-  width: 60%;
+  width: 70%;
+}
+
+.course-modules-list {
+  border: 1px solid #f6c61b;
+  background-color: #f6c71b95;
+  display: flex;
+  padding: 18px 28px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modules-week {
+  padding-left: 3%;
+}
+
+.course-modules-about {
+  margin: 14px 0;
+  font-size: 18px;
 }

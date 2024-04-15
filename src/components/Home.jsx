@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import Navigation1 from './Navigation1';
 import Navigation from './Navigation';
 import Infograph from './Infograph';
 import CategoryCarousel from './Carousel';
-import '../styles/Home.css';
 import Prospects from './Prospects';
 import Vision from './Vision';
 import FeaturedCourses from './FeaturedCourses';
@@ -38,7 +36,7 @@ function Homepage() {
   useEffect(() => {
     console.log("Search results:", searchResults);
   }, [searchResults]);
-  
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -63,18 +61,22 @@ function Homepage() {
               Today!
             </p>
           </div>
-          <div className="home-form">
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search courses, instructors..."
-                className="me-2 search-form"
-                aria-label="Search"
-                value={searchQuery}
-                onChange={handleSearchChange}
-              />
-              <Button type="button" className="home-search-btn" disabled={loading}>Search</Button>
-            </Form>
+          <div className="home-form search-container">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Search courses, instructors..."
+              className="search-input"
+            />
+            <button className="home-search-btn" onClick={handleSearchChange}>Search</button>
+            <ul className="search-result-container">
+              {searchResults.map((result) => (
+                <li className="search-result-list" key={result.id}>
+                  <Link to={`/${result.id}/modules`}>{result.title}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
@@ -87,16 +89,6 @@ function Homepage() {
       <Invitation />
       <Partners />
       <Footer />
-
-      {searchResults.length > 0 ? (
-        searchResults.map((result) => (
-          <div key={result.id}>
-            {result.name}
-          </div>
-        ))
-      ) : (
-        <div>No results found</div>
-      )}
     </>
   );
 }

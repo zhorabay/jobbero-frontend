@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { fetchCourses } from '../redux/actions/courseActions';
 import time from '../media/time.png';
 import '../styles/Home.css';
 
-const FeaturedCourses = () => {
+const FeaturedCourses = ({ userId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const categoryId = new URLSearchParams(location.search).get("categoryId");
   const coursesState = useSelector((state) => state.courses.courses);
 
   useEffect(() => {
@@ -28,22 +30,27 @@ const FeaturedCourses = () => {
 
   const handleAddToCart = (course) => {
     dispatch(addToCart(course));
+    userId && navigate(`/${userId}/cart`);
   };
+
+  const filteredCourses = categoryId
+  ? courses.filter(course => course.category_id === parseInt(categoryId))
+  : courses;
 
   return (
     <div className="featured-container">
       <div className="featured-flex">
         <div className="featured">
           <h2 className="featured-h2">Featured Courses</h2>
-          <Link to="/courses" className="featured-a">see more</Link>
+          <Link to="/all-courses" className="featured-a">see more</Link>
         </div>
         <ul className="featured-courses">
-          {courses.map((course) => (
+          {filteredCourses.map((course) => (
             <li key={course.id}>
               <Card style={{ width: '18rem' }} className="course-card">
                 <Card.Img variant="top" src={course.image} className="course-card-img" />
                 <Card.Body className="course-card-body">
-                  <Link to={`${course.id}/modules`} className="courses-link">
+                  <Link to={`/${course.id}/modules`} className="courses-link">
                     <Card.Title className="course-card-title">{course.title}</Card.Title>
                     <Card.Text className="course-card-desc">{course.description}</Card.Text>
                     <div className="course-card-flex">

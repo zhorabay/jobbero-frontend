@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { fetchCategories } from '../redux/actions/categoryActions';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { addToCart } from '../redux/actions/cartActions';
@@ -12,11 +12,11 @@ import time from '../media/time.png';
 
 function Courses({ userId }) {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const categoryId = new URLSearchParams(location.search).get("categoryId");
+  const navigate = useNavigate();
+  const { categoryId } = useParams();
   const coursesState = useSelector((state) => state.courses.courses);
   const categoriesState = useSelector((state) => state.categories.categories);
-  console.log('Courses:', coursesState);
+  console.log(categoryId);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -62,7 +62,7 @@ function Courses({ userId }) {
                 <Card style={{ width: '18rem' }} className="course-card">
                   <Card.Img variant="top" src={course.image} className="course-card-img" />
                   <Card.Body className="course-card-body">
-                    <Link to={`/${course.category_id}/${course.id}/modules`} className="courses-link">
+                    <Link to={`/${course.id}/modules`} className="courses-link">
                       <Card.Title className="course-card-title">{course.title}</Card.Title>
                       <Card.Text className="course-card-desc">{course.description}</Card.Text>
                       <div className="course-card-flex">

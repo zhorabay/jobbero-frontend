@@ -14,8 +14,8 @@ import Navigation3 from './Navigation3';
 function Modules() {
   const dispatch = useDispatch();
   const { categoryId, courseId } = useParams();
-  const courses = useSelector((state) => state.courses.courses);
-  const modules = useSelector((state) => state.modules.course_modules);
+  const coursesData = useSelector((state) => state.courses.courses);
+  const modules = useSelector((state) => state.modules.modules);
   const reviews = useSelector((state) => state.reviews.reviews);
 
   const [isExpanded, setIsExpanded] = useState(true);
@@ -24,8 +24,10 @@ function Modules() {
 
   useEffect(() => {
     dispatch(fetchCourses());
-    dispatch(fetchCourseModules(categoryId, courseId));
-    dispatch(fetchReviews(categoryId, courseId));
+    if (courseId) {
+      dispatch(fetchCourseModules(categoryId, courseId));
+      dispatch(fetchReviews(categoryId, courseId));
+    }
   }, [dispatch, categoryId, courseId]);
 
   const toggleExpand = () => {
@@ -42,15 +44,30 @@ function Modules() {
     setShowDescription(false);
   };
 
-  console.log('Fetched courses:', courses);
+  console.log('Fetched courses:', coursesData);
   console.log('Fetched modules:', modules);
   console.log('Fetched reviews:', reviews);
+  console.log(categoryId, courseId);
+
+  if (!coursesData || !coursesData.courses) {
+    return <div>Loading...</div>;
+  }
+  
+  const courses = coursesData.courses;
+
+  const course = courses.find(course => course.id === parseInt(courseId));
+
+  if (!course) {
+    return <div>Error: Course not found</div>;
+  }
+
+  const courseModules = Array.isArray(modules) ? modules.filter(module => module.course_id === parseInt(courseId)) : [];
+  const courseReviews = Array.isArray(reviews) ? reviews.filter(review => review.course_id === parseInt(courseId)) : [];
 
   return (
     <>
       <Navigation3 />
       <div className="modules-container">
-        {courses && courses.length > 0 && courses.map((course) => (
           <div className="modules-flex" key={course.id}>
             <h2 className="courses-h2">{course.title}</h2>
             <div className="modules-choose">
@@ -63,8 +80,8 @@ function Modules() {
                 Feedback
               </button>
             </div>
-            {showDescription && <div className="modules-course-description">{course.about}</div>}
-            {showComments && reviews && reviews.length > 0 && reviews.map((review) => (
+            {showDescription && <div className="course-modules-about">{course.about}</div>}
+            {showComments && courseReviews.length > 0 && courseReviews.map((review) => (
               <div key={review.id} className="modules-course-comments">
                 <p>
                   Rating: {review.rating}
@@ -74,8 +91,8 @@ function Modules() {
                 </p>
               </div>
             ))}
-            {showComments && reviews && reviews.length === 0 && (
-              <p>No reviews found.</p>
+            {showComments && courseReviews.length === 0 && (
+              <p className="course-modules-about">No reviews found.</p>
             )}
             <div className="modules-section3">
               <p className="account-courses">Course Content</p>
@@ -83,14 +100,14 @@ function Modules() {
                 <img src={down} alt="down" className="account-down" />
                 Expand All
               </button>
-              {isExpanded && modules && modules.length > 0 && modules.map((module) => (
+              {isExpanded && courseModules.length > 0 && courseModules.map((module) => (
                 <div className="modules-list" key={module.id}>
-                  <h3>{module.week}</h3>
-                  <button type="button" className="account-course-list">
+                  <h3 className="modules-week">Week {module.week}</h3>
+                  <button type="button" className="course-modules-list">
                     <div className="modules-btn-prt1">
                       <h4 className="account-h4">{module.title}</h4>
                       <p className="modules-lessons">
-                        3 lessons
+                        {module.lessons ? module.lessons.length : 0}
                         {' '}
                         Topics
                       </p>
@@ -104,7 +121,6 @@ function Modules() {
               ))}
             </div>
           </div>
-        ))}
       </div>
     </>
   );

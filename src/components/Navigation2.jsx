@@ -6,8 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Navbar.css';
 import origin8lab2 from '../media/origin8lab2.png';
 import signin from '../media/signin.png';
+import { useNavigate } from 'react-router-dom';
 
 function Navigation2() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/all-courses');
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" className="navbar2">
       <Container>
@@ -19,7 +26,7 @@ function Navigation2() {
           <Nav className="me-auto">
             <Nav.Link href="/course" className="signin-nav-link">Courses</Nav.Link>
             <Nav.Link href="/forum" className="signin-nav-link-1">Forum</Nav.Link>
-            <Button type="button" className="nav-btn">Start Learning</Button>
+            <Button type="button" className="nav-btn" onClick={handleClick}>Start Learning</Button>
           </Nav>
           <Nav>
             <Nav.Link href="/login" eventKey={2}>

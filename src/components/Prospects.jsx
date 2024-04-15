@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import education from '../media/education.png';
 import instructor from '../media/instructor.png';
 import Live from '../media/Live.png';
@@ -6,12 +7,18 @@ import Student from '../media/Student.png';
 import '../styles/Home.css';
 
 function Prospects() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/all-courses');
+  };
+
   return (
     <div className="prospects-container">
       <div className="prospects">
         <div>
           <h2 className="prosp-h2">Elevate Your Job Prospects: Discover Why Origin8Lab Reigns Supreme in Employment-Oriented Skill Development!</h2>
-          <button type="button" className="prosp-btn">Start Now</button>
+          <button type="button" className="prosp-btn" onClick={handleClick}>Start Now</button>
         </div>
         <div className="prosp-grid">
           <div className="card-0" />

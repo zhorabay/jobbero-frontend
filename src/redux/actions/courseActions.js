@@ -28,9 +28,9 @@ export const postCourseFailure = (error) => ({
   payload: error,
 });
 
-export const fetchCourses = () => (dispatch) => {
+export const fetchCourses = (categoryId) => (dispatch) => {
   dispatch(fetchCoursesRequest());
-  axios.get('http://localhost:3000/api/v1/categories/:category_id/courses')
+  axios.get(`http://localhost:3000/api/v1/categories/${categoryId}/courses`)
     .then((response) => {
       dispatch(fetchCoursesSuccess(response.data));
     })
@@ -39,9 +39,9 @@ export const fetchCourses = () => (dispatch) => {
     });
 };
 
-export const postCourse = (courseData) => (dispatch) => {
+export const postCourse = (categoryId, courseData) => (dispatch) => {
   dispatch(postCourseRequest());
-  axios.post('http://localhost:3000/api/v1/categories/:category_id/courses', courseData)
+  axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses`, courseData)
     .then((response) => {
       dispatch(postCourseSuccess(response.data));
     })
