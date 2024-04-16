@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { fetchCourseModules } from '../redux/actions/courseModuleActions';
 import { fetchReviews } from '../redux/actions/reviewActions';
@@ -21,6 +21,7 @@ function Modules() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
   const [showComments, setShowComments] = useState(false);
+  const [expandedModules, setExpandedModules] = useState({});
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -42,6 +43,13 @@ function Modules() {
   const toggleComments = () => {
     setShowComments(!showComments);
     setShowDescription(false);
+  };
+
+  const toggleLessons = (moduleId) => {
+    setExpandedModules((prevExpandedModules) => ({
+      ...prevExpandedModules,
+      [moduleId]: !prevExpandedModules[moduleId],
+    }));
   };
 
   console.log('Fetched courses:', coursesData);
@@ -115,7 +123,7 @@ function Modules() {
                   Week
                   {module.week}
                 </h3>
-                <button type="button" className="course-modules-list">
+                <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
                   <div className="modules-btn-prt1">
                     <h4 className="account-h4">{module.title}</h4>
                     <p className="modules-lessons">
@@ -126,9 +134,14 @@ function Modules() {
                   </div>
                   <button type="button" className="modules-expand-lessons modules-btn-prt2">
                     <img src={downblue} alt="down" className="account-down" />
-                    <p className="account-down">Expand</p>
+                    <p className="account-down">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
                   </button>
                 </button>
+                {expandedModules[module.id] && module.lessons && module.lessons.map((lesson) => (
+                  <div key={lesson.id} className="lesson-item">
+                    <Link to={`/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
