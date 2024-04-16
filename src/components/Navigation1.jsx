@@ -40,7 +40,7 @@ function Navigation1({ userId }) {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary nav1">
       <Container>
         <Nav>
           <NavDropdown title="USD($)" id="navbarScrollingDropdown" show={showCurrencies} onClick={handleCurrencyClick}>

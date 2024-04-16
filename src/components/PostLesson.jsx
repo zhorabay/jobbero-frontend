@@ -37,6 +37,8 @@ const PostLesson = () => {
     } catch (error) {
       setFormError('An error occurred while submitting the lesson');
     }
+
+    console.log(formData);
   };
 
   return (

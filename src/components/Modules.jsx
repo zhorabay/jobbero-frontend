@@ -134,7 +134,7 @@ function Modules() {
                   </div>
                   <button type="button" className="modules-expand-lessons modules-btn-prt2">
                     <img src={downblue} alt="down" className="account-down" />
-                    <p className="account-down">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
+                    <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
                   </button>
                 </button>
                 {expandedModules[module.id] && module.lessons && module.lessons.map((lesson) => (

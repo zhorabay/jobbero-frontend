@@ -43,7 +43,17 @@ export const fetchLessons = (categoryId, courseId, courseModuleId) => (dispatch)
 
 export const postLesson = (categoryId, courseId, courseModuleId, formData) => (dispatch) => {
   dispatch(postLessonRequest());
-  axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`, { lesson: formData })
+
+  const formDataObj = new FormData();
+  formDataObj.append('lesson[title]', formData.title);
+  formDataObj.append('lesson[description]', formData.description);
+  formDataObj.append('lesson[video]', formData.video);
+
+  axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`, formDataObj, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
     .then((response) => {
       dispatch(postLessonSuccess(response.data));
     })
