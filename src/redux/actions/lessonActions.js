@@ -18,19 +18,21 @@ export const postLessonRequest = () => ({
   type: 'POST_LESSON_REQUEST',
 });
 
-export const postLessonSuccess = (lesson) => ({
-  type: 'POST_LESSON_SUCCESS',
-  payload: lesson,
-});
+export const postLessonSuccess = (lesson) => (dispatch) => {
+  dispatch({
+    type: 'POST_LESSON_SUCCESS',
+    payload: lesson,
+  });
+};
 
 export const postLessonFailure = (error) => ({
   type: 'POST_LESSON_FAILURE',
   payload: error,
 });
 
-export const fetchLessons = () => (dispatch) => {
+export const fetchLessons = (categoryId, courseId, courseModuleId) => (dispatch) => {
   dispatch(fetchLessonsRequest());
-  axios.get('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons')
+  axios.get(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`)
     .then((response) => {
       dispatch(fetchLessonsSuccess(response.data));
     })
@@ -39,9 +41,9 @@ export const fetchLessons = () => (dispatch) => {
     });
 };
 
-export const postLesson = (lessonData) => (dispatch) => {
+export const postLesson = (categoryId, courseId, courseModuleId, formData) => (dispatch) => {
   dispatch(postLessonRequest());
-  axios.post('http://localhost:3000/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons', lessonData)
+  axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`, { lesson: formData })
     .then((response) => {
       dispatch(postLessonSuccess(response.data));
     })

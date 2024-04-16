@@ -33,7 +33,7 @@ const lessonReducer = (state = initialState, action) => {
     case 'POST_LESSON_SUCCESS':
       return {
         ...state,
-        lesson: action.payload,
+        lessons: [...state.lessons, action.payload],
         loading: false,
       };
     case 'POST_LESSON_FAILURE':

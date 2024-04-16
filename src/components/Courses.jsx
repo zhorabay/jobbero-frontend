@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import PropTypes from 'prop-types';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { fetchCategories } from '../redux/actions/categoryActions';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { addToCart } from '../redux/actions/cartActions';
 import '../styles/Course.css';
@@ -15,11 +15,9 @@ function Courses({ userId }) {
   const navigate = useNavigate();
   const { categoryId } = useParams();
   const coursesState = useSelector((state) => state.courses.courses);
-  const categoriesState = useSelector((state) => state.categories.categories);
   console.log(categoryId);
 
   useEffect(() => {
-    dispatch(fetchCategories());
     dispatch(fetchCourses());
   }, [dispatch]);
 
@@ -30,19 +28,12 @@ function Courses({ userId }) {
     courses = coursesState.courses;
   }
 
-  let categories = [];
-  if (Array.isArray(categoriesState)) {
-    categories = categoriesState;
-  } else if (categoriesState.success && Array.isArray(categoriesState.categories)) {
-    categories = categoriesState.categories;
-  }
-
   if (courses.length === 0) {
     return <div>Loading...</div>;
   }
 
   const filteredCourses = categoryId
-    ? courses.filter(course => course.category_id === parseInt(categoryId))
+    ? courses.filter((course) => course.category_id === parseInt(categoryId))
     : courses;
 
   const handleAddToCart = (course) => {
@@ -89,5 +80,13 @@ function Courses({ userId }) {
     </>
   );
 }
+
+Courses.propTypes = {
+  userId: PropTypes.string,
+};
+
+Courses.defaultProps = {
+  userId: null,
+};
 
 export default Courses;

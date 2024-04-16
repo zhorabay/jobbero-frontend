@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { fetchCourses } from '../redux/actions/courseActions';
 import logoblack from '../media/logoblack.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
 
 function Registration() {
+  const dispatch = useDispatch();
+  const coursesState = useSelector((state) => state.courses.courses);
+
+  useEffect(() => {
+    dispatch(fetchCourses());
+  }, [dispatch]);
+
+  let courses = [];
+  if (Array.isArray(coursesState)) {
+    courses = coursesState;
+  } else if (coursesState.success && Array.isArray(coursesState.courses)) {
+    courses = coursesState.courses;
+  }
+
   return (
     <>
       <Navigation3 />
@@ -24,11 +40,11 @@ function Registration() {
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">First Name:</Form.Label>
-                  <Form.Control className="registration-input" />
+                  <Form.Control className="registration-input" required />
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Last Name:</Form.Label>
-                  <Form.Control className="registration-input" />
+                  <Form.Control className="registration-input" required />
                 </Col>
               </Row>
               <Row className="registration-row">
@@ -42,27 +58,27 @@ function Registration() {
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Date Of Birth:</Form.Label>
-                  <Form.Control className="registration-input" placeholder="dd/mm/yyyy" />
+                  <Form.Control className="registration-input" placeholder="dd/mm/yyyy" required />
                 </Col>
               </Row>
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">WhatsApp Number:</Form.Label>
-                  <Form.Control className="registration-input" />
+                  <Form.Control className="registration-input" required />
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Phone Number:</Form.Label>
-                  <Form.Control className="registration-input" />
+                  <Form.Control className="registration-input" required />
                 </Col>
               </Row>
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Email:</Form.Label>
-                  <Form.Control className="registration-input" />
+                  <Form.Control className="registration-input" required />
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Nationality:</Form.Label>
-                  <Form.Control className="registration-input" />
+                  <Form.Control className="registration-input" required />
                 </Col>
               </Row>
             </Form>
@@ -74,18 +90,16 @@ function Registration() {
             </div>
             <Form>
               <div key="column-radio" className="mb-3">
-                <Form.Check
-                  label="1"
-                  name="group1"
-                  type="radio"
-                  id="radio-1"
-                />
-                <Form.Check
-                  label="2"
-                  name="group1"
-                  type="radio"
-                  id="radio-2"
-                />
+                {courses.map((course) => (
+                  <Form.Check
+                    key={course.id}
+                    label={course.title}
+                    name="group1"
+                    type="radio"
+                    id={`radio-${course.id}`}
+                    required
+                  />
+                ))}
               </div>
             </Form>
           </div>

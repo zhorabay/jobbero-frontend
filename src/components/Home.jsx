@@ -19,13 +19,11 @@ function Homepage() {
   const userId = user?.id;
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
   const searchResults = useSelector((state) => state.search.results);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (searchQuery.trim() !== '') {
-        setLoading(true);
         dispatch(searchInstructorsAndCourses(searchQuery));
       }
     }, 500);
@@ -34,7 +32,7 @@ function Homepage() {
   }, [searchQuery, dispatch]);
 
   useEffect(() => {
-    console.log("Search results:", searchResults);
+    console.log('Search results:', searchResults);
   }, [searchResults]);
 
   const handleSearchChange = (e) => {
@@ -69,7 +67,7 @@ function Homepage() {
               placeholder="Search courses, instructors..."
               className="search-input"
             />
-            <button className="home-search-btn" onClick={handleSearchChange}>Search</button>
+            <button type="button" className="home-search-btn" onClick={handleSearchChange}>Search</button>
             <ul className="search-result-container">
               {searchResults.map((result) => (
                 <li className="search-result-list" key={result.id}>

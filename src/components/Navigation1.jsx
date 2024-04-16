@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { logoutUser } from '../redux/actions/authActions';
 import cart from '../media/cart.png';
 import bell from '../media/bell.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Navbar.css';
 
 function Navigation1({ userId }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [logoutMessage, setLogoutMessage] = useState('');
   const [showCurrencies, setShowCurrencies] = useState(false);
   const { t, i18n } = useTranslation();
 
@@ -20,6 +26,16 @@ function Navigation1({ userId }) {
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await dispatch(logoutUser());
+      setLogoutMessage('Logout successful');
+      navigate('/');
+    } catch (error) {
+      setLogoutMessage('Logout failed');
+    }
   };
 
   return (
@@ -55,15 +71,23 @@ function Navigation1({ userId }) {
               navbarScroll
             >
               {userId && (
-                <Nav.Link href={`/${userId}/cart`}>
-                  <img src={cart} alt="Categories" className="icon-img" />
-                </Nav.Link>
+                <>
+                  <Nav.Link href={`/${userId}/cart`}>
+                    <img src={cart} alt="Categories" className="icon-img" />
+                  </Nav.Link>
+                  <Nav.Link href="/notifications">
+                    <img src={bell} alt="Categories" className="icon-img" />
+                  </Nav.Link>
+                  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                  {logoutMessage && <p>{logoutMessage}</p>}
+                </>
               )}
-              <Nav.Link href="/notifications">
-                <img src={bell} alt="Categories" className="icon-img" />
-              </Nav.Link>
-              <Nav.Link href="/login">Login</Nav.Link>
-              <Nav.Link href="/signup">Register</Nav.Link>
+              {!userId && (
+                <>
+                  <Nav.Link href="/login">Login</Nav.Link>
+                  <Nav.Link href="/signup">Register</Nav.Link>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Nav>

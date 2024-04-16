@@ -17,6 +17,8 @@ import Cart from './components/Cart';
 import Modules from './components/Modules';
 import Registration from './components/Registration';
 import Payment from './components/Payment';
+import Contact from './components/Contact';
+import PostLesson from './components/PostLesson';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -51,6 +53,8 @@ const App = () => {
               <Route path="/:courseId/modules" element={<Modules />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/payment" element={<Payment />} />
+              <Route path="/contact-us" element={<Contact />} />
+              <Route path="/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson" element={<PostLesson />} />
             </>
           ) : (
             <>
@@ -62,6 +66,7 @@ const App = () => {
               <Route path="/:categoryId/courses" element={<Courses />} />
               <Route path="/all-courses" element={<Courses />} />
               <Route path="/:categoryId/:courseId/modules" element={<Modules />} />
+              <Route path="/contact-us" element={<Contact />} />
             </>
           )}
         </Routes>

@@ -1,12 +1,14 @@
 const initialState = {
+  users: [],
   user: null,
-  error: null,
   loading: false,
+  error: null,
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_USERS_REQUEST':
+    case 'SIGN_UP_REQUEST':
       return {
         ...state,
         loading: true,
@@ -17,12 +19,6 @@ const userReducer = (state = initialState, action) => {
         ...state,
         users: action.payload,
         loading: false,
-        error: null,
-      };
-    case 'SIGN_UP_REQUEST':
-      return {
-        ...state,
-        loading: true,
         error: null,
       };
     case 'SIGN_UP_SUCCESS':

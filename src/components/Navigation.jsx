@@ -6,8 +6,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchCategories } from '../redux/actions/categoryActions';
 import { Link, useNavigate } from 'react-router-dom';
+import { fetchCategories } from '../redux/actions/categoryActions';
 import '../styles/Navbar.css';
 import origin8lab from '../media/origin8lab.png';
 import jobbero from '../media/jobbero.png';
@@ -67,7 +67,7 @@ function Navigation() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/all-courses">Courses</Nav.Link>
             <Nav.Link href="/instructors">Instructors</Nav.Link>
-            <Nav.Link href="/forum">Forum</Nav.Link>
+            <Nav.Link href="/contact-us">Contact Us</Nav.Link>
           </Nav>
           <Nav>
             <Button type="button" className="nav-btn" onClick={handleClick}>Start Learning</Button>

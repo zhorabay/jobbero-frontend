@@ -555,3 +555,16 @@
 .psection3-row {
   padding-top: 20px;
 }
+
+.make-payment-btn {
+  text-decoration: none !important;
+  background-color: #f6c61b !important;
+  border: none !important;
+  padding: 6px !important;
+  text-align: center !important;
+  border-radius: 20px !important;
+  font-size: 21px !important;
+  font-weight: 600 !important;
+  color: black !important;
+  width: 100% !important;
+}

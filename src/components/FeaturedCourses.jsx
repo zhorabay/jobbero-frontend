@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { fetchCourses } from '../redux/actions/courseActions';
+import { addToCart } from '../redux/actions/cartActions';
 import time from '../media/time.png';
 import '../styles/Home.css';
 
 const FeaturedCourses = ({ userId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const categoryId = new URLSearchParams(location.search).get("categoryId");
+  const location = useLocation();
+  const categoryId = new URLSearchParams(location.search).get('categoryId');
   const coursesState = useSelector((state) => state.courses.courses);
 
   useEffect(() => {
@@ -34,8 +37,8 @@ const FeaturedCourses = ({ userId }) => {
   };
 
   const filteredCourses = categoryId
-  ? courses.filter(course => course.category_id === parseInt(categoryId))
-  : courses;
+    ? courses.filter((course) => course.category_id === parseInt(categoryId))
+    : courses;
 
   return (
     <div className="featured-container">
@@ -75,6 +78,14 @@ const FeaturedCourses = ({ userId }) => {
       </div>
     </div>
   );
+};
+
+FeaturedCourses.propTypes = {
+  userId: PropTypes.string,
+};
+
+FeaturedCourses.defaultProps = {
+  userId: null,
 };
 
 export default FeaturedCourses;

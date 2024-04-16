@@ -29,18 +29,18 @@ export const signUpFailure = (error) => ({
   payload: error,
 });
 
-export const fetchUsers = () => (dispatch) => {
+export const fetchUsers = () => async (dispatch) => {
   dispatch(fetchUsersRequest());
-  axios.get('http://localhost:3000/api/v1/users')
-    .then((response) => {
-      dispatch(fetchUsersSuccess(response.data));
-    })
-    .catch((error) => {
-      dispatch(fetchUsersFailure(error.message));
-    });
+  try {
+    const response = await axios.get('http://localhost:3000/api/v1/users');
+    dispatch(fetchUsersSuccess(response.data));
+  } catch (error) {
+    dispatch(fetchUsersFailure(error.message));
+  }
 };
 
 export const signUp = (userData) => async (dispatch) => {
+  dispatch(signUpRequest());
   try {
     const response = await axios.post('http://localhost:3000/api/v1/users', { user: userData });
     if (response.status === 201 || response.status === 200) {

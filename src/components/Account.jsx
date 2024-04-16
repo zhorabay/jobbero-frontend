@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers } from '../redux/actions/userActions';
+import { fetchCourses } from '../redux/actions/courseActions';
 import down from '../media/down.png';
 import signin from '../media/sign-blue.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 
 function Account() {
+  const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(true);
-  const [user, setUser] = useState(null);
+  const signedInUser = useSelector((state) => state.auth.user);
+  const courses = useSelector((state) => state.courses.courses);
+  // const paidCourses = useSelector((state) => state.courses.paidCourses);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/users')
-      .then((response) => {
-        setUser(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-      });
-  }, []);
+    dispatch(fetchUsers());
+    dispatch(fetchCourses());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     dispatch(fetchPaidCourses(user.id));
+  //   }
+  // }, [dispatch, user]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -31,37 +37,30 @@ function Account() {
           <div className="account-section1">
             <h2 className="account-h2">Welcome to Origin8Lab Africa, Here is your dashboard</h2>
             <div className="account-section2">
-              {user ? (
-                <>
-                  {user.photo ? (
-                    <img src={user.photo} alt="Profile" className="account-signin" />
-                  ) : (
-                    <img src={signin} alt="signin" className="account-signin" />
-                  )}
-                  <p className="account-user">{user.name}</p>
-                </>
-              ) : (
-                <p>Loading...</p>
-              )}
+              <div>
+                <img src={signedInUser.photo || signin} alt="Profile" className="account-signin" />
+                <p className="account-user">{signedInUser.name}</p>
+              </div>
             </div>
             <div className="account-section21">
               <div className="account-text">
-                <h3 className="account-h3">2</h3>
+                <h3 className="account-h3">{signedInUser.courses ? signedInUser.courses.length : 0}</h3>
+                {/* <h3 className="account-h3">{paidCourses ? paidCourses.length : 0}</h3> */}
                 <p className="account-p">Courses</p>
               </div>
               <hr className="account-hr" />
               <div className="account-text">
-                <h3 className="account-h3">2</h3>
+                <h3 className="account-h3">0</h3>
                 <p className="account-p">Completed</p>
               </div>
               <hr className="account-hr" />
               <div className="account-text">
-                <h3 className="account-h3">2</h3>
+                <h3 className="account-h3">0</h3>
                 <p className="account-p">Certificate</p>
               </div>
               <hr className="account-hr" />
               <div className="account-text">
-                <h3 className="account-h3">2</h3>
+                <h3 className="account-h3">0</h3>
                 <p className="account-p">Points</p>
               </div>
             </div>
@@ -72,22 +71,19 @@ function Account() {
               <img src={down} alt="down" className="account-down" />
               Expand All
             </button>
-            {isExpanded && (
+            {isExpanded && courses && Array.isArray(courses) && (
               <div className="account-list">
-                <button type="button" className="account-course-list">
-                  <div className="button-prt1">
-                    <h4 className="account-h4">Virtual Assistant</h4>
-                  </div>
-                  <div className="button-prt2">
-                    <p className="account-status">In Progress</p>
-                    <img src={down} alt="down" className="account-down-2" />
-                  </div>
-                </button>
-                <button type="button" className="account-course-list">
-                  <h4>UX design</h4>
-                  <p>InProgress</p>
-                  <img src={down} alt="down" className="account-down-2" />
-                </button>
+                {courses.map((course) => (
+                  <button type="button" className="account-course-list" key={signedInUser.course.id}>
+                    <div className="button-prt1">
+                      <h4 className="account-h4">{signedInUser.course.title}</h4>
+                    </div>
+                    <div className="button-prt2">
+                      <p className="account-status">In Progress</p>
+                      <img src={down} alt="down" className="account-down-2" />
+                    </div>
+                  </button>
+                ))}
               </div>
             )}
           </div>
