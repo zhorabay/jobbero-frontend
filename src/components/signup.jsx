@@ -77,7 +77,7 @@ const SignUpForm = () => {
                     type="text"
                     name="phone_number"
                     value={userData.phone_number}
-                    onChange={(value, data) => handleChange({ target: { name: 'phone_number', value } })}
+                    onChange={(value) => handleChange({ target: { name: 'phone_number', value } })}
                     inputProps={{
                       id: 'phone_number',
                       required: true,

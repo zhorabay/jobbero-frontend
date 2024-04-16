@@ -24,6 +24,7 @@ export const login = (email, password) => async (dispatch) => {
 
         const { data } = responseData;
         const user = data ? { id: data.id, email: data.email } : null;
+        console.log(user);
 
         dispatch(loginSuccess(responseData));
         return { success: true };

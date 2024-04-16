@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -95,5 +96,13 @@ function Navigation1({ userId }) {
     </Navbar>
   );
 }
+
+Navigation1.propTypes = {
+  userId: PropTypes.string,
+};
+
+Navigation1.defaultProps = {
+  userId: null,
+};
 
 export default Navigation1;

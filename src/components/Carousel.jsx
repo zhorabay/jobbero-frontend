@@ -41,7 +41,7 @@ const CategoryCarousel = () => {
     <div className="category-section">
       <h2 className="category-h2">Browse Skills By Categories</h2>
       <div className="carousel">
-        <button className="carousel-btn prev" onClick={goToPrevSlide}>
+        <button type="button" className="carousel-btn prev" onClick={goToPrevSlide}>
           &lt;
         </button>
         <div className="carousel-inner" ref={sliderRef}>
@@ -56,7 +56,7 @@ const CategoryCarousel = () => {
             </div>
           ))}
         </div>
-        <button className="carousel-btn next" onClick={goToNextSlide}>
+        <button type="button" className="carousel-btn next" onClick={goToNextSlide}>
           &gt;
         </button>
       </div>

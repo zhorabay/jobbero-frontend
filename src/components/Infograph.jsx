@@ -2,25 +2,8 @@
 // import axios from 'axios';
 import '../styles/Home.css';
 
-const Infograph = () =>
-// const [hotelItems, setHotelItems] = useState([]);
-// const [isMenuOpen, setMenuOpen] = useState(true);
-
-  // const toggleMenu = () => {
-  //   setMenuOpen(!isMenuOpen);
-  // };
-  // useEffect(() => {
-  //   const fetchHotelItems = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:4000/api/v1/items');
-  //       setHotelItems(response.data.items);
-  //     } catch (error) {
-  //       console.error('Error fetching hotel items:', error);
-  //     }
-  //   };
-  //   fetchHotelItems();
-  // }, []);
-  (
+function Infograph() {
+  return (
     <>
       <div className="homepage-container-2">
         <div className="infograph">
@@ -47,5 +30,6 @@ const Infograph = () =>
       </div>
     </>
   );
+}
 
 export default Infograph;
