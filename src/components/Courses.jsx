@@ -38,7 +38,7 @@ function Courses({ userId }) {
 
   const handleAddToCart = (course) => {
     dispatch(addToCart(course));
-    userId && navigate(`/${userId}/cart`);
+    userId && navigate(`/${userId.toString()}/cart`);
   };
 
   return (
@@ -82,7 +82,7 @@ function Courses({ userId }) {
 }
 
 Courses.propTypes = {
-  userId: PropTypes.string,
+  userId: PropTypes.number,
 };
 
 Courses.defaultProps = {

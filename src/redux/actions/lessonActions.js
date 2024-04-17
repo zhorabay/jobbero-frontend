@@ -45,6 +45,7 @@ export const postLesson = (categoryId, courseId, courseModuleId, formData) => (d
   dispatch(postLessonRequest());
 
   const formDataObj = new FormData();
+  formDataObj.append('lesson[course_module_id]', courseModuleId);
   formDataObj.append('lesson[title]', formData.title);
   formDataObj.append('lesson[description]', formData.description);
   formDataObj.append('lesson[video]', formData.video);
@@ -58,6 +59,7 @@ export const postLesson = (categoryId, courseId, courseModuleId, formData) => (d
       dispatch(postLessonSuccess(response.data));
     })
     .catch((error) => {
-      dispatch(postLessonFailure(error.message));
+      const errorMessage = error.response?.data?.message;
+      dispatch(postLessonFailure(errorMessage));
     });
 };
