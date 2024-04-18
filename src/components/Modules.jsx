@@ -79,8 +79,9 @@ function Modules() {
   const courseReviews = Array.isArray(reviews)
     ? reviews.filter((review) => review.course_id === parseInt(courseId, 10))
     : [];
-  
-  const filteredLessons = lessons.filter((lesson) => lesson.course_module_id === parseInt(courseModuleId));
+
+  // const filteredLessons = lessons.filter((lesson) =>
+  // lesson.course_module_id === parseInt(courseModuleId));
 
   return (
     <>
