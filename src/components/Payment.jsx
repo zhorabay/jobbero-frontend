@@ -1,15 +1,30 @@
 import React from 'react';
+import { paystack } from 'paystack-js';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import logoblack from '../media/logoblack.png';
-import paystack from '../media/paystack.png';
+import paystackimg from '../media/paystack.png';
 import flutterwave from '../media/flutterwave.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
 
 function Payment() {
+  const handlePayment = async () => {
+    const { data } = await paystack.inline({
+      email: 'user@example.com',
+      amount: 10000,
+      callback: (response) => {
+        console.log(response);
+      },
+      onClose: () => {
+        console.log('Payment closed');
+      },
+    });
+    console.log(data);
+  };
+
   return (
     <>
       <Navigation3 />
@@ -27,7 +42,7 @@ function Payment() {
               <div key="column-radio" className="mb-3 inline-form-p">
                 <Form.Check
                   inline
-                  label={<img src={paystack} alt="Paystack" className="payment-img" />}
+                  label={<img src={paystackimg} alt="Paystack" className="payment-img" />}
                   name="group1"
                   type="radio"
                   id="inline-radio-1"
@@ -70,7 +85,7 @@ function Payment() {
                 </Col>
               </Row>
             </Form>
-            <button type="button" className="psection3-btn">Pay</button>
+            <button type="button" className="psection3-btn" onClick={handlePayment}>Pay</button>
           </div>
         </div>
       </div>
