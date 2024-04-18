@@ -10,7 +10,7 @@ function Invitation() {
           <img src={student2} alt="student" className="invitation-student" />
         </div>
         <div className="invitation">
-          <h2 className="expert-h2">Ready to take on the real world?</h2>
+          <h2 className="expert-h2 invitation-h2">Ready to take on the real world?</h2>
           <div className="invitation-imgp">
             <img src={arrow2} alt="arrow" className="invitation-arrow" />
             <p className="invitation-p">

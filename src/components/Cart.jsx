@@ -34,7 +34,7 @@ function Cart() {
   return (
     <>
       <Navigation3 />
-      <div className="courses-container">
+      <div className="cart-container">
         <div className="cart-flex">
           <div className="cart-lists">
             <h2 className="cart-h2">Shopping Cart</h2>

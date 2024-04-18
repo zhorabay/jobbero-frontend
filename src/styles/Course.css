@@ -88,8 +88,19 @@
   align-self: center;
 }
 
+.cart-container {
+  padding: 100px 0;
+  background-color: #483f50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  min-height: 100vh;
+}
+
 .courses-flex,
-.cart-flex {
+.cart-flex,
+.lesson-flex {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -98,7 +109,8 @@
   margin: auto;
 }
 
-.cart-flex {
+.cart-flex,
+.lesson-flex {
   flex-direction: row;
   justify-content: space-between;
   width: 60%;
@@ -282,6 +294,25 @@ p {
   font-size: 18px;
 }
 
+.lesson-video {
+  width: 100%;
+  border: 1px solid black;
+}
+
+.lesson-h2 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #fff;
+  margin: 40px 20px;
+}
+
+.lesson-description {
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: 3%;
+  margin: 30px 0;
+}
+
 @media only screen and (max-width: 756px) {
   .modules-flex {
     padding: 30px;
@@ -319,7 +350,12 @@ p {
     margin-top: 118px;
   }
 
-  .courses-container {
+  .lesson-flex {
+    flex-direction: column;
+    width: 85%;
+  }
+
+  .cart-container {
     padding: 0;
   }
 
@@ -346,5 +382,17 @@ p {
 
   .make-payment-btn {
     margin-left: 90% !important;
+  }
+
+  .course-card {
+    margin: 20px;
+  }
+
+  .expert-teacher {
+    display: none;
+  }
+
+  .expert-h2 {
+    font-size: 35px;
   }
 }

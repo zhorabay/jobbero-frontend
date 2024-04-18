@@ -76,7 +76,7 @@ function Account() {
                 {courses.map((course) => (
                   <button type="button" className="account-course-list" key={signedInUser.course.id}>
                     <div className="button-prt1">
-                      <h4 className="account-h4">{signedInUser.course.title}</h4>
+                      <h4 className="account-h4">{course.title}</h4>
                     </div>
                     <div className="button-prt2">
                       <p className="account-status">In Progress</p>

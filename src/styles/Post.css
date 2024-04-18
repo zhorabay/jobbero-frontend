@@ -1,0 +1,40 @@
+.post-lesson-container {
+  margin: 40px;
+}
+
+.post-lesson-form {
+  margin-top: 20px;
+}
+
+.post-lesson-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.post-lesson-form input[type="text"],
+.post-lesson-form textarea,
+.post-lesson-form input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.post-lesson-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post-lesson-form button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

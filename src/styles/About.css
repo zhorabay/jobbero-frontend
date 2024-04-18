@@ -300,3 +300,90 @@
   margin: 30px;
   margin-top: 160px;
 }
+
+@media only screen and (max-width: 756px) {
+  .about-h2 {
+    font-size: 30px;
+  }
+
+  .about-about1,
+  .about-about2 {
+    width: 222px;
+  }
+
+  .about-section2 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section2-texts {
+    padding-top: 30px;
+    width: 100%;
+  }
+
+  .section2-imgs {
+    width: 100%;
+    height: 336px;
+  }
+
+  .about-about2 {
+    margin-top: 100px;
+  }
+
+  .about-about3 {
+    display: none;
+  }
+
+  .about-section3 {
+    padding-top: 0;
+  }
+
+  .section4-texts {
+    margin: auto;
+    padding: 40px;
+  }
+
+  .bold-text {
+    font-size: 16px;
+    padding: 0 5px;
+  }
+
+  .psection2-head {
+    font-size: 27px;
+  }
+
+  .about-long-text {
+    font-size: 16px;
+  }
+
+  .contact-body {
+    flex-direction: column;
+  }
+
+  .contact-about2 {
+    width: 100%;
+  }
+
+  .contact-section2-p {
+    margin: 15px;
+    margin-top: 43px;
+    font-size: 17px;
+  }
+
+  .contact-about1 {
+    margin-top: 118px;
+  }
+
+  .contact-h4 {
+    font-size: 22px;
+  }
+
+  .contact-h3 {
+    font-size: 18px;
+  }
+
+  .contact-form {
+    padding: 20px;
+    width: 100%;
+  }
+}

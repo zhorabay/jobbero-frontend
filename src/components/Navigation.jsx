@@ -59,8 +59,8 @@ function Navigation() {
               id="collapsible-nav-dropdown"
             >
               {categories && categories.map((category) => (
-                <NavDropdown.Item key={category.id}>
-                  <Link to={`/${category.id}/courses`}>{category.title}</Link>
+                <NavDropdown.Item key={category.id} className="nav-cat-dropdown">
+                  <Link to={`/${category.id}/courses`} className="nav-cat-title">{category.title}</Link>
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
@@ -70,7 +70,7 @@ function Navigation() {
             <Nav.Link href="/contact-us">Contact Us</Nav.Link>
           </Nav>
           <Nav>
-            <Button type="button" className="nav-btn" onClick={handleClick}>Start Learning</Button>
+            <Button type="button" className="nav-btn blue-nav-btn" onClick={handleClick}>Start Learning</Button>
             <Nav.Link href="https://www.jobbero.com/" eventKey={2}>
               Powered By:
               <img src={jobbero} alt="google" className="brand-img" id="brand" />

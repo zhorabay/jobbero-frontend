@@ -12,12 +12,14 @@ const lessonReducer = (state = initialState, action) => {
         loading: true,
         error: null,
       };
-    case 'FETCH_LESSONS_SUCCESS':
+    case 'FETCH_LESSONS_SUCCESS': {
+      const lessons = Array.isArray(action.payload.lessons) ? action.payload.lessons : [];
       return {
         ...state,
-        lessons: action.payload,
+        lessons,
         loading: false,
       };
+    }
     case 'FETCH_LESSONS_FAILURE':
       return {
         ...state,

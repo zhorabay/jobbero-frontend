@@ -15,6 +15,7 @@ import Policy from './components/Policy';
 import Courses from './components/Courses';
 import Cart from './components/Cart';
 import Modules from './components/Modules';
+import Lessons from './components/Lessons';
 import Registration from './components/Registration';
 import Payment from './components/Payment';
 import Contact from './components/Contact';
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/all-courses" element={<Courses userId={userId} />} />
               <Route path="/:userId/cart" element={<Cart />} />
               <Route path="/:courseId/modules" element={<Modules />} />
+              <Route path="/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/contact-us" element={<Contact />} />

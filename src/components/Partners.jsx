@@ -10,7 +10,7 @@ function Partners() {
     <div className="expert-container">
       <div className="partners-flex">
         <div className="invitation">
-          <h2 className="expert-h2">Our Educational Partners</h2>
+          <h2 className="partners-h2">Our Educational Partners</h2>
         </div>
         <div className="partners-img">
           <img src={partner1} alt="partner" className="partners-partner" />

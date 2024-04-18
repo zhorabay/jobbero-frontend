@@ -36,11 +36,11 @@ function Navigation3() {
         <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
           <Nav>
             <Nav.Link href="/my-profile" eventKey={2}>
-              <img src={signin} alt="signin" className="brand-img" id="brand" />
+              <img src={signin} alt="signin" className="brand-img my-prof-img" id="brand" />
             </Nav.Link>
           </Nav>
           <Nav>
-            <Button type="button" className="nav-btn" onClick={handleLogout}>Logout</Button>
+            <Button type="button" className="nav-btn yellow-nav" onClick={handleLogout}>Logout</Button>
             {logoutMessage && <p>{logoutMessage}</p>}
           </Nav>
         </Navbar.Collapse>

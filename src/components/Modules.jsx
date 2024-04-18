@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { fetchCourseModules } from '../redux/actions/courseModuleActions';
 import { fetchReviews } from '../redux/actions/reviewActions';
+import { fetchLessons } from '../redux/actions/lessonActions';
 import down from '../media/down.png';
 import downblue from '../media/downblue.png';
 import book from '../media/book.png';
@@ -45,10 +46,12 @@ function Modules() {
     setShowDescription(false);
   };
 
-  const toggleLessons = (moduleId) => {
+  const toggleLessons = async (courseModuleId) => {
+    await dispatch(fetchLessons(courseModuleId));
+
     setExpandedModules((prevExpandedModules) => ({
       ...prevExpandedModules,
-      [moduleId]: !prevExpandedModules[moduleId],
+      [courseModuleId]: !prevExpandedModules[courseModuleId],
     }));
   };
 
@@ -76,6 +79,8 @@ function Modules() {
   const courseReviews = Array.isArray(reviews)
     ? reviews.filter((review) => review.course_id === parseInt(courseId, 10))
     : [];
+  
+  const filteredLessons = lessons.filter((lesson) => lesson.course_module_id === parseInt(courseModuleId));
 
   return (
     <>

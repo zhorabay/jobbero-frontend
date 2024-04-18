@@ -43,11 +43,11 @@ function Navigation1({ userId }) {
     <Navbar expand="lg" className="bg-body-tertiary nav1">
       <Container>
         <Nav>
-          <NavDropdown title="USD($)" id="navbarScrollingDropdown" show={showCurrencies} onClick={handleCurrencyClick}>
+          <NavDropdown className="nav-padding" title="USD($)" id="navbarScrollingDropdown" show={showCurrencies} onClick={handleCurrencyClick}>
             <NavDropdown.Item>Euro (€)</NavDropdown.Item>
             <NavDropdown.Item>Pound (£)</NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title={t('navbar.english')} id="navbarLanguageDropdown">
+          <NavDropdown className="nav-padding" title={t('navbar.english')} id="navbarLanguageDropdown">
             <NavDropdown.Item onClick={() => changeLanguage('en')}>
               {t('navbar.english')}
             </NavDropdown.Item>
@@ -79,14 +79,14 @@ function Navigation1({ userId }) {
                   <Nav.Link href="/notifications">
                     <img src={bell} alt="Categories" className="icon-img" />
                   </Nav.Link>
-                  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                  <Nav.Link className="nav-padding" onClick={handleLogout}>Logout</Nav.Link>
                   {logoutMessage && <p>{logoutMessage}</p>}
                 </>
               )}
               {!userId && (
                 <>
-                  <Nav.Link href="/login">Login</Nav.Link>
-                  <Nav.Link href="/signup">Register</Nav.Link>
+                  <Nav.Link className="nav-padding" href="/login">Login</Nav.Link>
+                  <Nav.Link className="nav-padding" href="/signup">Register</Nav.Link>
                 </>
               )}
             </Nav>

@@ -72,5 +72,39 @@
   margin-left: 200px;
 }
 
+.nav-cat-title {
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+}
+
+.nav-padding {
+  padding-top: 5px;
+}
+
 @media only screen and (max-width: 756px) {
+  .yellow-nav {
+    margin-left: 75%;
+  }
+
+  .my-prof-img {
+    margin-left: 88%;
+  }
+
+  .blue-nav-btn {
+    margin-right: 220px;
+    margin-left: 0;
+  }
+
+  .nav-categories {
+    margin-right: 240px;
+  }
+
+  .nav-cat-title {
+    font-size: 14px;
+  }
+
+  .nav1 {
+    display: none;
+  }
 }
