@@ -138,11 +138,11 @@ const SignUpForm = () => {
                   <>
                     Agree to Origin8Lab Company&apos;s
                     {' '}
-                    <Link to="/terms">Terms of Use</Link>
+                    <Link to="/terms" className="signup-checkbox-link">Terms of Use</Link>
                     {' '}
                     and
                     {' '}
-                    <Link to="/privacy-policy">Privacy Policy</Link>
+                    <Link to="/privacy-policy" className="signup-checkbox-link">Privacy Policy</Link>
                     .
                   </>
                 )}

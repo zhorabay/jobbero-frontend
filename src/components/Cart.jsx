@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Navigation3 from './Navigation3';
 import '../styles/Course.css';
-import about1 from '../media/about1.png';
 import { removeFromCart } from '../redux/actions/cartActions';
 
 function Cart() {
@@ -41,7 +40,7 @@ function Cart() {
             <ul className="cart-list-ul">
               {cartItems.map((item) => (
                 <li key={item.id} className="cart-list-item-li">
-                  <img src={about1} alt="course" className="cart-img" />
+                  <img src={item.image} alt="course" className="cart-img" />
                   <div className="cart-list-details">
                     <h3 className="cart-h3">{item.title}</h3>
                     <p className="cart-hours">

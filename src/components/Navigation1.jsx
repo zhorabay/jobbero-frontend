@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
@@ -16,7 +15,6 @@ import '../styles/Navbar.css';
 
 function Navigation1({ userId }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [logoutMessage, setLogoutMessage] = useState('');
   const [showCurrencies, setShowCurrencies] = useState(false);
   const { t, i18n } = useTranslation();
@@ -33,7 +31,7 @@ function Navigation1({ userId }) {
     try {
       await dispatch(logoutUser());
       setLogoutMessage('Logout successful');
-      navigate('/');
+      window.location.reload();
     } catch (error) {
       setLogoutMessage('Logout failed');
     }

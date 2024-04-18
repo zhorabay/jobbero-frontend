@@ -1,8 +1,7 @@
-import React from 'react';
-import { paystack } from 'paystack-js';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import PaystackPop from '@paystack/inline-js';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import logoblack from '../media/logoblack.png';
 import paystackimg from '../media/paystack.png';
 import flutterwave from '../media/flutterwave.png';
@@ -11,18 +10,37 @@ import Navigation3 from './Navigation3';
 import Footer from './Footer';
 
 function Payment() {
-  const handlePayment = async () => {
-    const { data } = await paystack.inline({
-      email: 'user@example.com',
-      amount: 10000,
-      callback: (response) => {
-        console.log(response);
-      },
-      onClose: () => {
-        console.log('Payment closed');
-      },
-    });
-    console.log(data);
+  const user = useSelector((state) => state.auth.user);
+  const cartItems = useSelector((state) => state.cart.items);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const paystackPayment = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
+
+      const paystack = new PaystackPop();
+      paystack.newTransaction({
+        key: 'pk_live_03a1c01d490ee49f14ad187283af346d5c2b7069',
+        email: user.email,
+        amount: totalPrice * 100,
+        reference: 'unique_reference_for_transaction',
+        onSuccess(transaction) {
+          const message = `Payment Complete! Reference ${transaction.reference}`;
+          alert(message);
+        },
+        onCancel() {
+          alert('You have canceled the transaction');
+        },
+      });
+      console.log(paystack);
+    } catch (error) {
+      console.error('Error initializing transaction:', error);
+      alert('An error occurred during payment initiation');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -46,6 +64,8 @@ function Payment() {
                   name="group1"
                   type="radio"
                   id="inline-radio-1"
+                  onClick={paystackPayment}
+                  disabled={isLoading}
                 />
                 <Form.Check
                   inline
@@ -56,36 +76,6 @@ function Payment() {
                 />
               </div>
             </Form>
-          </div>
-          <div className="payment-section3">
-            <div className="psection3">
-              <p className="psection3-logo">ORIGIN8LAB</p>
-              <div>
-                <p className="psection3-p">trial@origin8lab.com</p>
-                <p className="psection3-p">Payment</p>
-              </div>
-            </div>
-            <hr className="psection3-hr" />
-            <h2 className="psection3-h2">Enter your card details to pay</h2>
-            <Form className="psection3-form">
-              <Row className="psection3-row">
-                <Col>
-                  <Form.Label className="psection3-label">CARD NUMBER:</Form.Label>
-                  <Form.Control className="psection3-input-2" placeholder="0000 0000 0000 0000" />
-                </Col>
-              </Row>
-              <Row className="psection3-row">
-                <Col>
-                  <Form.Label className="psection3-label">CARD EXPIRY:</Form.Label>
-                  <Form.Control className="psection3-input" placeholder="MM/YY" />
-                </Col>
-                <Col>
-                  <Form.Label className="psection3-label">CVV:</Form.Label>
-                  <Form.Control className="psection3-input" placeholder="123" />
-                </Col>
-              </Row>
-            </Form>
-            <button type="button" className="psection3-btn" onClick={handlePayment}>Pay</button>
           </div>
         </div>
       </div>
