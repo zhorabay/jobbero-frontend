@@ -1,5 +1,5 @@
 services:
   - type: web
     name: origin8lab
-    buildCommand: npm install && npm run build
+    buildCommand: npm install && ./node_modules/.bin/react-scripts build
     startCommand: npm start
