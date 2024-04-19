@@ -20,6 +20,9 @@ import Registration from './components/Registration';
 import Payment from './components/Payment';
 import Contact from './components/Contact';
 import PostLesson from './components/PostLesson';
+import PostCategory from './components/PostCategory';
+import PostCourse from './components/PostCourse';
+import PostModule from './components/PostModule';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -57,6 +60,9 @@ const App = () => {
               <Route path="/registration" element={<Registration />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/contact-us" element={<Contact />} />
+              <Route path="/categories/post-category" element={<PostCategory />} />
+              <Route path="/categories/:categoryId/courses/post-course" element={<PostCourse />} />
+              <Route path="/categories/:categoryId/courses/:courseId/modules/post-module" element={<PostModule />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson" element={<PostLesson />} />
             </>
           ) : (

@@ -46,6 +46,7 @@ function Courses({ userId }) {
       <div className="courses-container">
         <div className="courses-flex">
           <h2 className="courses-h2">Available Courses</h2>
+          <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">Add Course</Link>
           <ul className="course-list">
             {filteredCourses.map((course) => (
               <li key={course.id}>

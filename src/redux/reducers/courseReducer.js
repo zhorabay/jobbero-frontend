@@ -18,12 +18,6 @@ const courseReducer = (state = initialState, action) => {
         courses: action.payload,
         loading: false,
       };
-    case 'FETCH_COURSES_FAILURE':
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
     case 'POST_COURSE_REQUEST':
       return {
         ...state,
@@ -33,9 +27,10 @@ const courseReducer = (state = initialState, action) => {
     case 'POST_COURSE_SUCCESS':
       return {
         ...state,
-        course: action.payload,
+        courses: [...state.courses, action.payload],
         loading: false,
       };
+    case 'FETCH_COURSES_FAILURE':
     case 'POST_COURSE_FAILURE':
       return {
         ...state,

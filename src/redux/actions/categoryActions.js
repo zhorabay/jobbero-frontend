@@ -39,13 +39,15 @@ export const fetchCategories = () => (dispatch) => {
     });
 };
 
-export const postCategories = (categoryData) => (dispatch) => {
+export const postCategory = (categoryData) => (dispatch) => {
   dispatch(postCategoryRequest());
   axios.post('http://localhost:3000/api/v1/categories', categoryData)
     .then((response) => {
       dispatch(postCategorySuccess(response.data));
+      return response.data;
     })
     .catch((error) => {
       dispatch(postCategoryFailure(error.message));
+      throw error;
     });
 };

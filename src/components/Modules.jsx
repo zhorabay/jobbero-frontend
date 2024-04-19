@@ -121,6 +121,7 @@ function Modules() {
                 Expand All
               </button>
             </div>
+            <Link to={`/categories/${categoryId}/courses/${courseId}/modules/post-module`} className="nav-cat-title">Add Module</Link>
             <ul className="modules-ul">
               {isExpanded && courseModules.length > 0 && courseModules.map((module) => (
                 <li className="modules-list" key={module.id}>

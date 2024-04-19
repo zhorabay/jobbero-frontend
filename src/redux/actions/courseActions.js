@@ -39,13 +39,12 @@ export const fetchCourses = (categoryId) => (dispatch) => {
     });
 };
 
-export const postCourse = (categoryId, courseData) => (dispatch) => {
+export const postCourse = (categoryId, courseData) => async (dispatch) => {
   dispatch(postCourseRequest());
-  axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses`, courseData)
-    .then((response) => {
-      dispatch(postCourseSuccess(response.data));
-    })
-    .catch((error) => {
-      dispatch(postCourseFailure(error.message));
-    });
+  try {
+    const response = await axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses`, courseData);
+    dispatch(postCourseSuccess(response.data));
+  } catch (error) {
+    dispatch(postCourseFailure(error.message));
+  }
 };

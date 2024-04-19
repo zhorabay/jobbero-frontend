@@ -63,6 +63,9 @@ function Navigation() {
                   <Link to={`/categories/${category.id}/courses`} className="nav-cat-title">{category.title}</Link>
                 </NavDropdown.Item>
               ))}
+              <NavDropdown.Item className="nav-cat-dropdown">
+                <Link to="/categories/post-category" className="nav-cat-title">Add Category</Link>
+              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/all-courses">Courses</Nav.Link>

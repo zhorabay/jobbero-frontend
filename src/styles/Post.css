@@ -38,3 +38,98 @@
   color: red;
   margin-top: 10px;
 }
+
+.post-category-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 400px;
+}
+
+.post-category-container h2 {
+  margin-bottom: 10px;
+}
+
+.post-category-container form input,
+.post-category-container form button {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+}
+
+.post-category-container form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-category-container form button:hover {
+  background-color: #0056b3;
+}
+
+.post-course-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 400px;
+}
+
+.post-course-container h2 {
+  margin-bottom: 10px;
+}
+
+.post-course-container form input,
+.post-course-container form textarea,
+.post-course-container form button {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+}
+
+.post-course-container form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-course-container form button:hover {
+  background-color: #0056b3;
+}
+
+.post-module-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 400px;
+}
+
+.post-module-container h2 {
+  margin-bottom: 10px;
+}
+
+.post-module-container form input,
+.post-module-container form textarea,
+.post-module-container form button {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+}
+
+.post-module-container form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-module-container form button:hover {
+  background-color: #0056b3;
+}
