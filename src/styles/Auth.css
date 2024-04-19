@@ -594,15 +594,12 @@
   .account-section21 {
     justify-content: center;
     gap: 5px;
+    flex-wrap: wrap;
   }
 
   .account-expand {
     justify-content: center;
     font-size: 0;
     padding: 18px 23px;
-  }
-
-  .account-section21 {
-    flex-wrap: wrap;
   }
 }
