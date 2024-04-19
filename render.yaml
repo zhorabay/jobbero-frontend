@@ -1,5 +1,5 @@
 services:
   - type: web
-    name: origin8lab-f
+    name: origin8lab
     buildCommand: npm install && npm run build
     startCommand: npm start
