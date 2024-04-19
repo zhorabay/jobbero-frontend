@@ -15,11 +15,10 @@ function Courses({ userId }) {
   const navigate = useNavigate();
   const { categoryId } = useParams();
   const coursesState = useSelector((state) => state.courses.courses);
-  console.log(categoryId);
 
   useEffect(() => {
-    dispatch(fetchCourses());
-  }, [dispatch]);
+    dispatch(fetchCourses(categoryId));
+  }, [dispatch, categoryId]);
 
   let courses = [];
   if (Array.isArray(coursesState)) {
@@ -53,7 +52,7 @@ function Courses({ userId }) {
                 <Card style={{ width: '18rem' }} className="course-card">
                   <Card.Img variant="top" src={course.image} className="course-card-img" />
                   <Card.Body className="course-card-body">
-                    <Link to={`/${course.id}/modules`} className="courses-link">
+                    <Link to={`/categories/${categoryId}/courses/${course.id}/modules`} className="courses-link">
                       <Card.Title className="course-card-title">{course.title}</Card.Title>
                       <Card.Text className="course-card-desc">{course.description}</Card.Text>
                       <div className="course-card-flex">

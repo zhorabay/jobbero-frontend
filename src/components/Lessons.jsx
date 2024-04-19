@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import Navigation3 from './Navigation3';
 import '../styles/Course.css';
 import { fetchLessons } from '../redux/actions/lessonActions';
 
 function Lessons() {
+  const navigate = useNavigate();
   const lessons = useSelector((state) => state.lesson.lessons);
   const loading = useSelector((state) => state.lesson.loading);
   const error = useSelector((state) => state.lesson.error);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const paymentStatus = sessionStorage.getItem('paymentStatus');
   const {
     categoryId, courseId, courseModuleId, lessonId,
   } = useParams();
@@ -18,14 +21,24 @@ function Lessons() {
     dispatch(fetchLessons(categoryId, courseId, courseModuleId, lessonId));
   }, [dispatch, categoryId, courseId, courseModuleId, lessonId]);
 
-  console.log('Lessons:', lessons);
+  if (!isAuthenticated) {
+    navigate('/login');
+  }
+
+  if (paymentStatus !== 'paid') {
+    return (
+      <div className="no-access-page">
+        Go to the payment to have an access to this page or explore other
+        <Link to="/all-courses" className="no-access-page-link">courses.</Link>
+      </div>
+    );
+  }
 
   if (loading || lessons === null) {
     return <div>Loading...</div>;
   }
 
   const validLessons = lessons.filter((lesson) => lesson !== null);
-  console.log('validLessons:', validLessons);
   const lesson = validLessons.find((lesson) => lesson.id === parseInt(lessonId, 10));
 
   if (!lesson) {

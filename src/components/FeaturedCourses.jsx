@@ -9,7 +9,7 @@ import { addToCart } from '../redux/actions/cartActions';
 import time from '../media/time.png';
 import '../styles/Home.css';
 
-const FeaturedCourses = ({ userId }) => {
+function FeaturedCourses({ userId }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,8 +17,8 @@ const FeaturedCourses = ({ userId }) => {
   const coursesState = useSelector((state) => state.courses.courses);
 
   useEffect(() => {
-    dispatch(fetchCourses());
-  }, [dispatch]);
+    dispatch(fetchCourses(categoryId));
+  }, [dispatch, categoryId]);
 
   let courses = [];
   if (Array.isArray(coursesState)) {
@@ -33,7 +33,7 @@ const FeaturedCourses = ({ userId }) => {
 
   const handleAddToCart = (course) => {
     dispatch(addToCart(course));
-    userId && navigate(`/${userId}/cart`);
+    userId && navigate(`/${userId.toString()}/cart`);
   };
 
   const filteredCourses = categoryId
@@ -53,7 +53,7 @@ const FeaturedCourses = ({ userId }) => {
               <Card style={{ width: '18rem' }} className="course-card">
                 <Card.Img variant="top" src={course.image} className="course-card-img" />
                 <Card.Body className="course-card-body">
-                  <Link to={`/${course.id}/modules`} className="courses-link">
+                  <Link to={`/categories/${categoryId}/courses/${course.id}/modules`} className="courses-link">
                     <Card.Title className="course-card-title">{course.title}</Card.Title>
                     <Card.Text className="course-card-desc">{course.description}</Card.Text>
                     <div className="course-card-flex">
@@ -78,10 +78,10 @@ const FeaturedCourses = ({ userId }) => {
       </div>
     </div>
   );
-};
+}
 
 FeaturedCourses.propTypes = {
-  userId: PropTypes.string,
+  userId: PropTypes.number,
 };
 
 FeaturedCourses.defaultProps = {

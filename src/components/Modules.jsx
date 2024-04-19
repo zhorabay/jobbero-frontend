@@ -18,15 +18,17 @@ function Modules() {
   const coursesData = useSelector((state) => state.courses.courses);
   const modules = useSelector((state) => state.modules.modules);
   const reviews = useSelector((state) => state.reviews.reviews);
+  const lessons = useSelector((state) => state.lesson.lessons);
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
   const [showComments, setShowComments] = useState(false);
+  const [showLessons, setShowLessons] = useState(true);
   const [expandedModules, setExpandedModules] = useState({});
 
   useEffect(() => {
     dispatch(fetchCourses());
-    if (courseId) {
+    if (categoryId && courseId) {
       dispatch(fetchCourseModules(categoryId, courseId));
       dispatch(fetchReviews(categoryId, courseId));
     }
@@ -46,19 +48,16 @@ function Modules() {
     setShowDescription(false);
   };
 
-  const toggleLessons = async (courseModuleId) => {
-    await dispatch(fetchLessons(courseModuleId));
-
+  const toggleLessons = (moduleId) => {
+    if (!expandedModules[moduleId]) {
+      dispatch(fetchLessons(categoryId, courseId, moduleId));
+    }
+    setShowLessons(!showLessons);
     setExpandedModules((prevExpandedModules) => ({
       ...prevExpandedModules,
-      [courseModuleId]: !prevExpandedModules[courseModuleId],
+      [moduleId]: !prevExpandedModules[moduleId],
     }));
   };
-
-  console.log('Fetched courses:', coursesData);
-  console.log('Fetched modules:', modules);
-  console.log('Fetched reviews:', reviews);
-  console.log(categoryId, courseId);
 
   if (!coursesData || !coursesData.courses) {
     return <div>Loading...</div>;
@@ -79,9 +78,6 @@ function Modules() {
   const courseReviews = Array.isArray(reviews)
     ? reviews.filter((review) => review.course_id === parseInt(courseId, 10))
     : [];
-
-  // const filteredLessons = lessons.filter((lesson) =>
-  // lesson.course_module_id === parseInt(courseModuleId));
 
   return (
     <>
@@ -115,41 +111,51 @@ function Modules() {
             </div>
           ))}
           {showComments && courseReviews.length === 0 && (
-          <p className="course-modules-about">No reviews found.</p>
+            <p className="course-modules-about">No reviews found.</p>
           )}
           <div className="modules-section3">
-            <p className="account-courses">Course Content</p>
-            <button type="button" className="modules-expand" onClick={toggleExpand}>
-              <img src={down} alt="down" className="account-down" />
-              Expand All
-            </button>
-            {isExpanded && courseModules.length > 0 && courseModules.map((module) => (
-              <div className="modules-list" key={module.id}>
-                <h3 className="modules-week">
-                  Week
-                  {module.week}
-                </h3>
-                <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
-                  <div className="modules-btn-prt1">
-                    <h4 className="account-h4">{module.title}</h4>
-                    <p className="modules-lessons">
-                      {module.lessons ? module.lessons.length : 0}
-                      {' '}
-                      Topics
-                    </p>
-                  </div>
-                  <button type="button" className="modules-expand-lessons modules-btn-prt2">
-                    <img src={downblue} alt="down" className="account-down" />
-                    <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
+            <div className="modules-section3-expand">
+              <p className="account-courses">Course Content</p>
+              <button type="button" className="modules-expand" onClick={toggleExpand}>
+                <img src={down} alt="down" className="account-down" />
+                Expand All
+              </button>
+            </div>
+            <ul className="modules-ul">
+              {isExpanded && courseModules.length > 0 && courseModules.map((module) => (
+                <li className="modules-list" key={module.id}>
+                  <h3 className="modules-week">
+                    Week
+                    {module.week}
+                  </h3>
+                  <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
+                    <div className="modules-btn-prt1">
+                      <h4 className="account-h4">{module.title}</h4>
+                      <p className="modules-lessons">
+                        {module.lessons ? module.lessons.length : 0}
+                        {' '}
+                        Topics
+                      </p>
+                    </div>
+                    <button type="button" className="modules-expand-lessons modules-btn-prt2">
+                      <img src={downblue} alt="down" className="account-down" />
+                      <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
+                    </button>
                   </button>
-                </button>
-                {expandedModules[module.id] && module.lessons && module.lessons.map((lesson) => (
-                  <div key={lesson.id} className="lesson-item">
-                    <Link to={`/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
+                  {expandedModules[module.id] && (
+                  <div>
+                    {lessons
+                      .filter((lesson) => lesson && lesson.course_module_id === module.id)
+                      .map((lesson) => (
+                        <div key={lesson.id} className="lesson-item">
+                          <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
+                        </div>
+                      ))}
                   </div>
-                ))}
-              </div>
-            ))}
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

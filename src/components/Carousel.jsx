@@ -49,7 +49,7 @@ const CategoryCarousel = () => {
             <div key={category.id} className="category-list-id">
               <img src={category.image} alt="category" className="category-img" />
               <h3 className="category-h3">
-                <Link to={`/${category.id}/courses`} className="category-h3">
+                <Link to={`/categories/${category.id}/courses`} className="category-h3">
                   {category.title}
                 </Link>
               </h3>

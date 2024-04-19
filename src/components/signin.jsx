@@ -24,7 +24,6 @@ const SignIn = () => {
         setError(response.message);
       }
     } catch (error) {
-      console.error('An error occurred while logging in:', error);
       setError('An error occurred');
     }
   };

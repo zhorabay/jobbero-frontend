@@ -29,12 +29,12 @@ function Payment() {
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
           alert(message);
+          sessionStorage.setItem('paymentStatus', 'paid');
         },
         onCancel() {
           alert('You have canceled the transaction');
         },
       });
-      console.log(paystack);
     } catch (error) {
       console.error('Error initializing transaction:', error);
       alert('An error occurred during payment initiation');

@@ -60,14 +60,14 @@ function Navigation() {
             >
               {categories && categories.map((category) => (
                 <NavDropdown.Item key={category.id} className="nav-cat-dropdown">
-                  <Link to={`/${category.id}/courses`} className="nav-cat-title">{category.title}</Link>
+                  <Link to={`/categories/${category.id}/courses`} className="nav-cat-title">{category.title}</Link>
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/all-courses">Courses</Nav.Link>
             <Nav.Link href="/instructors">Instructors</Nav.Link>
-            <Nav.Link href="/contact-us">Contact Us</Nav.Link>
+            <Nav.Link href="/contact-us">Contacts</Nav.Link>
           </Nav>
           <Nav>
             <Button type="button" className="nav-btn blue-nav-btn" onClick={handleClick}>Start Learning</Button>

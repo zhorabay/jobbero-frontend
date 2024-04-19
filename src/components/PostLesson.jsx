@@ -39,8 +39,6 @@ const PostLesson = () => {
     } catch (error) {
       setFormError('An error occurred while submitting the lesson');
     }
-
-    console.log(formData);
   };
 
   return (
@@ -84,7 +82,6 @@ const PostLesson = () => {
                   ...formData,
                   video: e.target.files[0],
                 });
-                console.log(e.target.files[0]);
               }}
             />
           </div>

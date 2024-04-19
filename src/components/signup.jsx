@@ -19,8 +19,6 @@ const SignUpForm = () => {
     password_confirmation: '',
   });
 
-  console.log(userData);
-
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.error);
   const handleChange = (e) => {
@@ -34,7 +32,6 @@ const SignUpForm = () => {
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
     } else {
-      console.log('Submitting data:', userData);
       dispatch(signUp(userData)).then((success) => {
         if (success) {
           navigate('/');

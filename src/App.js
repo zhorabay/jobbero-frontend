@@ -48,15 +48,16 @@ const App = () => {
               <Route path="/my-profile" element={<Account />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
-              <Route path="/:categoryId/courses" element={<Courses userId={userId} />} />
+              <Route path="/categories/:categoryId/courses" element={<Courses userId={userId} />} />
               <Route path="/all-courses" element={<Courses userId={userId} />} />
               <Route path="/:userId/cart" element={<Cart />} />
-              <Route path="/:courseId/modules" element={<Modules />} />
-              <Route path="/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
+              <Route path="/categories/:categoryId/courses/:courseId/modules" element={<Modules />} />
+              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId" element={<Modules />} />
+              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/contact-us" element={<Contact />} />
-              <Route path="/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson" element={<PostLesson />} />
+              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson" element={<PostLesson />} />
             </>
           ) : (
             <>
@@ -65,9 +66,9 @@ const App = () => {
               <Route path="/*" element={<Home />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
-              <Route path="/:categoryId/courses" element={<Courses />} />
+              <Route path="/categories/:categoryId/courses" element={<Courses />} />
               <Route path="/all-courses" element={<Courses />} />
-              <Route path="/:categoryId/:courseId/modules" element={<Modules />} />
+              <Route path="/categories/:categoryId/courses/:courseId/modules" element={<Modules />} />
               <Route path="/contact-us" element={<Contact />} />
             </>
           )}
