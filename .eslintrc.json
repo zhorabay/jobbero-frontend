@@ -21,7 +21,8 @@
     "no-shadow": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "radix": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "camelcase": "off"
   },
   "overrides": [
     {
