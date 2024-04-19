@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { postCourse } from '../redux/actions/courseActions';
 import '../styles/Post.css';
 
 function PostCourse({ postCourse }) {
   const { categoryId } = useParams();
+  const navigate = useNavigate();
   const [courseData, setCourseData] = useState({
     title: '',
     image: '',
@@ -14,30 +15,34 @@ function PostCourse({ postCourse }) {
     price: '',
     about: '',
     duration: '',
+    category_id: categoryId,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCourseData(prevState => ({
+    setCourseData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-  }
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    postCourse(categoryId, courseData);
-    setCourseData({
-      title: '',
-      image: '',
-      description: '',
-      price: '',
-      about: '',
-      duration: '',
-    });
-  }
 
-  const { title, image, description, price, about, duration } = courseData;
+    const { category_id, ...data } = courseData;
+
+    try {
+      await postCourse(category_id, data);
+      alert('Course created successfully');
+      navigate('/');
+    } catch (error) {
+      console.error('Error creating course:', error);
+    }
+  };
+
+  const {
+    title, image, description, price, about, duration,
+  } = courseData;
 
   return (
     <div className="post-course-container">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { postCourseModule } from '../redux/actions/courseModuleActions';
 import '../styles/Post.css';
 
@@ -13,6 +13,7 @@ function PostCourseModule({ postCourseModule }) {
     week: '',
     amountOfLessons: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,15 +23,16 @@ function PostCourseModule({ postCourseModule }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    postCourseModule(categoryId, courseId, moduleData);
-    setModuleData({
-      title: '',
-      description: '',
-      week: '',
-      amountOfLessons: '',
-    });
+    try {
+      await postCourseModule(categoryId, courseId, moduleData);
+
+      alert('Module created successfully');
+      navigate('/');
+    } catch (error) {
+      console.error('Error creating module:', error);
+    }
   };
 
   const {

@@ -82,7 +82,7 @@ function Homepage() {
       <Prospects />
       <CategoryCarousel />
       <Vision />
-      <FeaturedCourses />
+      <FeaturedCourses userId={userId} />
       <ExpertTutors />
       <Invitation />
       <Partners />

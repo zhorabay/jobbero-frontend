@@ -143,7 +143,7 @@ function Modules() {
                       <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
                     </button>
                   </button>
-                  {expandedModules[module.id] && (
+                  {expandedModules[module.id] && (  
                   <div>
                     {lessons
                       .filter((lesson) => lesson && lesson.course_module_id === module.id)
@@ -152,6 +152,7 @@ function Modules() {
                           <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
                         </div>
                       ))}
+                      <Link to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`} className="nav-cat-title">Add Lesson</Link>
                   </div>
                   )}
                 </li>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { postLesson } from '../redux/actions/lessonActions';
 import Navigation3 from './Navigation3';
 import '../styles/Post.css';
@@ -15,6 +15,7 @@ const PostLesson = () => {
     },
   );
   const [formError, setFormError] = useState('');
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const error = useSelector((state) => state.lesson.error);
@@ -36,6 +37,8 @@ const PostLesson = () => {
       await dispatch(postLesson(categoryId, courseId, courseModuleId, formData));
       setFormData({ title: '', description: '', video: null });
       setFormError('');
+      alert('Lesson created successfully');
+      navigate('/');
     } catch (error) {
       setFormError('An error occurred while submitting the lesson');
     }

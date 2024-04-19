@@ -11,7 +11,7 @@ class PostCategory extends React.Component {
     this.state = {
       title: '',
       image: '',
-      successMessage: ''
+      successMessage: '',
     };
   }
 
@@ -19,7 +19,7 @@ class PostCategory extends React.Component {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
-      successMessage: ''
+      successMessage: '',
     });
   }
 
@@ -29,15 +29,15 @@ class PostCategory extends React.Component {
     try {
       await this.props.postCategory({ title, image });
       this.setState({
-        title: '', 
+        title: '',
         image: '',
-        successMessage: 'Category created successfully'
+        successMessage: 'Category created successfully',
       });
       setTimeout(() => {
         this.setState({ successMessage: '' });
       }, 3000);
     } catch (error) {
-      console.error("Error creating category:", error);
+      console.error('Error creating category:', error);
     }
   }
 

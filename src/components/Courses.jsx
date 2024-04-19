@@ -49,7 +49,7 @@ function Courses({ userId }) {
           <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">Add Course</Link>
           <ul className="course-list">
             {filteredCourses.map((course) => (
-              <li key={course.id}>
+              <li key={course.id} className="course-list-li">
                 <Card style={{ width: '18rem' }} className="course-card">
                   <Card.Img variant="top" src={course.image} className="course-card-img" />
                   <Card.Body className="course-card-body">

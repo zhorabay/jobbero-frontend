@@ -47,6 +47,7 @@
 
 .course-card-img {
   width: 120%;
+  height: 200px;
   border-top-left-radius: 39px;
   border-top-right-radius: 39px;
   margin-top: -8%;

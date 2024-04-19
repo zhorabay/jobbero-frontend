@@ -35,7 +35,7 @@ function Navigation() {
     );
   }
 
-  const handleClick = () => {
+  const handleCoursesClick = () => {
     navigate('/all-courses');
   };
 
@@ -73,7 +73,7 @@ function Navigation() {
             <Nav.Link href="/contact-us">Contacts</Nav.Link>
           </Nav>
           <Nav>
-            <Button type="button" className="nav-btn blue-nav-btn" onClick={handleClick}>Start Learning</Button>
+            <Button type="button" className="nav-btn blue-nav-btn" onClick={handleCoursesClick}>Start Learning</Button>
             <Nav.Link href="https://www.jobbero.com/" eventKey={2}>
               Powered By:
               <img src={jobbero} alt="google" className="brand-img" id="brand" />
