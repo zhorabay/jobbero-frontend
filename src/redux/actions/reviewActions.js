@@ -30,7 +30,7 @@ export const postReviewFailure = (error) => ({
 
 export const fetchReviews = (categoryId, courseId) => (dispatch) => {
   dispatch(fetchReviewsRequest());
-  axios.get(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/reviews`)
+  axios.get(`https://origin8lab-9812617f1fe1.herokuapp.com/api/v1/categories/${categoryId}/courses/${courseId}/reviews`)
     .then((response) => {
       dispatch(fetchReviewsSuccess(response.data));
     })
@@ -41,7 +41,7 @@ export const fetchReviews = (categoryId, courseId) => (dispatch) => {
 
 export const postReview = (reviewData, categoryId, courseId) => (dispatch) => {
   dispatch(postReviewRequest());
-  axios.post(`http://localhost:3000/api/v1/categories/${categoryId}/courses/${courseId}/reviews`, reviewData)
+  axios.post(`https://origin8lab-9812617f1fe1.herokuapp.com/api/v1/categories/${categoryId}/courses/${courseId}/reviews`, reviewData)
     .then((response) => {
       dispatch(postReviewSuccess(response.data));
     })

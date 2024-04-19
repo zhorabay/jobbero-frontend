@@ -6,7 +6,7 @@ export const logout = createAction('auth/logout');
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('https://origin8lab-9812617f1fe1.herokuapp.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
