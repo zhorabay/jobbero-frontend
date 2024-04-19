@@ -55,7 +55,7 @@ function Navigation1({ userId }) {
         </Nav>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto navpart2">
             {userId && (
               <>
                 <Nav.Link href={`/${userId}/cart`}>

@@ -15,6 +15,8 @@ function Courses({ userId }) {
   const navigate = useNavigate();
   const { categoryId } = useParams();
   const coursesState = useSelector((state) => state.courses.courses);
+  const user = useSelector((state) => state.auth.user);
+  const isAdmin = user && user.email === 'admin@jobbero.com';
 
   useEffect(() => {
     dispatch(fetchCourses(categoryId));
@@ -28,7 +30,11 @@ function Courses({ userId }) {
   }
 
   if (courses.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">Add Course</Link>
+      </div>
+    );
   }
 
   const filteredCourses = categoryId
@@ -46,7 +52,11 @@ function Courses({ userId }) {
       <div className="courses-container">
         <div className="courses-flex">
           <h2 className="courses-h2">Available Courses</h2>
-          <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">Add Course</Link>
+          {isAdmin && (
+            <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">
+              Add Course
+            </Link>
+          )}
           <ul className="course-list">
             {filteredCourses.map((course) => (
               <li key={course.id} className="course-list-li">

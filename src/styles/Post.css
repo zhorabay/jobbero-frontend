@@ -30,10 +30,6 @@
   cursor: pointer;
 }
 
-.post-lesson-form button:hover {
-  background-color: #0056b3;
-}
-
 .error-message {
   color: red;
   margin-top: 10px;
@@ -66,10 +62,6 @@
   cursor: pointer;
 }
 
-.post-category-container form button:hover {
-  background-color: #0056b3;
-}
-
 .post-course-container {
   margin: 20px;
   padding: 20px;
@@ -98,10 +90,6 @@
   cursor: pointer;
 }
 
-.post-course-container form button:hover {
-  background-color: #0056b3;
-}
-
 .post-module-container {
   margin: 20px;
   padding: 20px;
@@ -128,6 +116,18 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.post-lesson-form button:hover {
+  background-color: #0056b3;
+}
+
+.post-category-container form button:hover {
+  background-color: #0056b3;
+}
+
+.post-course-container form button:hover {
+  background-color: #0056b3;
 }
 
 .post-module-container form button:hover {

@@ -27,6 +27,7 @@ class PostCategory extends React.Component {
     e.preventDefault();
     const { title, image } = this.state;
     try {
+      // eslint-disable-next-line react/destructuring-assignment
       await this.props.postCategory({ title, image });
       this.setState({
         title: '',

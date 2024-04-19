@@ -83,6 +83,10 @@
   padding-top: 5px;
 }
 
+.navpart2 {
+  margin-left: 85%;
+}
+
 @media only screen and (max-width: 756px) {
   .yellow-nav {
     margin-left: 75%;
@@ -111,5 +115,9 @@
 
   .nav-padding-log {
     display: contents !important;
+  }
+
+  .navpart2 {
+    margin-left: 0;
   }
 }

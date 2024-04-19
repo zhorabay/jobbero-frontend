@@ -19,6 +19,8 @@ function Modules() {
   const modules = useSelector((state) => state.modules.modules);
   const reviews = useSelector((state) => state.reviews.reviews);
   const lessons = useSelector((state) => state.lesson.lessons);
+  const user = useSelector((state) => state.auth.user);
+  const isAdmin = user && user.email === 'admin@jobbero.com';
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
@@ -121,7 +123,9 @@ function Modules() {
                 Expand All
               </button>
             </div>
-            <Link to={`/categories/${categoryId}/courses/${courseId}/modules/post-module`} className="nav-cat-title">Add Module</Link>
+            {isAdmin && (
+              <Link to={`/categories/${categoryId}/courses/${courseId}/modules/post-module`} className="nav-cat-title">Add Module</Link>
+            )}
             <ul className="modules-ul">
               {isExpanded && courseModules.length > 0 && courseModules.map((module) => (
                 <li className="modules-list" key={module.id}>
@@ -132,18 +136,18 @@ function Modules() {
                   <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
                     <div className="modules-btn-prt1">
                       <h4 className="account-h4">{module.title}</h4>
-                      <p className="modules-lessons">
+                      {/* <p className="modules-lessons">
                         {module.lessons ? module.lessons.length : 0}
                         {' '}
                         Topics
-                      </p>
+                      </p> */}
                     </div>
                     <button type="button" className="modules-expand-lessons modules-btn-prt2">
                       <img src={downblue} alt="down" className="account-down" />
                       <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
                     </button>
                   </button>
-                  {expandedModules[module.id] && (  
+                  {expandedModules[module.id] && (
                   <div>
                     {lessons
                       .filter((lesson) => lesson && lesson.course_module_id === module.id)
@@ -152,7 +156,9 @@ function Modules() {
                           <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
                         </div>
                       ))}
-                      <Link to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`} className="nav-cat-title">Add Lesson</Link>
+                      {isAdmin && (
+                        <Link to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`} className="nav-cat-title">Add Lesson</Link>
+                      )}
                   </div>
                   )}
                 </li>

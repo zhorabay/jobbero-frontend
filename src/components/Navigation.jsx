@@ -17,6 +17,8 @@ function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { categories, loading, error } = useSelector((state) => state.categories.categories);
+  const user = useSelector((state) => state.auth.user);
+  const isAdmin = user && user.email === 'admin@jobbero.com';
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -63,9 +65,11 @@ function Navigation() {
                   <Link to={`/categories/${category.id}/courses`} className="nav-cat-title">{category.title}</Link>
                 </NavDropdown.Item>
               ))}
+              {isAdmin && (
               <NavDropdown.Item className="nav-cat-dropdown">
                 <Link to="/categories/post-category" className="nav-cat-title">Add Category</Link>
               </NavDropdown.Item>
+              )}
             </NavDropdown>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/all-courses">Courses</Nav.Link>
