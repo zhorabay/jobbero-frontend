@@ -1,0 +1,605 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.signin-container {
+  background-color: #483f50;
+}
+
+.signin-flex {
+  display: flex;
+  width: 90%;
+  margin: auto;
+  padding: 65px 0;
+  padding-bottom: 115px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.signin-girl {
+  width: 90%;
+  padding: 20px;
+}
+
+.signin-form {
+  background-color: #fff;
+  border-radius: 60px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin-right: 5%;
+}
+
+.signin-h2 {
+  font-size: 20px;
+  font-weight: 500;
+  align-self: center;
+  padding-bottom: 30px;
+}
+
+.signin-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+  padding-top: 15px;
+}
+
+.signin-label-p {
+  width: 100%;
+}
+
+.signin-input,
+.signin-input-p,
+.signin-input-p2 {
+  border-radius: 20px;
+  background-color: #d9d9d9;
+  padding: 8px;
+  margin: 8px 0;
+  width: 100%;
+  border: none;
+}
+
+.signin-input-p {
+  padding: 8px 20px;
+  background-color: #fff;
+  border: 1px solid #483f50;
+}
+
+.react-tel-input {
+  border-radius: 20px !important;
+  background-color: #d9d9d9 !important;
+  padding: 4px !important;
+  margin: 8px 0 !important;
+  width: 100% !important;
+  border: none !important;
+  height: auto !important;
+}
+
+.flag-dropdown {
+  height: auto !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-right: 1px solid #fff !important;
+}
+
+/* .form-control,
+.form-control:focus {
+  background: transparent !important;
+  border: none !important;
+  border-color: transparent;
+} */
+
+.signin-btn {
+  border-radius: 14px;
+  border: none;
+  background-color: #f6c61b;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  padding: 10px 30px;
+}
+
+.mt-6 {
+  align-self: end;
+  padding: 25px 0;
+}
+
+.sigin-forgot,
+.sigin-dont-have,
+.sigin-up {
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.sigin-forgot {
+  font-weight: 400;
+  padding-bottom: 8px;
+}
+
+.sigin-up {
+  color: #f6c61b;
+  padding-left: 8px;
+}
+
+.signup-checkbox {
+  padding-top: 20px;
+  font-size: 18px;
+}
+
+.signup-checkbox-link {
+  font-size: 19px;
+}
+
+.signup-btn {
+  padding: 25px 0;
+  align-self: center;
+}
+
+.confirmation-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #483f50;
+}
+
+.confirmation-flex {
+  border: none;
+  border-radius: 60px;
+  margin: 35px;
+  padding: 200px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 95%;
+  text-align: center;
+}
+
+.confirmation-h2 {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.confirmation-p {
+  font-size: 18px;
+}
+
+.confirmation-resend {
+  font-size: 20px;
+  color: #ffbf00;
+  font-weight: 600;
+}
+
+.red-part {
+  color: #f00;
+  font-size: 18px;
+}
+
+.account-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #483f50;
+}
+
+.account-flex {
+  border: none;
+  border-radius: 60px;
+  margin: 35px;
+  padding: 0 150px;
+  padding-top: 100px;
+  padding-bottom: 250px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 95%;
+  text-align: center;
+}
+
+.account-h2,
+.account-courses,
+.account-user,
+.account-h4 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.account-signin {
+  width: 60%;
+}
+
+.account-section1,
+.account-section2 {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-section2 {
+  gap: 16px;
+}
+
+.account-section3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.account-expand {
+  display: flex;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: space-between;
+  width: 13%;
+  border: none;
+  border-radius: 20px;
+  background-color: #f6c61b;
+}
+
+.account-list {
+  position: absolute;
+  margin-top: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 60%;
+}
+
+.account-section21 {
+  display: flex;
+  gap: 18px;
+}
+
+.account-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.account-h3 {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.account-p {
+  font-size: 20px;
+}
+
+.account-hr {
+  color: #22c0db;
+  width: 100%;
+  border: 1px solid #22c0db;
+}
+
+.account-course-list {
+  border-radius: 15px;
+  border: 1px solid #f6c61b;
+  background-color: #f6c71b95;
+  display: flex;
+  padding: 14px 18px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account-status {
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 10px 18px;
+  background-color: #fff;
+  margin: 0;
+}
+
+.button-prt1,
+.button-prt2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.account-down-2 {
+  background-color: #fff;
+  border-radius: 50px;
+  padding: 15px 12px;
+}
+
+.registration-container {
+  background-color: #483f50;
+}
+
+.registration-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 70%;
+  margin: auto;
+  color: #fff;
+}
+
+.registration-section1 {
+  display: flex;
+  align-items: center;
+  padding: 80px 0;
+  width: 100%;
+}
+
+.registration-logo {
+  position: absolute;
+  background-color: #fff;
+  padding: 14px 28px;
+  border-radius: 17px;
+  margin-left: -20px;
+  margin-top: -70px;
+}
+
+.registration-p {
+  border: 5px solid #fff;
+  background-color: transparent;
+  padding: 45px 20px;
+  font-size: 24px;
+  font-weight: 600;
+  border-radius: 30px;
+  text-align: center;
+  margin-left: 40px;
+  margin-top: 100px;
+}
+
+.registration-section2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 40px 0;
+  width: 95%;
+}
+
+.registration-h2,
+.registration-label,
+.registration-label-2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.registration-input,
+.registration-input-big {
+  background-color: #d9d9d9 !important;
+  border-radius: 30px !important;
+  padding: 12px !important;
+  font-size: 22px !important;
+  color: black !important;
+}
+
+.registration-form {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.registration-col {
+  width: 100%;
+  margin: 30px;
+}
+
+.registration-row {
+  margin-top: 40px;
+}
+
+.registration-section3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  width: 65%;
+}
+
+.rsection3 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-check,
+.form-check-label {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form-check {
+  margin: 10px;
+}
+
+.registration-select {
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 600;
+  color: #fff;
+}
+
+.registration-section4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  padding-bottom: 80px;
+  width: 95%;
+}
+
+.registration-input-big {
+  min-height: 117px;
+}
+
+.registration-btn {
+  text-decoration: none;
+  background-color: #f6c61b;
+  border: none;
+  padding: 6px 50px;
+  margin: 10px 30px;
+  border-radius: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  margin-left: 100px;
+  align-self: flex-end;
+}
+
+.registration-label-2 {
+  margin-right: -100px;
+}
+
+.payment-section2 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 40px 0;
+  width: 95%;
+}
+
+.inline-form-p {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.psection3-logo {
+  font-size: 26px;
+  font-weight: bolder;
+  color: black;
+}
+
+.psection3 {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.psection3-hr {
+  margin: 60px auto;
+  width: 90%;
+  border: 1px solid black;
+  color: black;
+}
+
+.psection3-h2,
+.psection3-p,
+.psection3-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.psection3-label {
+  color: #827676;
+}
+
+.payment-section3 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  background-color: #fff;
+  padding: 40px 50px;
+  color: black;
+  margin: 60px auto;
+  margin-bottom: 120px;
+}
+
+.psection3-btn {
+  border-radius: 10px;
+  color: #fff;
+  background-color: #0ebf2095;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  width: 80%;
+  padding: 30px;
+  border: none;
+  margin: 40px auto;
+}
+
+.psection3-form {
+  width: 80%;
+  padding-top: 20px;
+}
+
+.psection3-input,
+.psection3-input-2 {
+  color: #827676 !important;
+  font-size: 20px !important;
+  border: 2px solid #827676 !important;
+  border-radius: 10px !important;
+}
+
+.psection3-input-2 {
+  min-height: 50px;
+}
+
+.psection3-row {
+  padding-top: 20px;
+}
+
+.make-payment-btn {
+  text-decoration: none !important;
+  background-color: #f6c61b !important;
+  border: none !important;
+  padding: 6px !important;
+  text-align: center !important;
+  border-radius: 20px !important;
+  font-size: 21px !important;
+  font-weight: 600 !important;
+  color: black !important;
+  width: 100% !important;
+}
+
+.no-access-page {
+  text-align: center;
+  padding-top: 25%;
+  font-weight: 600;
+}
+
+.no-access-page-link {
+  font-weight: 600;
+  font-style: italic;
+  padding-left: 5px;
+}
+
+@media only screen and (max-width: 756px) {
+  .account-flex {
+    padding: 40px;
+  }
+
+  .account-section21 {
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .account-expand {
+    justify-content: center;
+    font-size: 0;
+    padding: 18px 23px;
+  }
+}

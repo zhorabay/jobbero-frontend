@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from './redux/slices/authSlice';
+import { logout } from '../redux/actions/authActions';
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const Logout = () => {
 
   return (
     <div>
-      <button onClick={handleLogout} className="w-35 p-2 text-center text-white rounded-md bg-red-600">Logout</button>
+      <button type="button" onClick={handleLogout} className="w-35 p-2 text-center text-white rounded-md bg-red-600">Logout</button>
       {logoutMessage && <p>{logoutMessage}</p>}
     </div>
   );

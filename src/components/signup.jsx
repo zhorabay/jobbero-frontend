@@ -1,175 +1,165 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import 'react-phone-input-2/lib/style.css';
+import '../styles/Auth.css';
+import PhoneInput from 'react-phone-input-2';
+import girl from '../media/girl.png';
+import Navigation2 from './Navigation2';
+import { signUp } from '../redux/actions/userActions';
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const [photo, setPhoto] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [userData, setUserData] = useState({
+    name: '',
+    phone_number: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+  });
 
-  const handleSubmit = async (e) => {
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.user.error);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const formattedValue = value.trim();
+    setUserData({ ...userData, [name]: formattedValue });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      setError('');
-
-      if (password.trim() === '') {
-        setError("Password can't be blank");
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        setError('Passwords do not match');
-        return;
-      }
-
-      const dataToSend = {
-        user: {
-          name,
-          photo,
-          email,
-          password,
-        },
-      };
-
-      await axios.post(
-        'http://127.0.0.1:4000/api/v1/users',
-        dataToSend,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-
-      navigate('/');
-
-      setName('');
-      setPhoto('');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-      setError('');
-    } catch (error) {
-      if (
-        error.response
-        && error.response.data
-        && error.response.data.message[0]
-      ) {
-        setError(error.response.data.message[0]);
-      } else {
-        setError('An error occurred');
-      }
+    if (userData.password !== userData.password_confirmation) {
+      console.error('Passwords do not match');
+    } else {
+      dispatch(signUp(userData)).then((success) => {
+        if (success) {
+          navigate('/');
+        }
+      });
     }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full bg-opacity-90">
-        <form className="space-y-3" onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Name
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Name"
+    <>
+      <Navigation2 />
+      <div className="signin-container">
+        <div className="signin-flex">
+          <div className="signin-img">
+            <img src={girl} alt="student" className="signin-girl" />
+          </div>
+          <form className="signin-form" onSubmit={handleSubmit}>
+            <h2 className="signin-h2">Get Started!</h2>
+            <div>
+              <label htmlFor="email" className="signin-label">
+                Email
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={userData.email}
+                  onChange={handleChange}
+                  className="signin-input"
+                  autoComplete="username"
+                  required
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="phone_number" className="signin-label">
+                Phone
+                <div className="signin-label-p">
+                  <PhoneInput
+                    country="us"
+                    type="text"
+                    name="phone_number"
+                    value={userData.phone_number}
+                    onChange={(value) => handleChange({ target: { name: 'phone_number', value } })}
+                    inputProps={{
+                      id: 'phone_number',
+                      required: true,
+                    }}
+                  />
+                </div>
+              </label>
+            </div>
+            <div>
+              <label htmlFor="name" className="signin-label">
+                Full Name
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={userData.name}
+                  onChange={handleChange}
+                  className="signin-input"
+                  required
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="password" className="signin-label">
+                Password
+                <input
+                  type="password"
+                  id="password"
+                  className="signin-input"
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                  required
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="confirmPassword" className="signin-label">
+                Retype Password
+                <input
+                  type="password"
+                  id="password_confirmation"
+                  name="password_confirmation"
+                  value={userData.password_confirmation}
+                  onChange={handleChange}
+                  className="signin-input"
+                  required
+                />
+              </label>
+              {error && <div className="text-red-500">{error}</div>}
+            </div>
+            <div>
+              <Form.Check
+                type="checkbox"
+                className="signup-checkbox"
+                label={(
+                  <>
+                    Agree to Origin8Lab Company&apos;s
+                    {' '}
+                    <Link to="/terms" className="signup-checkbox-link">Terms of Use</Link>
+                    {' '}
+                    and
+                    {' '}
+                    <Link to="/privacy-policy" className="signup-checkbox-link">Privacy Policy</Link>
+                    .
+                  </>
+                )}
+                required
               />
-            </label>
-          </div>
-
-          <div>
-            <label
-              htmlFor="photo"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Photo
-              <input
-                type="file"
-                id="photo"
-                value={name}
-                onChange={(e) => setPhoto(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Choose file"
-              />
-            </label>
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Email
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Email"
-              />
-            </label>
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Password
-              <input
-                type="password"
-                id="password"
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Password"
-                autoComplete="new-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-            {error && <div className="text-red-500">{error}</div>}
-          </div>
-
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-500 text-left"
-            >
-              Confirm Password
-              <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Confirm Password"
-              />
-            </label>
-            {error && <div className="text-red-500">{error}</div>}
-          </div>
-
-          <div className="mt-6">
-            <button
-              type="submit"
-              className="w-full p-2 text-center text-white rounded-md bg-blue-600"
-            >
-              Sign up
-            </button>
-          </div>
-        </form>
+            </div>
+            <div className="signup-btn">
+              <button type="submit" className="signin-btn">
+                Sign Up
+              </button>
+            </div>
+            <p className="sigin-dont-have">
+              Have an account?
+              {' '}
+              <Link to="/login" className="sigin-up">Log In</Link>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

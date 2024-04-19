@@ -1,35 +1,94 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-// import '../styles/Home.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Navigation1 from './Navigation1';
+import Navigation from './Navigation';
+import Infograph from './Infograph';
+import CategoryCarousel from './Carousel';
+import Prospects from './Prospects';
+import Vision from './Vision';
+import FeaturedCourses from './FeaturedCourses';
+import ExpertTutors from './ExpertTutors';
+import Invitation from './Invitation';
+import Partners from './Partners';
+import Footer from './Footer';
+import { searchInstructorsAndCourses } from '../redux/actions/searchActions';
 
-const Homepage = () => {
-  const [hotelItems, setHotelItems] = useState([]);
-  const [isMenuOpen, setMenuOpen] = useState(true);
+function Homepage() {
+  const user = useSelector((state) => state.auth.user);
+  const userId = user?.id;
+  const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchResults = useSelector((state) => state.search.results);
 
-  const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
   useEffect(() => {
-    const fetchHotelItems = async () => {
-      try {
-        const response = await axios.get('http://localhost:4000/api/v1/items');
-        setHotelItems(response.data.items);
-      } catch (error) {
-        console.error('Error fetching hotel items:', error);
+    const timerId = setTimeout(() => {
+      if (searchQuery.trim() !== '') {
+        dispatch(searchInstructorsAndCourses(searchQuery));
       }
-    };
-    fetchHotelItems();
-  }, []);
+    }, 500);
+
+    return () => clearTimeout(timerId);
+  }, [searchQuery, dispatch]);
+
+  useEffect(() => {
+    console.log('Search results:', searchResults);
+  }, [searchResults]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <>
-      <Navbar toggleMenu={toggleMenu} />
+      <Navigation1 userId={userId ? userId.toString() : ''} />
+      <Navigation />
       <div className="homepage-container">
-        <h1>Latest Hotels</h1>
-        <p>Please select a hotel</p>
-        <span className={` ${isMenuOpen ? 'menu-open-padding' : 'menu-close-padding'}`}><Carousel items={hotelItems} /></span>
+        <div className="home-text">
+          <div className="home-title">
+            <h1 className="home-h1">Discover Your Potential:</h1>
+            <p className="home-p">
+              Acquire In-Demand
+              <span className="white">
+                Skills
+              </span>
+              and Land Your Dream
+              <span className="white">
+                Career
+              </span>
+              Today!
+            </p>
+          </div>
+          <div className="home-form search-container">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Search courses, instructors..."
+              className="search-input"
+            />
+            <button type="button" className="home-search-btn" onClick={handleSearchChange}>Search</button>
+            <ul className="search-result-container">
+              {searchResults.map((result) => (
+                <li className="search-result-list" key={result.id}>
+                  <Link to={`/${result.id}/modules`}>{result.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
+      <Infograph />
+      <Prospects />
+      <CategoryCarousel />
+      <Vision />
+      <FeaturedCourses userId={userId} />
+      <ExpertTutors />
+      <Invitation />
+      <Partners />
+      <Footer />
     </>
   );
-};
+}
 
 export default Homepage;
