@@ -16,12 +16,7 @@ import '../styles/Navbar.css';
 function Navigation1({ userId }) {
   const dispatch = useDispatch();
   const [logoutMessage, setLogoutMessage] = useState('');
-  const [showCurrencies, setShowCurrencies] = useState(false);
   const { t, i18n } = useTranslation();
-
-  const handleCurrencyClick = () => {
-    setShowCurrencies(!showCurrencies);
-  };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -41,10 +36,6 @@ function Navigation1({ userId }) {
     <Navbar expand="lg" className="bg-body-tertiary nav1">
       <Container>
         <Nav>
-          <NavDropdown className="nav-padding" title="USD($)" id="navbarScrollingDropdown" show={showCurrencies} onClick={handleCurrencyClick}>
-            <NavDropdown.Item>Euro (€)</NavDropdown.Item>
-            <NavDropdown.Item>Pound (£)</NavDropdown.Item>
-          </NavDropdown>
           <NavDropdown className="nav-padding" title={t('navbar.english')} id="navbarLanguageDropdown">
             <NavDropdown.Item onClick={() => changeLanguage('en')}>
               {t('navbar.english')}
@@ -62,34 +53,29 @@ function Navigation1({ userId }) {
             />
           </Form>
         </Nav>
-        <Nav>
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
-              navbarScroll
-            >
-              {userId && (
-                <>
-                  <Nav.Link href={`/${userId}/cart`}>
-                    <img src={cart} alt="Categories" className="icon-img" />
-                  </Nav.Link>
-                  <Nav.Link href="/notifications">
-                    <img src={bell} alt="Categories" className="icon-img" />
-                  </Nav.Link>
-                  <Nav.Link className="nav-padding" onClick={handleLogout}>Logout</Nav.Link>
-                  {logoutMessage && <p>{logoutMessage}</p>}
-                </>
-              )}
-              {!userId && (
-                <>
-                  <Nav.Link className="nav-padding" href="/login">Login</Nav.Link>
-                  <Nav.Link className="nav-padding" href="/signup">Register</Nav.Link>
-                </>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            {userId && (
+              <>
+                <Nav.Link href={`/${userId}/cart`}>
+                  <img src={cart} alt="Categories" className="icon-img" />
+                </Nav.Link>
+                <Nav.Link href="/notifications">
+                  <img src={bell} alt="Categories" className="icon-img" />
+                </Nav.Link>
+                <Nav.Link className="nav-padding-log" onClick={handleLogout}>Logout</Nav.Link>
+                {logoutMessage && <p>{logoutMessage}</p>}
+              </>
+            )}
+            {!userId && (
+              <>
+                <Nav.Link className="nav-padding-log" href="/login">Login</Nav.Link>
+                <Nav.Link className="nav-padding-log" href="/signup">Register</Nav.Link>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

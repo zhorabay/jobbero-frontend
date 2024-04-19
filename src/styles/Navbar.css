@@ -41,7 +41,8 @@
   display: none;
 }
 
-.icon-img {
+.icon-img,
+.icon-img-2 {
   padding-right: 8px;
 }
 
@@ -104,7 +105,11 @@
     font-size: 14px;
   }
 
-  .nav1 {
+  .nav1 .nav-padding {
     display: none;
+  }
+
+  .nav-padding-log {
+    display: contents !important;
   }
 }
