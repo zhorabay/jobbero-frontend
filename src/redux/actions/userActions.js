@@ -42,7 +42,7 @@ export const fetchUsers = () => async (dispatch) => {
 export const signUp = (userData) => async (dispatch) => {
   dispatch(signUpRequest());
   try {
-    const response = await axios.post('https://origin8lab-9812617f1fe1.herokuapp.com/api/v1/users', { user: userData });
+    const response = await axios.post('https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/api/v1/users', { user: userData });
     if (response.status === 201 || response.status === 200) {
       const { user, token } = response.data;
       if (token) {

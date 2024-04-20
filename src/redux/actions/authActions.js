@@ -6,7 +6,7 @@ export const logout = createAction('auth/logout');
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    const response = await fetch('https://origin8lab-9812617f1fe1.herokuapp.com/login', {
+    const response = await fetch('https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ export const postCommentFailure = (error) => ({
 
 export const fetchComments = () => (dispatch) => {
   dispatch(fetchCommentsRequest());
-  axios.get('https://origin8lab-9812617f1fe1.herokuapp.com/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments')
+  axios.get('https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments')
     .then((response) => {
       dispatch(fetchCommentsSuccess(response.data));
     })
@@ -41,7 +41,7 @@ export const fetchComments = () => (dispatch) => {
 
 export const postComment = (commentData) => (dispatch) => {
   dispatch(postCommentRequest());
-  axios.post('https://origin8lab-9812617f1fe1.herokuapp.com/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments', commentData)
+  axios.post('https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/api/v1/categories/:category_id/courses/:course_id/course_modules/:course_module_id/lessons/:lesson_id/comments', commentData)
     .then((response) => {
       dispatch(postCommentSuccess(response.data));
     })

@@ -32,7 +32,7 @@ export const postLessonFailure = (error) => ({
 
 export const fetchLessons = (categoryId, courseId, courseModuleId) => (dispatch) => {
   dispatch(fetchLessonsRequest());
-  axios.get(`https://origin8lab-9812617f1fe1.herokuapp.com/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`)
+  axios.get(`https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`)
     .then((response) => {
       dispatch(fetchLessonsSuccess(response.data));
     })
@@ -50,7 +50,7 @@ export const postLesson = (categoryId, courseId, courseModuleId, formData) => (d
   formDataObj.append('lesson[description]', formData.description);
   formDataObj.append('lesson[video]', formData.video);
 
-  axios.post(`https://origin8lab-9812617f1fe1.herokuapp.com/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`, formDataObj, {
+  axios.post(`https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`, formDataObj, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
