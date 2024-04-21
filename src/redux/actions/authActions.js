@@ -6,7 +6,7 @@ export const logout = createAction('auth/logout');
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    const response = await fetch('https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/login', {
+    const response = await fetch('https://jobbero-backend.onrender.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

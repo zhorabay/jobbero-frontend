@@ -32,7 +32,7 @@ export const signUpFailure = (error) => ({
 export const fetchUsers = () => async (dispatch) => {
   dispatch(fetchUsersRequest());
   try {
-    const response = await axios.get('http://localhost:3000/api/v1/users');
+    const response = await axios.get('https://jobbero-backend.onrender.com/api/v1/users');
     dispatch(fetchUsersSuccess(response.data));
   } catch (error) {
     dispatch(fetchUsersFailure(error.message));
@@ -42,7 +42,7 @@ export const fetchUsers = () => async (dispatch) => {
 export const signUp = (userData) => async (dispatch) => {
   dispatch(signUpRequest());
   try {
-    const response = await axios.post('https://jobbero-backend-gcp91qfk2-zhorabays-projects.vercel.app/api/v1/users', { user: userData });
+    const response = await axios.post('https://jobbero-backend.onrender.com/api/v1/users', { user: userData });
     if (response.status === 201 || response.status === 200) {
       const { user, token } = response.data;
       if (token) {
