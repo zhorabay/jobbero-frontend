@@ -6,7 +6,7 @@ export const logout = createAction('auth/logout');
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    const response = await fetch('https://jobbero-backend.onrender.com/login', {
+    const response = await fetch('https://origin8lab.onrender.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

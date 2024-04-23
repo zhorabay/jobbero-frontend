@@ -30,7 +30,7 @@ export const postCourseFailure = (error) => ({
 
 export const fetchCourses = (categoryId) => (dispatch) => {
   dispatch(fetchCoursesRequest());
-  axios.get(`https://jobbero-backend.onrender.com/api/v1/categories/${categoryId}/courses`)
+  axios.get(`https://origin8lab.onrender.com/api/v1/categories/${categoryId}/courses`)
     .then((response) => {
       dispatch(fetchCoursesSuccess(response.data));
     })
@@ -42,7 +42,7 @@ export const fetchCourses = (categoryId) => (dispatch) => {
 export const postCourse = (categoryId, courseData) => async (dispatch) => {
   dispatch(postCourseRequest());
   try {
-    const response = await axios.post(`https://jobbero-backend.onrender.com/api/v1/categories/${categoryId}/courses`, courseData);
+    const response = await axios.post(`https://origin8lab.onrender.com/api/v1/categories/${categoryId}/courses`, courseData);
     dispatch(postCourseSuccess(response.data));
   } catch (error) {
     dispatch(postCourseFailure(error.message));

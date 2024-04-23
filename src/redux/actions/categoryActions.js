@@ -30,7 +30,7 @@ export const postCategoryFailure = (error) => ({
 
 export const fetchCategories = () => (dispatch) => {
   dispatch(fetchCategoriesRequest());
-  axios.get('https://jobbero-backend.onrender.com/api/v1/categories')
+  axios.get('https://origin8lab.onrender.com/api/v1/categories')
     .then((response) => {
       dispatch(fetchCategoriesSuccess(response.data));
     })
@@ -41,7 +41,7 @@ export const fetchCategories = () => (dispatch) => {
 
 export const postCategory = (categoryData) => (dispatch) => {
   dispatch(postCategoryRequest());
-  axios.post('https://jobbero-backend.onrender.com/api/v1/categories', categoryData)
+  axios.post('https://origin8lab.onrender.com/api/v1/categories', categoryData)
     .then((response) => {
       dispatch(postCategorySuccess(response.data));
       return response.data;
