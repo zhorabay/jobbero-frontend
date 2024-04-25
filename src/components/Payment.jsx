@@ -11,20 +11,21 @@ import Footer from './Footer';
 
 function Payment() {
   const user = useSelector((state) => state.auth.user);
-  const cartItems = useSelector((state) => state.cart.items);
+  // const cartItems = useSelector((state) => state.cart.items);
   const [isLoading, setIsLoading] = useState(false);
 
   const paystackPayment = async (e) => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
+      // const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
 
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: 'pk_live_03a1c01d490ee49f14ad187283af346d5c2b7069',
         email: user.email,
-        amount: totalPrice * 100,
+        // amount: totalPrice * 100,
+        amount: 20.00,
         reference: 'unique_reference_for_transaction',
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
@@ -56,7 +57,7 @@ function Payment() {
             <div className="rsection3">
               <h2 className="registration-h2">PAYMENT</h2>
             </div>
-            <Form>
+            <Form className="payment-form">
               <div key="column-radio" className="mb-3 inline-form-p">
                 <Form.Check
                   inline

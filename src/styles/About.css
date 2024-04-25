@@ -32,7 +32,7 @@
 
 .about-h2,
 .about-p {
-  font-size: 45px;
+  font-size: 33px;
   font-weight: 500;
   color: #fff;
   text-align: center;
@@ -40,7 +40,7 @@
 
 .about-p,
 .about-text {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .about-section2 {
@@ -57,8 +57,8 @@
   border: 10px solid #ffd233;
   border-radius: 18px;
   background-color: transparent;
-  width: 43%;
-  height: 436px;
+  width: 37%;
+  height: 400px;
 }
 
 .about-about1,
@@ -86,19 +86,19 @@
 }
 
 .about-h4 {
-  font-size: 27px;
+  font-size: 25px;
   font-weight: 500;
   color: #f6c61b;
 }
 
 .about-h3 {
-  font-size: 33px;
+  font-size: 27px;
   font-weight: bolder;
 }
 
 .about-section3 {
   color: #f6c61b;
-  font-size: 40px;
+  font-size: 27px;
   font-weight: bold;
   width: 80%;
   margin: auto;
@@ -107,7 +107,7 @@
 
 .white-text {
   color: #fff;
-  font-size: 40px;
+  font-size: 27px;
   font-weight: bold;
 }
 
@@ -132,7 +132,8 @@
   border-radius: 50px;
   z-index: 1;
   position: absolute;
-  margin-left: 3%;
+  margin-left: 6%;
+  width: 24%;
 }
 
 .about-btn {
@@ -141,7 +142,7 @@
   padding: 4px 10px;
   margin: 10px 0;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 600;
   color: black;
   margin-left: 100px;
@@ -155,25 +156,25 @@
 }
 
 .section4-head {
-  font-size: 27px;
+  font-size: 23px;
   font-weight: 600;
   text-align: center;
   padding-bottom: 30px;
 }
 
 .about-long-text {
-  font-size: 19px;
+  font-size: 16px;
 }
 
 .bold-text {
   font-weight: bold;
-  font-size: 19px;
+  font-size: 16px;
 }
 
 .policy-section2 {
   width: 85%;
   margin: auto;
-  padding: 300px 0;
+  padding: 200px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -181,11 +182,11 @@
 }
 
 .policy-privacy {
-  width: 34%;
+  width: 23%;
 }
 
 .psection2-head {
-  font-size: 33px;
+  font-size: 27px;
   font-weight: bolder;
   text-align: center;
 }
@@ -205,41 +206,42 @@
 }
 
 .contact-section2-texts {
-  font-size: 21px;
+  font-size: 17px;
   color: #fff;
   padding-top: 16px;
   font-weight: 600;
 }
 
 .contact-h4 {
-  font-size: 26px;
+  font-size: 22px;
 }
 
 .contact-h3 {
-  font-size: 21px;
+  font-size: 20px;
   padding-bottom: 25px;
 }
 
 .phone-img,
 .mail-img {
-  padding-right: 16px;
-  padding-bottom: 12px;
+  padding-right: 13px;
+  padding-bottom: 8px;
+  width: 6%;
 }
 
 .contact-form {
-  padding: 60px;
+  padding: 35px;
   padding-bottom: 30px;
   background-color: #fff;
   color: black;
   border-radius: 60px;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 35%;
   align-items: flex-end;
 }
 
 .contact-label {
-  margin: 16px 0;
+  margin: 12px 0;
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -252,7 +254,7 @@
 .contact-input {
   background-color: #d9d9d9;
   border-radius: 20px;
-  font-size: 16px;
+  font-size: 13px;
   color: black;
   padding: 10px 20px;
   border: none;
@@ -262,7 +264,7 @@
 .contact-textarea {
   border: 1px solid black;
   color: black;
-  font-size: 16px;
+  font-size: 13px;
   padding: 14px;
   border-radius: 20px;
   width: 80%;
@@ -274,7 +276,7 @@
   color: black;
   background-color: #f6c61b;
   border-radius: 14px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   margin-right: 10px;
   padding: 10px 18px;

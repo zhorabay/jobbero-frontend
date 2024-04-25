@@ -10,7 +10,7 @@ function Prospects() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/all-courses');
+    navigate('/registration');
   };
 
   return (

@@ -38,7 +38,7 @@ function Navigation() {
   }
 
   const handleCoursesClick = () => {
-    navigate('/all-courses');
+    navigate('/registration');
   };
 
   return (
@@ -53,7 +53,7 @@ function Navigation() {
             <NavDropdown
               className="nav-categories custom-dropdown"
               title={(
-                <span>
+                <span className="nav-categories-font">
                   <img src={Vector} alt="Categories" className="icon-img" />
                   Categories
                 </span>
@@ -80,7 +80,7 @@ function Navigation() {
             <Button type="button" className="nav-btn blue-nav-btn" onClick={handleCoursesClick}>Start Learning</Button>
             <Nav.Link href="https://www.jobbero.com/" eventKey={2}>
               Powered By:
-              <img src={jobbero} alt="google" className="brand-img" id="brand" />
+              <img src={jobbero} alt="google" className="jobbero-img" id="brand" />
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

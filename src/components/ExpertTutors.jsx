@@ -7,7 +7,7 @@ function ExpertTutors() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/all-courses');
+    navigate('/registration');
   };
 
   return (

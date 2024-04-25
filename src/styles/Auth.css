@@ -343,7 +343,7 @@
 .registration-section1 {
   display: flex;
   align-items: center;
-  padding: 80px 0;
+  padding: 40px 0;
   width: 100%;
 }
 
@@ -352,20 +352,21 @@
   background-color: #fff;
   padding: 14px 28px;
   border-radius: 17px;
-  margin-left: -20px;
+  margin-left: 70px;
   margin-top: -70px;
+  width: 14%;
 }
 
 .registration-p {
   border: 5px solid #fff;
   background-color: transparent;
-  padding: 45px 20px;
-  font-size: 24px;
+  padding: 20px;
+  font-size: 19px;
   font-weight: 600;
   border-radius: 30px;
   text-align: center;
-  margin-left: 40px;
-  margin-top: 100px;
+  margin-left: 100px;
+  margin-top: 40px;
 }
 
 .registration-section2 {
@@ -373,14 +374,14 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 40px 0;
+  padding: 30px 0;
   width: 95%;
 }
 
 .registration-h2,
 .registration-label,
 .registration-label-2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -388,8 +389,8 @@
 .registration-input-big {
   background-color: #d9d9d9 !important;
   border-radius: 30px !important;
-  padding: 12px !important;
-  font-size: 22px !important;
+  padding: 10px !important;
+  font-size: 14px !important;
   color: black !important;
 }
 
@@ -400,11 +401,7 @@
 
 .registration-col {
   width: 100%;
-  margin: 30px;
-}
-
-.registration-row {
-  margin-top: 40px;
+  margin: 14px;
 }
 
 .registration-section3 {
@@ -423,7 +420,7 @@
 
 .form-check,
 .form-check-label {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -448,7 +445,7 @@
 }
 
 .registration-input-big {
-  min-height: 117px;
+  min-height: 90px;
 }
 
 .registration-btn {
@@ -458,7 +455,7 @@
   padding: 6px 50px;
   margin: 10px 30px;
   border-radius: 30px;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
   color: black;
   margin-left: 100px;
@@ -559,6 +556,14 @@
 
 .psection3-row {
   padding-top: 20px;
+}
+
+.payment-img {
+  width: 100%;
+}
+
+.payment-form {
+  width: 90%;
 }
 
 .make-payment-btn {

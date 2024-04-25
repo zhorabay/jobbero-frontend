@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import PropTypes from 'prop-types';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+// import PropTypes from 'prop-types';
+import { Link, useParams } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
-import { addToCart } from '../redux/actions/cartActions';
+// import { addToCart } from '../redux/actions/cartActions';
 import '../styles/Course.css';
 import Navigation3 from './Navigation3';
 import time from '../media/time.png';
 
-function Courses({ userId }) {
+function Courses() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { categoryId } = useParams();
   const coursesState = useSelector((state) => state.courses.courses);
   const user = useSelector((state) => state.auth.user);
@@ -41,10 +41,10 @@ function Courses({ userId }) {
     ? courses.filter((course) => course.category_id === parseInt(categoryId))
     : courses;
 
-  const handleAddToCart = (course) => {
-    dispatch(addToCart(course));
-    userId && navigate(`/${userId.toString()}/cart`);
-  };
+  // const handleAddToCart = (course) => {
+  //   dispatch(addToCart(course));
+  //   userId && navigate(`/${userId.toString()}/cart`);
+  // };
 
   return (
     <>
@@ -79,7 +79,7 @@ function Courses({ userId }) {
                         </Card.Text>
                       </div>
                     </Link>
-                    <Button variant="primary" onClick={() => handleAddToCart(course)} className="course-card-btn">Add to Cart</Button>
+                    <Button variant="primary" className="course-card-btn">Add to Cart</Button>
                   </Card.Body>
                 </Card>
               </li>
@@ -91,12 +91,12 @@ function Courses({ userId }) {
   );
 }
 
-Courses.propTypes = {
-  userId: PropTypes.number,
-};
+// Courses.propTypes = {
+//   userId: PropTypes.number,
+// };
 
-Courses.defaultProps = {
-  userId: null,
-};
+// Courses.defaultProps = {
+//   userId: null,
+// };
 
 export default Courses;

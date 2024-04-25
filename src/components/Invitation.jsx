@@ -16,9 +16,9 @@ function Invitation() {
             <p className="invitation-p">
               Join Origin8Lab and equip yourself
               <br />
-              with in-demand skills that set you apart in today&apos;s
+              with in-demand skills that set you apart in
               <br />
-              competitive job market
+              today&apos;s competitive job market
             </p>
           </div>
         </div>

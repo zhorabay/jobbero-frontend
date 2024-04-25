@@ -10,8 +10,8 @@
 
 .homepage-container {
   min-height: 72vh;
-  background-image: url(../media/world.png), url(../media/inno.png);
-  background-position: left bottom, right top;
+  background-image: url(../media/inno.png);
+  background-position: right top;
   background-repeat: no-repeat;
   width: 100%;
   color: white;
@@ -24,18 +24,18 @@
 }
 
 .home-h1 {
-  font-size: 54px;
+  font-size: 45px;
   font-weight: 800;
 }
 
 .home-p {
   color: #22c0db;
-  font-size: 35px;
+  font-size: 28px;
 }
 
 .white {
   color: white;
-  font-size: 35px;
+  font-size: 28px;
   padding: 0 5px;
 }
 
@@ -48,13 +48,13 @@
   color: black;
   border-radius: 70px;
   border: none;
-  font-size: 22px;
+  font-size: 15px;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   margin: 8px 10px;
   padding: 12px 20px;
   position: absolute;
-  margin-left: -18%;
+  margin-left: -22%;
 }
 
 .home-search-btn:hover {
@@ -84,12 +84,12 @@
 }
 
 .infograph-h2 {
-  font-size: 50px;
+  font-size: 35px;
   font-weight: 700;
 }
 
 .infograph-p {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .infograph-hr {
@@ -114,16 +114,17 @@
   width: 90%;
   margin: auto;
   justify-content: space-between;
-  padding-top: 300px;
+  padding-top: 210px;
 }
 
 .prosp-h2 {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
   position: absolute;
   z-index: 1;
   width: 50%;
+  margin-top: 20px;
 }
 
 .prosp-btn {
@@ -135,25 +136,26 @@
   font-weight: 500;
   font-family: "Poppins", sans-serif;
   padding: 10px 30px;
-  margin-top: 320px;
+  margin-top: 250px;
 }
 
 .prosp-grid {
   display: grid;
-  grid-template-columns: 276px 276px 276px;
-  grid-template-rows: 267px 267px;
+  grid-template-columns: 268px 268px 268px;
+  grid-template-rows: 245px 245px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px 20px;
   border-radius: 9px;
   box-shadow: 0 1px 1px gray;
   margin: 20px;
   width: 90%;
+  margin-top: 0;
 }
 
 .card-img-1 {
@@ -192,21 +194,17 @@
 }
 
 .card-h4 {
-  margin: 5px;
-  font-size: 17px;
+  margin-top: 3px;
+  font-size: 15px;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
 }
 
 .card-p,
 .card-p-5 {
-  align-self: flex-start;
-  font-size: 14px;
+  font-size: 12px;
   font-family: "Poppins", sans-serif;
-}
-
-.card-p-5 {
-  font-size: 13px;
+  text-align: center;
 }
 
 .category-section {
@@ -216,7 +214,7 @@
 }
 
 .category-h2 {
-  font-size: 40px;
+  font-size: 31px;
   font-weight: bold;
   padding: 30px 0;
 }
@@ -234,7 +232,7 @@
 .slick-prev::before,
 .slick-next::before {
   color: #22c0db !important;
-  font-size: 60px !important;
+  font-size: 40px !important;
 }
 
 .category-img {
@@ -244,7 +242,7 @@
 }
 
 .category-h3 {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
   margin-top: 12px;
   text-decoration: none;
@@ -268,8 +266,8 @@
   background-color: #22c0db;
   color: #fff;
   border: none;
-  padding: 0 20px;
-  font-size: 40px;
+  padding: 0 15px;
+  font-size: 30px;
   border-radius: 60px;
 }
 
@@ -286,15 +284,20 @@
 .vision-flex {
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  gap: 40px;
+  width: 70%;
   margin: auto;
   padding: 40px 0;
+}
+
+.vision {
+  width: 80%;
 }
 
 .vision-h2,
 .vision-p {
   font-weight: bold;
-  font-size: 27px;
+  font-size: 18px;
   color: white;
   padding-top: 5px;
 }
@@ -302,7 +305,12 @@
 .vision-sun {
   position: absolute;
   z-index: 1;
-  right: 2%;
+  right: 26%;
+  width: 7%;
+}
+
+.vision-africa {
+  width: 65%;
 }
 
 .featured-flex {
@@ -355,7 +363,7 @@
   border: none;
   background-color: #f6c61b;
   color: black;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   font-family: "Poppins", sans-serif;
   padding: 10px 30px;
@@ -364,7 +372,7 @@
 
 .expert-h2,
 .partners-h2 {
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
 }
 
@@ -372,12 +380,17 @@
   font-size: 18px;
 }
 
+.expert-teacher {
+  width: 100%;
+}
+
 .invitation-container {
   background-color: #f6c61b;
   background-image: url(../media/star.png);
   background-repeat: no-repeat;
   background-position: left;
-  background-position-x: 8%;
+  background-position-x: 13%;
+  background-size: 30%;
 }
 
 .invitation-flex {
@@ -385,31 +398,45 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 90%;
   margin: auto;
 }
 
 .invitation {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  justify-content: flex-start;
+  width: 57%;
   color: #000;
   gap: 20px;
 }
 
 .invitation-imgp {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
+  width: 75%;
 }
 
 .invitation-star {
   position: absolute;
 }
 
+.invitation-arrow {
+  width: 20%;
+}
+
+.invitation-student {
+  width: 80%;
+}
+
 .invitation-p {
   font-size: 18px;
   text-align: right;
+}
+
+.partners-h2 {
+  text-align: center;
 }
 
 .partners-flex {
@@ -455,27 +482,28 @@
 }
 
 .footer-p {
-  font-size: 20px;
+  font-size: 15px;
+  padding-bottom: 6px;
   width: 85%;
 }
 
 .footer-links {
-  padding: 30px 0;
+  padding: 16px 0;
 }
 
 .footer-link {
   list-style: none;
-  padding: 10px 0;
+  padding: 6px 0;
 }
 
 .footer-link-a {
   color: #000;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .footer-social {
-  padding: 50px 20px;
+  padding: 30px 15px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -486,8 +514,8 @@
   background-color: #fff;
   border: none;
   border-radius: 50px;
-  padding: 9px;
-  margin: 14px;
+  padding: 6px;
+  margin: 10px;
 }
 
 .footer-sm-f {
@@ -495,14 +523,20 @@
 }
 
 .footer-sm-img {
-  width: 38px;
-  height: 40px;
+  cursor: pointer;
+  width: 26px;
+  height: 28px;
 }
 
 .footer-sm-img-f {
-  width: 58px;
-  height: 60px;
-  margin: 14px;
+  width: 38px;
+  height: 40px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.footer-origin8lab {
+  width: 33%;
 }
 
 .search-container {
@@ -533,10 +567,17 @@
 .search-input {
   width: 90%;
   padding: 20px;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 70px;
   background-color: white;
   border: none;
+}
+
+.home-hr {
+  color: #000;
+  background-color: #000;
+  padding: 1px;
+  margin: 0;
 }
 
 @media only screen and (max-width: 756px) {

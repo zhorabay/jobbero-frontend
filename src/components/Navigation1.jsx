@@ -71,7 +71,7 @@ function Navigation1({ userId }) {
             {!userId && (
               <>
                 <Nav.Link className="nav-padding-log" href="/login">Login</Nav.Link>
-                <Nav.Link className="nav-padding-log" href="/signup">Register</Nav.Link>
+                <Nav.Link className="nav-padding-log" href="/registration">Register</Nav.Link>
               </>
             )}
           </Nav>

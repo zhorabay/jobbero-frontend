@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link, useLocation } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { fetchCourses } from '../redux/actions/courseActions';
-import { addToCart } from '../redux/actions/cartActions';
+// import { addToCart } from '../redux/actions/cartActions';
 import time from '../media/time.png';
 import '../styles/Home.css';
 
-function FeaturedCourses({ userId }) {
+function FeaturedCourses() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
   const categoryId = new URLSearchParams(location.search).get('categoryId');
   const coursesState = useSelector((state) => state.courses.courses);
@@ -31,10 +30,10 @@ function FeaturedCourses({ userId }) {
     return <div>Loading...</div>;
   }
 
-  const handleAddToCart = (course) => {
-    dispatch(addToCart(course));
-    userId && navigate(`/${userId.toString()}/cart`);
-  };
+  // const handleAddToCart = (course) => {
+  //   dispatch(addToCart(course));
+  //   userId && navigate(`/${userId.toString()}/cart`);
+  // };
 
   const filteredCourses = categoryId
     ? courses.filter((course) => course.category_id === parseInt(categoryId))
@@ -69,7 +68,7 @@ function FeaturedCourses({ userId }) {
                       </Card.Text>
                     </div>
                   </Link>
-                  <Button variant="primary" onClick={() => handleAddToCart(course)} className="course-card-btn">Add to Cart</Button>
+                  <Button variant="primary" className="course-card-btn">Add to Cart</Button>
                 </Card.Body>
               </Card>
             </li>
@@ -80,12 +79,12 @@ function FeaturedCourses({ userId }) {
   );
 }
 
-FeaturedCourses.propTypes = {
-  userId: PropTypes.number,
-};
+// FeaturedCourses.propTypes = {
+//   userId: PropTypes.number,
+// };
 
-FeaturedCourses.defaultProps = {
-  userId: null,
-};
+// FeaturedCourses.defaultProps = {
+//   userId: null,
+// };
 
 export default FeaturedCourses;

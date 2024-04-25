@@ -10,7 +10,6 @@ import Vision from './Vision';
 import FeaturedCourses from './FeaturedCourses';
 import ExpertTutors from './ExpertTutors';
 import Invitation from './Invitation';
-import Partners from './Partners';
 import Footer from './Footer';
 import { searchInstructorsAndCourses } from '../redux/actions/searchActions';
 
@@ -85,7 +84,7 @@ function Homepage() {
       <FeaturedCourses userId={userId} />
       <ExpertTutors />
       <Invitation />
-      <Partners />
+      <hr className="home-hr" />
       <Footer />
     </>
   );
