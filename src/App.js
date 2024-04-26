@@ -57,12 +57,12 @@ const App = () => {
               <Route path="/categories/:categoryId/courses/:courseId/modules" element={<Modules />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId" element={<Modules />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
-              <Route path="/payment" element={<Payment />} />
               <Route path="/contact-us" element={<Contact />} />
               <Route path="/categories/post-category" element={<PostCategory />} />
               <Route path="/categories/:categoryId/courses/post-course" element={<PostCourse />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/post-module" element={<PostModule />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson" element={<PostLesson />} />
+              <Route path="/payment" element={<Payment />} />
             </>
           ) : (
             <>
@@ -78,7 +78,6 @@ const App = () => {
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
               <Route path="/contact-us" element={<Contact />} />
               <Route path="/registration" element={<Registration />} />
-              <Route path="/payment" element={<Payment />} />
             </>
           )}
         </Routes>

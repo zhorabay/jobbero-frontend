@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { signUp } from '../redux/actions/userActions';
+import setSelectedCourseId from '../redux/actions/selectedCourseActions';
 import logoblack from '../media/logoblack.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
@@ -15,6 +16,7 @@ import Footer from './Footer';
 function Registration() {
   const dispatch = useDispatch();
   const coursesState = useSelector((state) => state.courses.courses);
+  const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: '',
@@ -46,14 +48,17 @@ function Registration() {
     setUserData({ ...userData, [name]: formattedValue });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleCourseSelection = (courseId) => {
+    dispatch(setSelectedCourseId(courseId));
+  };
+
+  const handleSubmit = () => {
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
     } else {
-      dispatch(signUp(userData)).then((success) => {
+      dispatch(signUp(userData, selectedCourseId)).then((success) => {
         if (success) {
-          navigate('/payment');
+          navigate('/payment', { state: { selectedCourseId } });
         }
       });
     }
@@ -123,7 +128,7 @@ function Registration() {
               <h2 className="registration-h2">COURSES</h2>
               <p className="registration-select">Select One</p>
             </div>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <div key="column-radio" className="mb-3">
                 {courses.map((course) => (
                   <Form.Check
@@ -132,6 +137,7 @@ function Registration() {
                     name="group1"
                     type="radio"
                     id={`radio-${course.id}`}
+                    onChange={() => handleCourseSelection(course.id)}
                     required
                   />
                 ))}

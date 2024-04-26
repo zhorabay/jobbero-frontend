@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import PaystackPop from '@paystack/inline-js';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/logoblack.png';
@@ -10,34 +9,14 @@ import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
 
-function Payment({ selectedCourseId }) {
+function Payment() {
   const user = useSelector((state) => state.auth.user);
   const [isLoading, setIsLoading] = useState(false);
-
-  const sendWelcomeEmail = async () => {
-    try {
-      const response = await fetch('/users/send_welcome_email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data.message);
-      } else {
-        console.error('Failed to send welcome email');
-      }
-    } catch (error) {
-      console.error('Error sending welcome email:', error);
-    }
-  };
+  const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
 
   const informBackendAboutPayment = async () => {
     try {
-      const response = await fetch('/payments/success', {
+      const response = await fetch('http://127.0.0.1:3000/payments/success', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,7 +27,6 @@ function Payment({ selectedCourseId }) {
       if (response.ok) {
         const data = await response.json();
         console.log(data.message);
-        sendWelcomeEmail();
       } else {
         console.error('Failed to inform backend about payment');
       }
@@ -70,10 +48,10 @@ function Payment({ selectedCourseId }) {
 
       const paystack = new PaystackPop();
       paystack.newTransaction({
-        key: 'pk_live_03a1c01d490ee49f14ad187283af346d5c2b7069',
+        key: 'pk_test_5366b82b682f2debcdf19941ac686d2dcec0ba73',
         email: user.email,
         // amount: totalPrice * 100,
-        amount: 20.00,
+        amount: 20.00 * 100,
         reference: 'unique_reference_for_transaction',
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
@@ -133,9 +111,5 @@ function Payment({ selectedCourseId }) {
     </>
   );
 }
-
-Payment.propTypes = {
-  selectedCourseId: PropTypes.number.isRequired,
-};
 
 export default Payment;

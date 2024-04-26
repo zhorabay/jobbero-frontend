@@ -9,6 +9,7 @@ import lessonReducer from './reducers/lessonReducer';
 import commentReducer from './reducers/commentReducer';
 import cartReducer from './reducers/cartReducer';
 import searchReducer from './reducers/searchReducer';
+import selectedCourseReducer from './reducers/selectedCourseReducer';
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     comment: commentReducer,
     cart: cartReducer,
     search: searchReducer,
+    selectedCourse: selectedCourseReducer,
   },
   // other store configurations
 });
