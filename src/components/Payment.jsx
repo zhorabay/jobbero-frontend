@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import PaystackPop from '@paystack/inline-js';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/logoblack.png';
@@ -9,13 +10,60 @@ import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
 
-function Payment() {
+function Payment({ selectedCourseId }) {
   const user = useSelector((state) => state.auth.user);
-  // const cartItems = useSelector((state) => state.cart.items);
   const [isLoading, setIsLoading] = useState(false);
+
+  const sendWelcomeEmail = async () => {
+    try {
+      const response = await fetch('/users/send_welcome_email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+      } else {
+        console.error('Failed to send welcome email');
+      }
+    } catch (error) {
+      console.error('Error sending welcome email:', error);
+    }
+  };
+
+  const informBackendAboutPayment = async () => {
+    try {
+      const response = await fetch('/payments/success', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ reference: 'unique_reference_for_transaction' }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+        sendWelcomeEmail();
+      } else {
+        console.error('Failed to inform backend about payment');
+      }
+    } catch (error) {
+      console.error('Error informing backend about payment:', error);
+    }
+  };
 
   const paystackPayment = async (e) => {
     e.preventDefault();
+    if (!selectedCourseId) {
+      alert('Please select a course before proceeding with the payment.');
+      return;
+    }
+
     try {
       setIsLoading(true);
       // const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
@@ -31,6 +79,7 @@ function Payment() {
           const message = `Payment Complete! Reference ${transaction.reference}`;
           alert(message);
           sessionStorage.setItem('paymentStatus', 'paid');
+          informBackendAboutPayment(selectedCourseId);
         },
         onCancel() {
           alert('You have canceled the transaction');
@@ -47,7 +96,7 @@ function Payment() {
   return (
     <>
       <Navigation3 />
-      <div className="registration-container">
+      <div className="payment-container">
         <div className="registration-flex">
           <div className="registration-section1">
             <img src={logoblack} alt="Logo" className="registration-logo" />
@@ -84,5 +133,9 @@ function Payment() {
     </>
   );
 }
+
+Payment.propTypes = {
+  selectedCourseId: PropTypes.number.isRequired,
+};
 
 export default Payment;

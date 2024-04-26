@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { fetchCourses } from '../redux/actions/courseActions';
+import { signUp } from '../redux/actions/userActions';
 import logoblack from '../media/logoblack.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
@@ -13,6 +15,17 @@ import Footer from './Footer';
 function Registration() {
   const dispatch = useDispatch();
   const coursesState = useSelector((state) => state.courses.courses);
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    name: '',
+    surname: '',
+    birthdate: '',
+    whatsapp: '',
+    phone_number: '',
+    email: '',
+    nationality: '',
+    gender: '',
+  });
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -25,6 +38,27 @@ function Registration() {
     courses = coursesState.courses;
   }
 
+  const error = useSelector((state) => state.user.error);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const formattedValue = value.trim();
+    setUserData({ ...userData, [name]: formattedValue });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (userData.password !== userData.password_confirmation) {
+      console.error('Passwords do not match');
+    } else {
+      dispatch(signUp(userData)).then((success) => {
+        if (success) {
+          navigate('/payment');
+        }
+      });
+    }
+  };
+
   return (
     <>
       <Navigation3 />
@@ -36,21 +70,21 @@ function Registration() {
           </div>
           <div className="registration-section2">
             <h2 className="registration-h2">PERSONAL INFORMATION</h2>
-            <Form className="registration-form">
+            <Form className="registration-form" onSubmit={handleSubmit}>
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">First Name:</Form.Label>
-                  <Form.Control className="registration-input" required />
+                  <Form.Control className="registration-input" name="name" value={userData.name} onChange={handleChange} required />
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Last Name:</Form.Label>
-                  <Form.Control className="registration-input" required />
+                  <Form.Control className="registration-input" name="surname" value={userData.surname} onChange={handleChange} required />
                 </Col>
               </Row>
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Gender:</Form.Label>
-                  <Form.Select className="registration-input">
+                  <Form.Select className="registration-input" name="gender" value={userData.gender} onChange={handleChange}>
                     <option className="registration-option">Female</option>
                     <option className="registration-option">Male</option>
                     <option className="registration-option">Other</option>
@@ -58,30 +92,31 @@ function Registration() {
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Date Of Birth:</Form.Label>
-                  <Form.Control className="registration-input" placeholder="dd/mm/yyyy" required />
+                  <Form.Control className="registration-input" name="birthdate" value={userData.birthdate} onChange={handleChange} placeholder="dd/mm/yyyy" required />
                 </Col>
               </Row>
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">WhatsApp Number:</Form.Label>
-                  <Form.Control className="registration-input" required />
+                  <Form.Control className="registration-input" name="whatsapp" value={userData.whatsapp} onChange={handleChange} required />
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Phone Number:</Form.Label>
-                  <Form.Control className="registration-input" required />
+                  <Form.Control className="registration-input" name="phone_number" value={userData.phone_number} onChange={handleChange} required />
                 </Col>
               </Row>
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Email:</Form.Label>
-                  <Form.Control className="registration-input" required />
+                  <Form.Control className="registration-input" name="email" value={userData.email} onChange={handleChange} required />
                 </Col>
                 <Col className="registration-col">
                   <Form.Label className="registration-label">Nationality:</Form.Label>
-                  <Form.Control className="registration-input" required />
+                  <Form.Control className="registration-input" name="nationality" value={userData.nationality} onChange={handleChange} required />
                 </Col>
               </Row>
             </Form>
+            {error && <div className="text-red-500">{error}</div>}
           </div>
           <div className="registration-section3">
             <div className="rsection3">
@@ -123,7 +158,7 @@ function Registration() {
                 </Col>
               </Row>
             </Form>
-            <Link to="/payment" type="button" className="registration-btn">Next</Link>
+            <Button to="/payment" className="registration-btn" onClick={handleSubmit}>Next</Button>
           </div>
         </div>
       </div>

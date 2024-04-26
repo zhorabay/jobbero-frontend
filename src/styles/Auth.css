@@ -466,6 +466,11 @@
   margin-right: -100px;
 }
 
+.payment-container {
+  background-color: #483f50;
+  min-height: 60vh;
+}
+
 .payment-section2 {
   display: flex;
   align-items: flex-start;

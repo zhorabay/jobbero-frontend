@@ -82,7 +82,7 @@ const SignIn = () => {
             <Link to="/forget-a-password" className="sigin-forgot">Forgot your password?</Link>
             <p className="sigin-dont-have">
               Don&apos;t have an account?
-              <Link to="/signup" className="sigin-up">Sign Up</Link>
+              <Link to="/registration" className="sigin-up">Sign Up</Link>
             </p>
           </form>
         </div>
