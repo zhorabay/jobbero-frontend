@@ -15,9 +15,7 @@ function Invitation() {
             <img src={arrow2} alt="arrow" className="invitation-arrow" />
             <p className="invitation-p">
               Join Origin8Lab and equip yourself
-              <br />
               with in-demand skills that set you apart in
-              <br />
               today&apos;s competitive job market
             </p>
           </div>

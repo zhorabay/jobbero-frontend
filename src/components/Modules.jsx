@@ -135,7 +135,7 @@ function Modules() {
                   </h3>
                   <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
                     <div className="modules-btn-prt1">
-                      <h4 className="account-h4">{module.title}</h4>
+                      <h4 className="module-title-h4">{module.title}</h4>
                       {/* <p className="modules-lessons">
                         {module.lessons ? module.lessons.length : 0}
                         {' '}
