@@ -348,6 +348,22 @@ p {
 }
 
 @media only screen and (max-width: 756px) {
+  .courses-h2 {
+    font-size: 22px;
+  }
+
+  .h2-title {
+    font-size: 20px;
+  }
+
+  .course-modules-about {
+    font-size: 13px;
+  }
+
+  .account-courses {
+    font-size: 18px;
+  }
+
   .modules-flex {
     padding: 30px;
     min-height: 100vh;
@@ -362,17 +378,32 @@ p {
   }
 
   .modules-expand {
-    width: 55%;
+    width: 46%;
     margin-top: 11px;
+    font-size: 12px;
+  }
+
+  .modules-section3-expand {
+    width: 100%;
+    margin: 0;
   }
 
   .account-down-text {
     display: none;
   }
 
+  .modules-ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .modules-week {
+    font-size: 15px;
+  }
+
   .module-title-h4 {
     text-align: left;
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .modules-lessons {

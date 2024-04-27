@@ -86,7 +86,7 @@ function Modules() {
       <Navigation3 />
       <div className="modules-container">
         <div className="modules-flex" key={course.id}>
-          <h2 className="courses-h2">{course.title}</h2>
+          <h2 className="courses-h2 h2-title">{course.title}</h2>
           <div className="modules-choose">
             <button type="button" className="modules-choose-t" onClick={toggleDescription}>
               <img src={book} alt="book" className="modules-symbol" />

@@ -378,12 +378,16 @@
 
 .expert-h2,
 .partners-h2 {
-  font-size: 35px;
+  font-size: 24px;
   font-weight: bold;
 }
 
 .expert-p {
-  font-size: 18px;
+  font-size: 14px;
+}
+
+.expert-btn {
+  font-size: 12px;
 }
 
 .expert-teacher {
@@ -588,39 +592,64 @@
 @media only screen and (max-width: 756px) {
   .homepage-container {
     padding: 40px;
-    background-image: url(../media/inno.png);
+    background-position: right bottom;
+    background-blend-mode: soft-light;
+  }
+
+  .home-h1 {
+    font-size: 30px;
   }
 
   .home-p,
   .white {
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 700;
   }
 
   .search-input {
     width: 180%;
     position: absolute;
+    bottom: 0;
   }
 
   .home-search-btn {
-    margin-left: 108%;
+    margin-left: 120%;
+    bottom: 0;
   }
 
   .footer-link-a {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .footer-p {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .footer-origin8lab {
-    width: 130%;
+    width: 100%;
+  }
+
+  .footer-social {
+    flex-direction: column;
+  }
+
+  .footer-sm {
+    padding: 5px;
+  }
+
+  .footer-sm-img {
+    width: 18px;
+    height: 20px;
+  }
+
+  .footer-sm-img-f {
+    width: 28px;
+    height: 30px;
   }
 
   .infograph {
     flex-wrap: wrap;
-    margin-top: -30px;
+    margin-top: -35px;
     gap: 15px;
   }
 
@@ -629,17 +658,19 @@
   }
 
   .prospects {
-    padding-top: 640px;
+    padding-top: 520px;
+    gap: 20px;
   }
 
   .prosp-h2 {
-    font-size: 30px;
+    font-size: 24px;
     width: 90%;
   }
 
   .prosp-btn {
-    margin-top: 245px;
+    margin-top: 205px;
     width: 100%;
+    font-size: 12px;
   }
 
   .prosp-grid {
@@ -648,14 +679,19 @@
   }
 
   .carousel-btn {
-    font-size: 30px;
-    padding: 0 13px;
+    font-size: 20px;
+    padding: 0 10px;
   }
 
+  .category-img {
+    width: 166px;
+    height: 150px;
+  }
   .category-h2,
   .partners-h2 {
-    font-size: 30px;
+    font-size: 24px;
     text-align: center;
+    padding: 15px 0;
   }
 
   .carousel {
@@ -663,14 +699,25 @@
   }
 
   .vision-africa,
+  .vision-imgs,
   .vision-sun,
   .invitation-arrow,
   .invitation-p {
     display: none;
   }
 
+  .vision-h2,
   .vision-p {
-    font-size: 18px;
+    font-size: 14px;
+  }
+
+  .vision-flex {
+    gap: 0;
+    width: 80%;
+  }
+
+  .vision {
+    width: 100%;
   }
 
   .invitation-h2 {
@@ -683,5 +730,9 @@
 
   .invitation-student {
     width: 100%;
+  }
+
+  .invitation-flex {
+    flex-wrap: wrap;
   }
 }

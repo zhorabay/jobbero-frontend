@@ -45,7 +45,7 @@ function Navigation() {
     <Navbar collapseOnSelect expand="lg" className="navbar">
       <Container>
         <Navbar.Brand href="/">
-          <img src={origin8lab} alt="google" className="brand-img" id="brand" />
+          <img src={origin8lab} alt="google" className="brand-img-nav" id="brand" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

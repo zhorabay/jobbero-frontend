@@ -19,7 +19,7 @@ function Navigation2() {
     <Navbar collapseOnSelect expand="lg" className="navbar2">
       <Container>
         <Navbar.Brand href="/">
-          <img src={origin8lab2} alt="origin8lab2" className="brand-img" id="brand" />
+          <img src={origin8lab2} alt="origin8lab2" className="brand-img-nav-2" id="brand" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">

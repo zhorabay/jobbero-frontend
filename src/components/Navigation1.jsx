@@ -59,20 +59,20 @@ function Navigation1({ userId }) {
             {userId && (
               <>
                 <Nav.Link href={`/${userId}/cart`}>
-                  <img src={cart} alt="Categories" className="icon-img" />
+                  <img src={cart} alt="Categories" className="icon-img-nav1" />
                 </Nav.Link>
                 <Nav.Link href="/notifications">
-                  <img src={bell} alt="Categories" className="icon-img" />
+                  <img src={bell} alt="Categories" className="icon-img-nav1" />
                 </Nav.Link>
                 <Nav.Link className="nav-padding-log" onClick={handleLogout}>Logout</Nav.Link>
                 {logoutMessage && <p>{logoutMessage}</p>}
               </>
             )}
             {!userId && (
-              <>
-                <Nav.Link className="nav-padding-log" href="/login">Login</Nav.Link>
-                <Nav.Link className="nav-padding-log" href="/registration">Register</Nav.Link>
-              </>
+              <div className="nav-padding-log-flex">
+                <Nav.Link className="nav-padding-log-2" href="/login">Login</Nav.Link>
+                <Nav.Link className="nav-padding-log-2" href="/registration">Register</Nav.Link>
+              </div>
             )}
           </Nav>
         </Navbar.Collapse>

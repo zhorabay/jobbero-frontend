@@ -71,7 +71,7 @@ const SignIn = () => {
               </label>
               {error && <div className="text-red-500">{error}</div>}
             </div>
-            <div className="mt-6">
+            <div className="mt-6 signin-btn-6">
               <button
                 type="submit"
                 className="signin-btn"
