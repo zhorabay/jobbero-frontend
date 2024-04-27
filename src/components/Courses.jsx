@@ -32,7 +32,7 @@ function Courses() {
   if (courses.length === 0) {
     return (
       <div>
-        <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">Add Course</Link>
+        <span className="nav-cat-title">No courses found</span>
       </div>
     );
   }
