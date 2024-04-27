@@ -314,10 +314,6 @@
   width: 65%;
 }
 
-.featured-container {
-  border-bottom: 6px solid #f6c61b;
-}
-
 .featured-flex {
   display: flex;
   flex-direction: column;
