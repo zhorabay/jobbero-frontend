@@ -16,7 +16,7 @@ function Payment() {
 
   const informBackendAboutPayment = async () => {
     try {
-      const response = await fetch('https://origin8lab.onrender.com/payments/success', {
+      const response = await fetch('http://127.0.0.1:3000/payments/success', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,11 +48,11 @@ function Payment() {
 
       const paystack = new PaystackPop();
       paystack.newTransaction({
-        key: 'pk_live_03a1c01d490ee49f14ad187283af346d5c2b7069',
+        key: 'pk_test_5366b82b682f2debcdf19941ac686d2dcec0ba73',
         email: user.email,
         // amount: totalPrice * 100,
         amount: 20.00 * 100,
-        currency: 'USD',
+        domain: 'test',
         reference: 'unique_reference_for_transaction',
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
