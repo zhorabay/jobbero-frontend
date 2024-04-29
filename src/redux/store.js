@@ -17,7 +17,7 @@ const store = configureStore({
     user: userReducer,
     categories: categoryReducer,
     courses: courseReducer,
-    modules: courseModuleReducer,
+    module: courseModuleReducer,
     reviews: reviewReducer,
     lesson: lessonReducer,
     comment: commentReducer,

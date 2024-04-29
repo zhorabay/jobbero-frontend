@@ -39,10 +39,14 @@ export const fetchUsers = () => async (dispatch) => {
   }
 };
 
-export const signUp = (userData) => async (dispatch) => {
+export const signUp = (userData, selectedCourseId, userId) => async (dispatch) => {
   dispatch(signUpRequest());
   try {
-    const response = await axios.post('https://origin8lab.onrender.com/api/v1/users', { user: userData });
+    const response = await axios.post('https://origin8lab.onrender.com/api/v1/users', {
+      user: userData,
+      selectedCourseId,
+      userId,
+    });
     if (response.status === 201 || response.status === 200) {
       const { user, token } = response.data;
       if (token) {

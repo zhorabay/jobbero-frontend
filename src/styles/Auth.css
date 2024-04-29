@@ -10,6 +10,7 @@
 
 .signin-container {
   background-color: #483f50;
+  min-height: 100vh;
 }
 
 .signin-flex {

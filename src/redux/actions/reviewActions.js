@@ -41,7 +41,7 @@ export const fetchReviews = (categoryId, courseId) => (dispatch) => {
 
 export const postReview = (reviewData, categoryId, courseId) => (dispatch) => {
   dispatch(postReviewRequest());
-  axios.post(`https://origin8lab.onrender.com/api/v1/categories/${categoryId}/courses/${courseId}/reviews`, reviewData)
+  axios.post(`https://origin8lab.onrender.com0/api/v1/categories/${categoryId}/courses/${courseId}/reviews`, reviewData)
     .then((response) => {
       dispatch(postReviewSuccess(response.data));
     })

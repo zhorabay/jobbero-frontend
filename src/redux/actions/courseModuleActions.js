@@ -6,7 +6,7 @@ export const fetchCourseModulesRequest = () => ({
 
 export const fetchCourseModulesSuccess = (courseModules) => ({
   type: 'FETCH_MODULES_SUCCESS',
-  payload: courseModules.course_modules,
+  payload: courseModules,
 });
 
 export const fetchCourseModulesFailure = (error) => ({

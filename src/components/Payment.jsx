@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import PaystackPop from '@paystack/inline-js';
+import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/logoblack.png';
 import paystackimg from '../media/paystack.png';
@@ -10,19 +12,26 @@ import Navigation3 from './Navigation3';
 import Footer from './Footer';
 
 function Payment() {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const [isLoading, setIsLoading] = useState(false);
   const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
+  const generateUniqueId = uuidv4();
 
-  const informBackendAboutPayment = async () => {
+  const informBackendAboutPayment = async (userId) => {
     try {
-      const response = await fetch('http://127.0.0.1:3000/payments/success', {
+      const response = await fetch('https://origin8lab.onrender.com/payments/success', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ reference: 'unique_reference_for_transaction' }),
+        body: JSON.stringify({
+          reference: `TXN-${Date.now()}-${generateUniqueId}`,
+          course_id: selectedCourseId,
+          userId: user.id,
+        }),
       });
+      console.log('id:', userId);
 
       if (response.ok) {
         const data = await response.json();
@@ -52,13 +61,12 @@ function Payment() {
         email: user.email,
         // amount: totalPrice * 100,
         amount: 20.00 * 100,
-        domain: 'test',
-        reference: 'unique_reference_for_transaction',
+        reference: `TXN-${Date.now()}-${generateUniqueId}`,
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
           alert(message);
-          sessionStorage.setItem('paymentStatus', 'paid');
           informBackendAboutPayment(selectedCourseId);
+          navigate('/');
         },
         onCancel() {
           alert('You have canceled the transaction');

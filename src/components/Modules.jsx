@@ -16,12 +16,11 @@ function Modules() {
   const dispatch = useDispatch();
   const { categoryId, courseId } = useParams();
   const coursesData = useSelector((state) => state.courses.courses);
-  const modules = useSelector((state) => state.modules.modules);
+  const modules = useSelector((state) => state.module.modules);
   const reviews = useSelector((state) => state.reviews.reviews);
   const lessons = useSelector((state) => state.lesson.lessons);
   const user = useSelector((state) => state.auth.user);
   const isAdmin = user && user.email === 'admin@jobbero.com';
-
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
   const [showComments, setShowComments] = useState(false);
@@ -73,7 +72,7 @@ function Modules() {
     return <div>Error: Course not found</div>;
   }
 
-  const courseModules = Array.isArray(modules)
+  const courseModulesArray = Array.isArray(modules)
     ? modules.filter((module) => module.course_id === parseInt(courseId, 10))
     : [];
 
@@ -127,39 +126,43 @@ function Modules() {
               <Link to={`/categories/${categoryId}/courses/${courseId}/modules/post-module`} className="nav-cat-title">Add Module</Link>
             )}
             <ul className="modules-ul">
-              {isExpanded && courseModules.length > 0 && courseModules.map((module) => (
+              {isExpanded && courseModulesArray.length > 0 && courseModulesArray.map((module) => (
                 <li className="modules-list" key={module.id}>
-                  <h3 className="modules-week">
-                    Week
-                    {module.week}
-                  </h3>
-                  <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
-                    <div className="modules-btn-prt1">
-                      <h4 className="module-title-h4">{module.title}</h4>
-                      {/* <p className="modules-lessons">
-                        {module.lessons ? module.lessons.length : 0}
-                        {' '}
-                        Topics
-                      </p> */}
-                    </div>
-                    <button type="button" className="modules-expand-lessons modules-btn-prt2">
-                      <img src={downblue} alt="down" className="account-down" />
-                      <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
-                    </button>
-                  </button>
-                  {expandedModules[module.id] && (
-                  <div>
-                    {lessons
-                      .filter((lesson) => lesson && lesson.course_module_id === module.id)
-                      .map((lesson) => (
-                        <div key={lesson.id} className="lesson-item">
-                          <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
+                  {module.payment_status === 'paid' ? (
+                    <>
+                      <h3 className="modules-week">
+                        Week
+                        {module.week}
+                      </h3>
+                      <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
+                        <div className="modules-btn-prt1">
+                          <h4 className="module-title-h4">{module.title}</h4>
                         </div>
-                      ))}
-                      {isAdmin && (
-                        <Link to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`} className="nav-cat-title">Add Lesson</Link>
+                        <button type="button" className="modules-expand-lessons modules-btn-prt2">
+                          <img src={downblue} alt="down" className="account-down" />
+                          <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
+                        </button>
+                      </button>
+                      {expandedModules[module.id] && (
+                        <div>
+                          {lessons
+                            .filter((lesson) => lesson && lesson.course_module_id === module.id)
+                            .map((lesson) => (
+                              <div key={lesson.id} className="lesson-item">
+                                <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
+                              </div>
+                            ))}
+                          {isAdmin && (
+                            <Link to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`} className="nav-cat-title">Add Lesson</Link>
+                          )}
+                        </div>
                       )}
-                  </div>
+                    </>
+                  ) : (
+                    <div className="no-access-page">
+                      Go to the payment to have an access to modules or explore other
+                      <Link to="/all-courses" className="no-access-page-link">courses.</Link>
+                    </div>
                   )}
                 </li>
               ))}

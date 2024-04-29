@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { signUp } from '../redux/actions/userActions';
 import setSelectedCourseId from '../redux/actions/selectedCourseActions';
+import informBackendAboutPayment from './Payment';
 import logoblack from '../media/logoblack.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
@@ -28,6 +28,7 @@ function Registration() {
     nationality: '',
     gender: '',
   });
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -56,9 +57,12 @@ function Registration() {
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
     } else {
-      dispatch(signUp(userData, selectedCourseId)).then((success) => {
-        if (success) {
+      dispatch(signUp(userData, selectedCourseId)).then((response) => {
+        if (response.success) {
+          const { token } = response;
+          sessionStorage.setItem('token', token);
           navigate('/payment', { state: { selectedCourseId } });
+          informBackendAboutPayment(user.id);
         }
       });
     }
@@ -164,7 +168,7 @@ function Registration() {
                 </Col>
               </Row>
             </Form>
-            <Button to="/payment" className="registration-btn" onClick={handleSubmit}>Next</Button>
+            <Link to="/payment" className="registration-btn" onClick={handleSubmit}>Next</Link>
           </div>
         </div>
       </div>

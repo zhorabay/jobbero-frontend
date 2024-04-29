@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navigation3 from './Navigation3';
 import '../styles/Course.css';
 import { fetchLessons } from '../redux/actions/lessonActions';
@@ -11,7 +11,6 @@ function Lessons() {
   const loading = useSelector((state) => state.lesson.loading);
   const error = useSelector((state) => state.lesson.error);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const paymentStatus = sessionStorage.getItem('paymentStatus');
   const {
     categoryId, courseId, courseModuleId, lessonId,
   } = useParams();
@@ -23,15 +22,6 @@ function Lessons() {
 
   if (!isAuthenticated) {
     navigate('/login');
-  }
-
-  if (paymentStatus !== 'paid') {
-    return (
-      <div className="no-access-page">
-        Go to the payment to have an access to this page or explore other
-        <Link to="/all-courses" className="no-access-page-link">courses.</Link>
-      </div>
-    );
   }
 
   if (loading || lessons === null) {
