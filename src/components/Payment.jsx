@@ -20,7 +20,7 @@ function Payment() {
 
   const informBackendAboutPayment = async (userId) => {
     try {
-      const response = await fetch('https://origin8lab.onrender.com/payments/success', {
+      const response = await fetch('https://api.origin8lab.com/payments/success', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
