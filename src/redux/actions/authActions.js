@@ -6,7 +6,7 @@ export const logout = createAction('auth/logout');
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    const response = await fetch('https://api.origin8lab.com/login', {
+    const response = await fetch('https://origin8lab.osc-fr1.scalingo.io/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

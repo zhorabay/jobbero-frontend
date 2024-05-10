@@ -21,7 +21,7 @@ export const searchInstructorsAndCoursesFailure = (error) => ({
 export const searchInstructorsAndCourses = (query) => async (dispatch) => {
   dispatch(searchInstructorsAndCoursesRequest());
   try {
-    const response = await axios.get('https://api.origin8lab.com/search', { params: { query } });
+    const response = await axios.get('https://origin8lab.osc-fr1.scalingo.io/search', { params: { query } });
     if (response.status !== 200) {
       throw new Error('Failed to fetch data');
     }
