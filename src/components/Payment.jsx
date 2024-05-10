@@ -20,7 +20,7 @@ function Payment() {
 
   const informBackendAboutPayment = async (userId) => {
     try {
-      const response = await fetch('https://api.origin8lab.com/payments/success', {
+      const response = await fetch('https://origin8lab.osc-fr1.scalingo.io/payments/success', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
