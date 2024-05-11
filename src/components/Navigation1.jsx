@@ -73,6 +73,7 @@ function Navigation1({ userId }) {
                 <Nav.Link className="nav-padding-log-2" href="/login">Login</Nav.Link>
               </div>
             )}
+            <Nav.Link className="nav-padding-log-2" href="/login">Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
