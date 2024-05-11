@@ -41,6 +41,22 @@ function Navigation() {
     navigate('/registration');
   };
 
+  const handleClickHome = () => {
+    navigate('/');
+  };
+
+  const handleClickCourse = () => {
+    navigate('/all-courses');
+  };
+
+  const handleClickInstructors = () => {
+    navigate('/instructors');
+  };
+
+  const handleClickContacts = () => {
+    navigate('/contact-us');
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" className="navbar">
       <Container>
@@ -71,10 +87,10 @@ function Navigation() {
               </NavDropdown.Item>
               )}
             </NavDropdown>
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/all-courses">Courses</Nav.Link>
-            <Nav.Link href="/instructors">Instructors</Nav.Link>
-            <Nav.Link href="/contact-us">Contacts</Nav.Link>
+            <button type="button" className="handle-click-nav" onClick={handleClickHome}>Home</button>
+            <button type="button" className="handle-click-nav" onClick={handleClickCourse}>Courses</button>
+            <button type="button" className="handle-click-nav" onClick={handleClickInstructors}>Instructors</button>
+            <button type="button" className="handle-click-nav" onClick={handleClickContacts}>Contacts</button>
           </Nav>
           <Nav>
             <Button type="button" className="nav-btn blue-nav-btn" onClick={handleCoursesClick}>Start Learning</Button>

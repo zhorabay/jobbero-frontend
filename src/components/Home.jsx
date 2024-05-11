@@ -12,6 +12,8 @@ import ExpertTutors from './ExpertTutors';
 import Invitation from './Invitation';
 import Footer from './Footer';
 import { searchInstructorsAndCourses } from '../redux/actions/searchActions';
+import JobXorig from './JobXorig';
+import levelup from '../media/levelup-whole.png';
 
 function Homepage() {
   const user = useSelector((state) => state.auth.user);
@@ -79,12 +81,13 @@ function Homepage() {
       </div>
       <Infograph />
       <Prospects />
+      <JobXorig />
       <CategoryCarousel />
       <Vision />
       <FeaturedCourses userId={userId} />
       <ExpertTutors />
       <Invitation />
-      <hr className="home-hr" />
+      <img src={levelup} alt="level-up" className="levelup" />
       <Footer />
     </>
   );

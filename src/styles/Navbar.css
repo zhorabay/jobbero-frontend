@@ -95,6 +95,9 @@
 
 .nav-cat-title {
   text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   font-size: 13px;
   color: black;
 }
@@ -105,6 +108,18 @@
 
 .navpart2 {
   margin-left: 85%;
+}
+
+.nav-padding-log-2,
+.handle-click-nav {
+  border: none;
+  font-size: 13px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.handle-click-nav {
+  padding-left: 30px;
 }
 
 @media only screen and (max-width: 756px) {
