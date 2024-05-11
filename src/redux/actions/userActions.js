@@ -32,7 +32,7 @@ export const signUpFailure = (error) => ({
 export const fetchUsers = () => async (dispatch) => {
   dispatch(fetchUsersRequest());
   try {
-    const response = await axios.get('https://origin8lab.osc-fr1.scalingo.io/api/v1/users');
+    const response = await axios.get('https://origin8lab-cu7g.onrender.com/api/v1/users');
     dispatch(fetchUsersSuccess(response.data));
   } catch (error) {
     dispatch(fetchUsersFailure(error.message));
@@ -42,7 +42,7 @@ export const fetchUsers = () => async (dispatch) => {
 export const signUp = (userData, selectedCourseId, userId) => async (dispatch) => {
   dispatch(signUpRequest());
   try {
-    const response = await axios.post('https://origin8lab.osc-fr1.scalingo.io/api/v1/users', {
+    const response = await axios.post('https://origin8lab-cu7g.onrender.com/api/v1/users', {
       user: userData,
       selectedCourseId,
       userId,

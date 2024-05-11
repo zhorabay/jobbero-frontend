@@ -30,7 +30,7 @@ export const postCourseModuleFailure = (error) => ({
 
 export const fetchCourseModules = (categoryId, courseId) => (dispatch) => {
   dispatch(fetchCourseModulesRequest());
-  axios.get(`https://origin8lab.osc-fr1.scalingo.io/api/v1/categories/${categoryId}/courses/${courseId}/course_modules`)
+  axios.get(`https://origin8lab-cu7g.onrender.com/api/v1/categories/${categoryId}/courses/${courseId}/course_modules`)
     .then((response) => {
       dispatch(fetchCourseModulesSuccess(response.data));
     })
@@ -41,7 +41,7 @@ export const fetchCourseModules = (categoryId, courseId) => (dispatch) => {
 
 export const postCourseModule = (categoryId, courseId, courseModuleData) => (dispatch) => {
   dispatch(postCourseModuleRequest());
-  axios.post(`https://origin8lab.osc-fr1.scalingo.io/api/v1/categories/${categoryId}/courses/${courseId}/course_modules`, courseModuleData)
+  axios.post(`https://origin8lab-cu7g.onrender.com/api/v1/categories/${categoryId}/courses/${courseId}/course_modules`, courseModuleData)
     .then((response) => {
       dispatch(postCourseModuleSuccess(response.data));
     })
