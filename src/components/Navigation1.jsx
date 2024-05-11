@@ -71,7 +71,6 @@ function Navigation1({ userId }) {
             {!userId && (
               <div className="nav-padding-log-flex">
                 <Nav.Link className="nav-padding-log-2" href="/login">Login</Nav.Link>
-                <Nav.Link className="nav-padding-log-2" href="/registration">Register</Nav.Link>
               </div>
             )}
           </Nav>
