@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
@@ -30,6 +31,12 @@ function Navigation1({ userId }) {
     } catch (error) {
       setLogoutMessage('Logout failed');
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/login');
   };
 
   return (
@@ -70,7 +77,7 @@ function Navigation1({ userId }) {
             )}
             {!userId && (
               <div className="nav-padding-log-flex">
-                <Nav.Link className="nav-padding-log-2" href="/login">Login</Nav.Link>
+                <button type="button" className="nav-padding-log-2" onClick={handleClick}>Login</button>
               </div>
             )}
           </Nav>
