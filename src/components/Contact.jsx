@@ -52,7 +52,7 @@ function Contact() {
             </label>
             <label className="contact-label">
               <img src={phoneicon} alt="Phone" className="contact-icon" />
-              <input type="text" placeholder="Phone" className="contact-input" />
+              <input type="tel" placeholder="Phone" className="contact-input" />
             </label>
             <label className="contact-label">
               <img src={mailicon} alt="Email" className="contact-icon" />
