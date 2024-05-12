@@ -128,7 +128,7 @@ function Modules() {
             <ul className="modules-ul">
               {isExpanded && courseModulesArray.length > 0 && courseModulesArray.map((module) => (
                 <li className="modules-list" key={module.id}>
-                  {module.payment_status === 'paid' ? (
+                  {isAdmin || module.payment_status === 'paid' ? (
                     <>
                       <h3 className="modules-week">
                         Week
