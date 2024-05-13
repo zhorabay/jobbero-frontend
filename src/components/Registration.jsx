@@ -63,6 +63,7 @@ function Registration() {
         sessionStorage.setItem('token', token);
         console.log('Navigating to payment page with selectedCourseId:', selectedCourseId);
         navigate('/payment', { state: { selectedCourseId } });
+        informBackendAboutPayment(user.id);
       }
     } catch (error) {
       console.error('Error occurred during sign-up:', error);

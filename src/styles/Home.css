@@ -614,6 +614,10 @@
   border: none;
 }
 
+.levelup {
+  width: 100%;
+}
+
 @media only screen and (max-width: 756px) {
   .homepage-container {
     padding: 40px;

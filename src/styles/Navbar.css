@@ -168,4 +168,10 @@
   .navpart2 {
     margin-left: 0;
   }
+
+  .handle-click-nav,
+  .nav-padding-log-2 {
+    padding-left: 10px;
+    text-align: left;
+  }
 }
