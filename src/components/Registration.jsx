@@ -18,6 +18,7 @@ function Registration() {
   const coursesState = useSelector((state) => state.courses.courses);
   const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
     name: '',
     surname: '',
@@ -29,6 +30,7 @@ function Registration() {
     gender: '',
   });
   const user = useSelector((state) => state.auth.user);
+  const error = useSelector((state) => state.user.error);
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -41,8 +43,6 @@ function Registration() {
     courses = coursesState.courses;
   }
 
-  const error = useSelector((state) => state.user.error);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     const formattedValue = value.trim();
@@ -53,9 +53,12 @@ function Registration() {
     dispatch(setSelectedCourseId(courseId));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
+      setLoading(false);
     } else {
       dispatch(signUp(userData, selectedCourseId)).then((response) => {
         if (response.success) {
@@ -63,6 +66,7 @@ function Registration() {
           sessionStorage.setItem('token', token);
           navigate('/payment', { state: { selectedCourseId } });
           informBackendAboutPayment(user.id);
+          setLoading(false);
         }
       });
     }
@@ -169,6 +173,11 @@ function Registration() {
               </Row>
             </Form>
             <Link to="/payment" className="registration-btn" onClick={handleSubmit}>Next</Link>
+            {loading && (
+              <div className="loading-container">
+                <div className="loading-spinner" />
+              </div>
+            )}
           </div>
         </div>
       </div>
