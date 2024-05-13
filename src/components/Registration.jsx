@@ -176,7 +176,7 @@ function Registration() {
                 </Col>
               </Row>
             </Form>
-            <button type="submit" className="registration-btn" onClick={handleSubmit}>Next</button>
+            <Link to="/payment" className="registration-btn" onClick={handleSubmit}>Next</Link>
             {/* {loading && (
               <div className="loading-container">
                 <div className="loading-spinner" />
