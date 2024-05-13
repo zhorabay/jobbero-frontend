@@ -19,6 +19,7 @@ function Registration() {
   const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [formValidated, setFormValidated] = useState(false);
   const [userData, setUserData] = useState({
     name: '',
     surname: '',
@@ -55,21 +56,29 @@ function Registration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setLoading(true);
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      setFormValidated(true);
+      setLoading(false);
+      return;
+    }
+    setFormValidated(true);
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
       setLoading(false);
-    } else {
-      dispatch(signUp(userData, selectedCourseId)).then((response) => {
-        if (response.success) {
-          const { token } = response;
-          sessionStorage.setItem('token', token);
-          navigate('/payment', { state: { selectedCourseId } });
-          informBackendAboutPayment(user.id);
-          setLoading(false);
-        }
-      });
+      return;
     }
+    dispatch(signUp(userData, selectedCourseId)).then((response) => {
+      if (response.success) {
+        const { token } = response;
+        sessionStorage.setItem('token', token);
+        navigate('/payment', { state: { selectedCourseId } });
+        informBackendAboutPayment(user.id);
+        setLoading(false);
+      }
+    });
   };
 
   return (
@@ -83,7 +92,7 @@ function Registration() {
           </div>
           <div className="registration-section2">
             <h2 className="registration-h2">PERSONAL INFORMATION</h2>
-            <Form className="registration-form" onSubmit={handleSubmit}>
+            <Form className="registration-form" onSubmit={handleSubmit} noValidate validated={formValidated}>
               <Row className="registration-row">
                 <Col className="registration-col">
                   <Form.Label className="registration-label">First Name:</Form.Label>
