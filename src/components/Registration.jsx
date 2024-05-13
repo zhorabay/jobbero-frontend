@@ -36,6 +36,15 @@ function Registration() {
     dispatch(fetchCourses());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log('Selected Course ID:', selectedCourseId);
+    console.log('User:', user);
+    if (selectedCourseId && user.id) {
+      console.log('Navigating to payment page...');
+      navigate('/payment', { state: { selectedCourseId } });
+    }
+  }, [selectedCourseId, user, navigate]);
+
   let courses = [];
   if (Array.isArray(coursesState)) {
     courses = coursesState;
@@ -55,6 +64,7 @@ function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Form submitted');
     setLoading(true);
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
@@ -67,7 +77,6 @@ function Registration() {
         const { token } = response;
         sessionStorage.setItem('token', token);
         informBackendAboutPayment(user.id);
-        navigate('/payment', { state: { selectedCourseId } });
       }
     } catch (error) {
       console.error('Error occurred during sign-up:', error);
