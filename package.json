@@ -1,6 +1,7 @@
 {
   "name": "jobbero-frontend",
   "version": "0.1.0",
+  "homepage": "https://www.origin8lab.com",
   "private": true,
   "dependencies": {
     "@paystack/inline-js": "^2.16.1",

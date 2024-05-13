@@ -15,7 +15,7 @@ function Registration() {
   const coursesState = useSelector((state) => state.courses.courses);
   const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
   const navigate = useNavigate();
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState({
     name: '',
     surname: '',
@@ -52,11 +52,11 @@ function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted');
-    // setLoading(true);
+    console.log('Form submitted!');
+    setLoading(true);
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
-      // setLoading(false);
+      setLoading(false);
       return;
     }
     try {
@@ -64,13 +64,14 @@ function Registration() {
       if (response.success) {
         const { token } = response;
         sessionStorage.setItem('token', token);
+        console.log('Navigating to payment page with selectedCourseId:', selectedCourseId);
         navigate('/payment', { state: { selectedCourseId } });
         informBackendAboutPayment(user.id);
       }
     } catch (error) {
       console.error('Error occurred during sign-up:', error);
     }
-    // setLoading(false);
+    setLoading(false);
   };
 
   return (
@@ -175,15 +176,15 @@ function Registration() {
               </div>
             </form>
             <button type="submit" className="registration-btn" onClick={handleSubmit}>Next</button>
+            {loading && (
+              <div className="loading-container">
+                <div className="loading-spinner" />
+              </div>
+            )}
           </div>
         </div>
       </div>
       <Footer />
-      { /* {loading && (
-        <div className="loading-container">
-          <div className="loading-spinner" />
-        </div>
-      )} */ }
     </>
   );
 }
