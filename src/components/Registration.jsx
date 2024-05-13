@@ -55,6 +55,7 @@ function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('handleSubmit function called');
     setLoading(true);
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
@@ -67,7 +68,9 @@ function Registration() {
         const { token } = response;
         sessionStorage.setItem('token', token);
         navigate('/payment', { state: { selectedCourseId } });
+        console.log('Navigated to /payment page');
         informBackendAboutPayment(user.id);
+        console.log('Backend informed about payment');
       }
     } catch (error) {
       console.error('Error occurred during sign-up:', error);
@@ -175,7 +178,7 @@ function Registration() {
                 </Col>
               </Row>
             </Form>
-            <link to="/payment" className="registration-btn" onClick={handleSubmit}>Next</link>
+            <button type="button" className="registration-btn" onClick={handleSubmit}>Next</button>
             {loading && (
               <div className="loading-container">
                 <div className="loading-spinner" />
