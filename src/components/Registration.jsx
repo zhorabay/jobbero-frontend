@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import { useNavigate } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { signUp } from '../redux/actions/userActions';
 import setSelectedCourseId from '../redux/actions/selectedCourseActions';
@@ -87,52 +84,52 @@ function Registration() {
           </div>
           <div className="registration-section2">
             <h2 className="registration-h2">PERSONAL INFORMATION</h2>
-            <Form className="registration-form" onSubmit={handleSubmit}>
-              <Row className="registration-row">
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">First Name:</Form.Label>
-                  <Form.Control className="registration-input" name="name" value={userData.name} onChange={handleChange} required />
-                </Col>
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Last Name:</Form.Label>
-                  <Form.Control className="registration-input" name="surname" value={userData.surname} onChange={handleChange} required />
-                </Col>
-              </Row>
-              <Row className="registration-row">
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Gender:</Form.Label>
-                  <Form.Select className="registration-input" name="gender" value={userData.gender} onChange={handleChange}>
-                    <option className="registration-option">Female</option>
-                    <option className="registration-option">Male</option>
-                    <option className="registration-option">Other</option>
-                  </Form.Select>
-                </Col>
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Date Of Birth:</Form.Label>
-                  <Form.Control className="registration-input" name="birthdate" value={userData.birthdate} onChange={handleChange} placeholder="dd/mm/yyyy" required />
-                </Col>
-              </Row>
-              <Row className="registration-row">
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">WhatsApp Number:</Form.Label>
-                  <Form.Control className="registration-input" name="whatsapp" value={userData.whatsapp} onChange={handleChange} required />
-                </Col>
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Phone Number:</Form.Label>
-                  <Form.Control className="registration-input" name="phone_number" value={userData.phone_number} onChange={handleChange} required />
-                </Col>
-              </Row>
-              <Row className="registration-row">
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Email:</Form.Label>
-                  <Form.Control className="registration-input" name="email" value={userData.email} onChange={handleChange} required />
-                </Col>
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Nationality:</Form.Label>
-                  <Form.Control className="registration-input" name="nationality" value={userData.nationality} onChange={handleChange} required />
-                </Col>
-              </Row>
-            </Form>
+            <form className="registration-form" onSubmit={handleSubmit}>
+              <div className="registration-row">
+                <div className="registration-col">
+                  <label className="registration-label">First Name:</label>
+                  <input className="registration-input" name="name" value={userData.name} onChange={handleChange} required />
+                </div>
+                <div className="registration-col">
+                  <label className="registration-label">Last Name:</label>
+                  <input className="registration-input" name="surname" value={userData.surname} onChange={handleChange} required />
+                </div>
+              </div>
+              <div className="registration-row">
+                <div className="registration-col">
+                  <label className="registration-label">Gender:</label>
+                  <select className="registration-input" name="gender" value={userData.gender} onChange={handleChange}>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div className="registration-col">
+                  <label className="registration-label">Date Of Birth:</label>
+                  <input className="registration-input" name="birthdate" value={userData.birthdate} onChange={handleChange} placeholder="dd/mm/yyyy" required />
+                </div>
+              </div>
+              <div className="registration-row">
+                <div className="registration-col">
+                  <label className="registration-label">WhatsApp Number:</label>
+                  <input className="registration-input" name="whatsapp" value={userData.whatsapp} onChange={handleChange} required />
+                </div>
+                <div className="registration-col">
+                  <label className="registration-label">Phone Number:</label>
+                  <input className="registration-input" name="phone_number" value={userData.phone_number} onChange={handleChange} required />
+                </div>
+              </div>
+              <div className="registration-row">
+                <div className="registration-col">
+                  <label className="registration-label">Email:</label>
+                  <input className="registration-input" name="email" value={userData.email} onChange={handleChange} required />
+                </div>
+                <div className="registration-col">
+                  <label className="registration-label">Nationality:</label>
+                  <input className="registration-input" name="nationality" value={userData.nationality} onChange={handleChange} required />
+                </div>
+              </div>
+            </form>
             {error && <div className="text-red-500">{error}</div>}
           </div>
           <div className="registration-section3">
@@ -140,52 +137,53 @@ function Registration() {
               <h2 className="registration-h2">COURSES</h2>
               <p className="registration-select">Select One</p>
             </div>
-            <Form onSubmit={handleSubmit}>
-              <div key="column-radio" className="mb-3">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
                 {courses.map((course) => (
-                  <Form.Check
-                    key={course.id}
-                    label={course.title}
-                    name="group1"
-                    type="radio"
-                    id={`radio-${course.id}`}
-                    onChange={() => handleCourseSelection(course.id)}
-                    required
-                  />
+                  <div key={course.id}>
+                    <input
+                      type="radio"
+                      name="selectedCourseId"
+                      id={`radio-${course.id}`}
+                      onChange={() => handleCourseSelection(course.id)}
+                      required
+                    />
+                    <label htmlFor={`radio-${course.id}`}>{course.title}</label>
+                  </div>
                 ))}
               </div>
-            </Form>
+            </form>
           </div>
           <div className="registration-section4">
             <h2 className="registration-h2">ADDITIONAL INFORMATION</h2>
-            <Form className="registration-form">
-              <Row className="registration-row">
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Employment Status:</Form.Label>
-                  <Form.Control className="registration-input" />
-                </Col>
-                <Col className="registration-col">
-                  <Form.Label className="registration-label-2">How Did You Hear About Origin8Lab?</Form.Label>
-                  <Form.Control className="registration-input" />
-                </Col>
-              </Row>
-              <Row className="registration-row">
-                <Col className="registration-col">
-                  <Form.Label className="registration-label">Any Special Requirements or Accommodations Needed?</Form.Label>
-                  <Form.Control className="registration-input-big" />
-                </Col>
-              </Row>
-            </Form>
-            <Link to="/payment" className="registration-btn" onClick={handleSubmit}>Next</Link>
-            {/* {loading && (
-              <div className="loading-container">
-                <div className="loading-spinner" />
+            <form className="registration-form">
+              <div className="registration-row">
+                <div className="registration-col">
+                  <label className="registration-label">Employment Status:</label>
+                  <input className="registration-input" />
+                </div>
+                <div className="registration-col">
+                  <label className="registration-label">How Did You Hear About Origin8Lab?</label>
+                  <input className="registration-input" />
+                </div>
               </div>
-            )} */}
+              <div className="registration-row">
+                <div className="registration-col">
+                  <label className="registration-label">Any Special Requirements or Accommodations Needed?</label>
+                  <textarea className="registration-input-big" />
+                </div>
+              </div>
+            </form>
+            <button type="submit" className="registration-btn" onClick={handleSubmit}>Next</button>
           </div>
         </div>
       </div>
       <Footer />
+      { /* {loading && (
+        <div className="loading-container">
+          <div className="loading-spinner" />
+        </div>
+      )} */ }
     </>
   );
 }
