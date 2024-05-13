@@ -36,15 +36,6 @@ function Registration() {
     dispatch(fetchCourses());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log('Selected Course ID:', selectedCourseId);
-    console.log('User:', user);
-    if (selectedCourseId && user.id) {
-      console.log('Navigating to payment page...');
-      navigate('/payment', { state: { selectedCourseId } });
-    }
-  }, [selectedCourseId, user, navigate]);
-
   let courses = [];
   if (Array.isArray(coursesState)) {
     courses = coursesState;
@@ -76,6 +67,7 @@ function Registration() {
       if (response.success) {
         const { token } = response;
         sessionStorage.setItem('token', token);
+        navigate('/payment', { state: { selectedCourseId } });
         informBackendAboutPayment(user.id);
       }
     } catch (error) {
