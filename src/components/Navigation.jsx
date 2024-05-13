@@ -19,7 +19,7 @@ function Navigation() {
   const { categories, loading, error } = useSelector((state) => state.categories.categories);
   const user = useSelector((state) => state.auth.user);
   const isAdmin = user && user.email === 'admin@jobbero.com';
-  const isLoggedIn = !!user;
+  const isLoggedIn = !user;
 
   useEffect(() => {
     dispatch(fetchCategories());
