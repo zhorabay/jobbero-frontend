@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -175,7 +175,7 @@ function Registration() {
                 </Col>
               </Row>
             </Form>
-            <Link to="/payment" className="registration-btn" onClick={handleSubmit}>Next</Link>
+            <button type="button" className="registration-btn" onClick={handleSubmit}>Next</button>
             {loading && (
               <div className="loading-container">
                 <div className="loading-spinner" />
