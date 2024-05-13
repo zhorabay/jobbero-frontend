@@ -55,7 +55,6 @@ function Registration() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('handleSubmit function called');
     setLoading(true);
     if (userData.password !== userData.password_confirmation) {
       console.error('Passwords do not match');
@@ -67,10 +66,8 @@ function Registration() {
       if (response.success) {
         const { token } = response;
         sessionStorage.setItem('token', token);
-        navigate('/payment', { state: { selectedCourseId } });
-        console.log('Navigated to /payment page');
         informBackendAboutPayment(user.id);
-        console.log('Backend informed about payment');
+        navigate('/payment', { state: { selectedCourseId } });
       }
     } catch (error) {
       console.error('Error occurred during sign-up:', error);
