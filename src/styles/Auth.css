@@ -400,7 +400,13 @@
   padding-top: 20px;
 }
 
+.registration-row {
+  display: flex;
+}
+
 .registration-col {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin: 14px;
 }
