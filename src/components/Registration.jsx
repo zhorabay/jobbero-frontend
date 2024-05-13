@@ -53,7 +53,7 @@ function Registration() {
     dispatch(setSelectedCourseId(courseId));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     if (userData.password !== userData.password_confirmation) {
@@ -61,18 +61,18 @@ function Registration() {
       setLoading(false);
       return;
     }
-    dispatch(signUp(userData, selectedCourseId)).then((response) => {
+    try {
+      const response = await dispatch(signUp(userData, selectedCourseId));
       if (response.success) {
         const { token } = response;
         sessionStorage.setItem('token', token);
         navigate('/payment', { state: { selectedCourseId } });
         informBackendAboutPayment(user.id);
       }
-      setLoading(false);
-    }).catch((error) => {
+    } catch (error) {
       console.error('Error occurred during sign-up:', error);
-      setLoading(false);
-    });
+    }
+    setLoading(false);
   };
 
   return (
