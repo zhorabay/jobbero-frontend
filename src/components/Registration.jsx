@@ -73,7 +73,7 @@ function Registration() {
       console.error('Error occurred during sign-up:', error);
       setLoading(false);
     });
-  };  
+  };
 
   return (
     <>
