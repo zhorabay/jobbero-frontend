@@ -144,7 +144,7 @@ function Registration() {
                         onChange={() => handleCourseSelection(course.id)}
                         required
                       />
-                      <label htmlFor={`radio-${course.id}`}>{course.title}</label>
+                      <label className="course-title-reg" htmlFor={`radio-${course.id}`}>{course.title}</label>
                     </div>
                   ))}
                 </div>
