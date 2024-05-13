@@ -1,3 +1,5 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import education from '../media/education.png';
 import instructor from '../media/instructor.png';
@@ -8,6 +10,8 @@ import '../styles/Home.css';
 
 function Prospects() {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const isLoggedIn = !!user;
 
   const handleClick = () => {
     navigate('/registration');
@@ -18,7 +22,7 @@ function Prospects() {
       <div className="prospects">
         <div>
           <h2 className="prosp-h2">Elevate Your Job Prospects: Discover Why Origin8Lab Reigns Supreme in Employment-Oriented Skill Development!</h2>
-          <button type="button" className="prosp-btn" onClick={handleClick}>Start Now</button>
+          {!isLoggedIn && <button type="button" className="prosp-btn" onClick={handleClick}>Start Now</button>}
         </div>
         <div className="prosp-grid">
           <div className="card-0" />

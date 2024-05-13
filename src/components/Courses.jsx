@@ -33,6 +33,11 @@ function Courses() {
     return (
       <div>
         <span className="nav-cat-title">No courses found</span>
+        {isAdmin && (
+          <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">
+            Add Course
+          </Link>
+        )}
       </div>
     );
   }

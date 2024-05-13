@@ -19,6 +19,7 @@ function Navigation() {
   const { categories, loading, error } = useSelector((state) => state.categories.categories);
   const user = useSelector((state) => state.auth.user);
   const isAdmin = user && user.email === 'admin@jobbero.com';
+  const isLoggedIn = !!user;
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -93,7 +94,9 @@ function Navigation() {
             <button type="button" className="handle-click-nav" onClick={handleClickContacts}>Contacts</button>
           </Nav>
           <Nav>
-            <Button type="button" className="nav-btn blue-nav-btn" onClick={handleCoursesClick}>Start Learning</Button>
+            {isLoggedIn && (
+              <Button type="button" className="nav-btn blue-nav-btn" onClick={handleCoursesClick}>Start Learning</Button>
+            )}
             <Nav.Link href="https://www.jobbero.com/" eventKey={2}>
               Powered By:
               <img src={jobbero} alt="google" className="jobbero-img" id="brand" />
