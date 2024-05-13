@@ -48,25 +48,21 @@ function Registration() {
 
   const handleCourseSelection = (courseId) => {
     dispatch(setSelectedCourseId(courseId));
+    console.log('courseId:', courseId);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted!');
     setLoading(true);
-    if (userData.password !== userData.password_confirmation) {
-      console.error('Passwords do not match');
-      setLoading(false);
-      return;
-    }
     try {
       const response = await dispatch(signUp(userData, selectedCourseId));
-      if (response.success) {
+      console.log('response:', response);
+      if (response) {
         const { token } = response;
         sessionStorage.setItem('token', token);
         console.log('Navigating to payment page with selectedCourseId:', selectedCourseId);
         navigate('/payment', { state: { selectedCourseId } });
-        informBackendAboutPayment(user.id);
       }
     } catch (error) {
       console.error('Error occurred during sign-up:', error);
@@ -86,96 +82,94 @@ function Registration() {
           <div className="registration-section2">
             <h2 className="registration-h2">PERSONAL INFORMATION</h2>
             <form className="registration-form" onSubmit={handleSubmit}>
-              <div className="registration-row">
-                <div className="registration-col">
-                  <label className="registration-label">First Name:</label>
-                  <input className="registration-input" name="name" value={userData.name} onChange={handleChange} required />
+              <div>
+                <div className="registration-row">
+                  <div className="registration-col">
+                    <label className="registration-label">First Name:</label>
+                    <input className="registration-input" name="name" value={userData.name} onChange={handleChange} required />
+                  </div>
+                  <div className="registration-col">
+                    <label className="registration-label">Last Name:</label>
+                    <input className="registration-input" name="surname" value={userData.surname} onChange={handleChange} required />
+                  </div>
                 </div>
-                <div className="registration-col">
-                  <label className="registration-label">Last Name:</label>
-                  <input className="registration-input" name="surname" value={userData.surname} onChange={handleChange} required />
+                <div className="registration-row">
+                  <div className="registration-col">
+                    <label className="registration-label">Gender:</label>
+                    <select className="registration-input" name="gender" value={userData.gender} onChange={handleChange}>
+                      <option value="Female">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div className="registration-col">
+                    <label className="registration-label">Date Of Birth:</label>
+                    <input className="registration-input" name="birthdate" value={userData.birthdate} onChange={handleChange} placeholder="dd/mm/yyyy" required />
+                  </div>
+                </div>
+                <div className="registration-row">
+                  <div className="registration-col">
+                    <label className="registration-label">WhatsApp Number:</label>
+                    <input className="registration-input" name="whatsapp" value={userData.whatsapp} onChange={handleChange} required />
+                  </div>
+                  <div className="registration-col">
+                    <label className="registration-label">Phone Number:</label>
+                    <input className="registration-input" name="phone_number" value={userData.phone_number} onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="registration-row">
+                  <div className="registration-col">
+                    <label className="registration-label">Email:</label>
+                    <input className="registration-input" name="email" value={userData.email} onChange={handleChange} required />
+                  </div>
+                  <div className="registration-col">
+                    <label className="registration-label">Nationality:</label>
+                    <input className="registration-input" name="nationality" value={userData.nationality} onChange={handleChange} required />
+                  </div>
                 </div>
               </div>
-              <div className="registration-row">
-                <div className="registration-col">
-                  <label className="registration-label">Gender:</label>
-                  <select className="registration-input" name="gender" value={userData.gender} onChange={handleChange}>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                    <option value="Other">Other</option>
-                  </select>
+              <div className="registration-section3">
+                <div className="rsection3">
+                  <h2 className="registration-h2">COURSES</h2>
+                  <p className="registration-select">Select One</p>
                 </div>
-                <div className="registration-col">
-                  <label className="registration-label">Date Of Birth:</label>
-                  <input className="registration-input" name="birthdate" value={userData.birthdate} onChange={handleChange} placeholder="dd/mm/yyyy" required />
-                </div>
-              </div>
-              <div className="registration-row">
-                <div className="registration-col">
-                  <label className="registration-label">WhatsApp Number:</label>
-                  <input className="registration-input" name="whatsapp" value={userData.whatsapp} onChange={handleChange} required />
-                </div>
-                <div className="registration-col">
-                  <label className="registration-label">Phone Number:</label>
-                  <input className="registration-input" name="phone_number" value={userData.phone_number} onChange={handleChange} required />
+                <div className="mb-3">
+                  {courses.map((course) => (
+                    <div key={course.id}>
+                      <input
+                        type="radio"
+                        name="selectedCourseId"
+                        id={`radio-${course.id}`}
+                        onChange={() => handleCourseSelection(course.id)}
+                        required
+                      />
+                      <label htmlFor={`radio-${course.id}`}>{course.title}</label>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div className="registration-row">
-                <div className="registration-col">
-                  <label className="registration-label">Email:</label>
-                  <input className="registration-input" name="email" value={userData.email} onChange={handleChange} required />
+              <div className="registration-section4">
+                <h2 className="registration-h2">ADDITIONAL INFORMATION</h2>
+                <div className="registration-row">
+                  <div className="registration-col">
+                    <label className="registration-label">Employment Status:</label>
+                    <input className="registration-input" />
+                  </div>
+                  <div className="registration-col">
+                    <label className="registration-label">How Did You Hear About Origin8Lab?</label>
+                    <input className="registration-input" />
+                  </div>
                 </div>
-                <div className="registration-col">
-                  <label className="registration-label">Nationality:</label>
-                  <input className="registration-input" name="nationality" value={userData.nationality} onChange={handleChange} required />
+                <div className="registration-row">
+                  <div className="registration-col">
+                    <label className="registration-label">Any Special Requirements or Accommodations Needed?</label>
+                    <textarea className="registration-input-big" />
+                  </div>
                 </div>
               </div>
+              <button type="submit" className="registration-btn">Next</button>
             </form>
             {error && <div className="text-red-500">{error}</div>}
-          </div>
-          <div className="registration-section3">
-            <div className="rsection3">
-              <h2 className="registration-h2">COURSES</h2>
-              <p className="registration-select">Select One</p>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                {courses.map((course) => (
-                  <div key={course.id}>
-                    <input
-                      type="radio"
-                      name="selectedCourseId"
-                      id={`radio-${course.id}`}
-                      onChange={() => handleCourseSelection(course.id)}
-                      required
-                    />
-                    <label htmlFor={`radio-${course.id}`}>{course.title}</label>
-                  </div>
-                ))}
-              </div>
-            </form>
-          </div>
-          <div className="registration-section4">
-            <h2 className="registration-h2">ADDITIONAL INFORMATION</h2>
-            <form className="registration-form">
-              <div className="registration-row">
-                <div className="registration-col">
-                  <label className="registration-label">Employment Status:</label>
-                  <input className="registration-input" />
-                </div>
-                <div className="registration-col">
-                  <label className="registration-label">How Did You Hear About Origin8Lab?</label>
-                  <input className="registration-input" />
-                </div>
-              </div>
-              <div className="registration-row">
-                <div className="registration-col">
-                  <label className="registration-label">Any Special Requirements or Accommodations Needed?</label>
-                  <textarea className="registration-input-big" />
-                </div>
-              </div>
-            </form>
-            <button type="submit" className="registration-btn" onClick={handleSubmit}>Next</button>
             {loading && (
               <div className="loading-container">
                 <div className="loading-spinner" />
