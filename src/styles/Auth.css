@@ -468,7 +468,7 @@
 }
 
 .course-title-reg {
-  font-size: 13;
+  font-size: 13px;
   font-style: italic;
   padding-left: 8px;
 }
@@ -668,7 +668,9 @@
     padding: 5px 0;
   }
 
-  .sigin-forgot, .sigin-dont-have, .sigin-up {
+  .sigin-forgot,
+  .sigin-dont-have,
+  .sigin-up {
     font-size: 11px;
   }
 

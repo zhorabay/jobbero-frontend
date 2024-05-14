@@ -397,11 +397,11 @@
 }
 
 .expert-btn {
+  font-size: 12px;
   border-radius: 20px;
   border: none;
   background-color: #f6c61b;
   color: black;
-  font-size: 14px;
   font-weight: 500;
   font-family: "Poppins", sans-serif;
   padding: 10px 30px;
@@ -416,10 +416,6 @@
 
 .expert-p {
   font-size: 14px;
-}
-
-.expert-btn {
-  font-size: 12px;
 }
 
 .expert-teacher {
@@ -716,6 +712,7 @@
     width: 166px;
     height: 150px;
   }
+
   .category-h2,
   .partners-h2 {
     font-size: 24px;
