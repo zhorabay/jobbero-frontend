@@ -24,7 +24,7 @@ function Registration() {
     phone_number: '',
     email: '',
     nationality: '',
-    gender: '',
+    gender: 'Choose',
   });
   const user = useSelector((state) => state.auth.user);
   const error = useSelector((state) => state.user.error);
@@ -98,6 +98,7 @@ function Registration() {
                   <div className="registration-col">
                     <label className="registration-label">Gender:</label>
                     <select className="registration-input" name="gender" value={userData.gender} onChange={handleChange}>
+                      <option disabled className="choose">Choose</option>
                       <option value="Female">Female</option>
                       <option value="Male">Male</option>
                       <option value="Other">Other</option>
