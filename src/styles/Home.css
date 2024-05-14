@@ -321,7 +321,8 @@
 .vision-flex {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
+  align-items: center;
+  gap: 60px;
   width: 70%;
   margin: auto;
   padding: 40px 0;
@@ -334,7 +335,7 @@
 .vision-h2,
 .vision-p {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   padding-top: 5px;
 }
@@ -347,7 +348,7 @@
 }
 
 .vision-africa {
-  width: 75%;
+  width: 85%;
 }
 
 .featured-flex {

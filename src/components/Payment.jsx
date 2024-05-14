@@ -60,7 +60,7 @@ function Payment() {
         key: 'pk_test_5366b82b682f2debcdf19941ac686d2dcec0ba73',
         email: user.email,
         // amount: totalPrice * 100,
-        amount: 20.00 * 100,
+        amount: 20000.00 * 100,
         reference: `TXN-${Date.now()}-${generateUniqueId}`,
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
