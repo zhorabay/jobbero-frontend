@@ -468,7 +468,7 @@
 }
 
 .course-title-reg {
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
   padding-left: 8px;
 }
@@ -575,7 +575,7 @@
 }
 
 .payment-img {
-  width: 100%;
+  width: 90%;
 }
 
 .payment-form {
@@ -639,6 +639,14 @@
     flex-wrap: wrap;
     width: 70%;
     min-height: 100vh;
+  }
+
+  .payment-img {
+    width: 150px;
+  }
+
+  .registration-row {
+    flex-direction: column;
   }
 
   .signin-girl {

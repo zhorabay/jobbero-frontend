@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/logoblack.png';
 import paystackimg from '../media/paystack.png';
-import flutterwave from '../media/flutterwave.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
@@ -103,13 +102,6 @@ function Payment() {
                   id="inline-radio-1"
                   onClick={paystackPayment}
                   disabled={isLoading}
-                />
-                <Form.Check
-                  inline
-                  label={<img src={flutterwave} alt="Flutterwave" className="payment-img" />}
-                  name="group1"
-                  type="radio"
-                  id="inline-radio-2"
                 />
               </div>
             </Form>
