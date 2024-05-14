@@ -121,6 +121,25 @@
   padding-left: 30px;
 }
 
+.nav2-start-learning {
+  margin-left: 100px;
+}
+
+.add-category {
+  font-size: 13px;
+  font-style: italic;
+  border: none;
+  background-color: transparent;
+  padding-left: 10px;
+}
+
+.edit-button {
+  background-color: transparent;
+  color: black;
+  text-decoration: underline;
+  border: none;
+}
+
 @media only screen and (max-width: 756px) {
   .nav-padding-log-flex {
     display: flex;

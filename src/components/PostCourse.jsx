@@ -53,9 +53,9 @@ function PostCourse({ postCourse }) {
         <form onSubmit={handleSubmit}>
           <input type="text" name="title" value={title} onChange={handleChange} placeholder="Course Title" required />
           <input type="text" name="image" value={image} onChange={handleChange} placeholder="Image URL" required />
-          <textarea name="description" value={description} onChange={handleChange} placeholder="Description" required />
+          <textarea name="description" value={description} onChange={handleChange} placeholder="Short description" required />
           <input type="text" name="price" value={price} onChange={handleChange} placeholder="Price" required />
-          <textarea name="about" value={about} onChange={handleChange} placeholder="About" required />
+          <textarea name="about" value={about} onChange={handleChange} placeholder="Long Description" required />
           <input type="text" name="duration" value={duration} onChange={handleChange} placeholder="Duration" required />
           <button type="submit">Submit</button>
         </form>

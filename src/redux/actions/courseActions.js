@@ -28,6 +28,20 @@ export const postCourseFailure = (error) => ({
   payload: error,
 });
 
+export const deleteCourseRequest = () => ({
+  type: 'DELETE_COURSE_REQUEST',
+});
+
+export const deleteCourseSuccess = (courseId) => ({
+  type: 'DELETE_COURSE_SUCCESS',
+  payload: courseId,
+});
+
+export const deleteCourseFailure = (error) => ({
+  type: 'DELETE_COURSE_FAILURE',
+  payload: error,
+});
+
 export const fetchCourses = (categoryId) => (dispatch) => {
   dispatch(fetchCoursesRequest());
   axios.get(`https://origin8lab-cu7g.onrender.com/api/v1/categories/${categoryId}/courses`)
@@ -47,4 +61,15 @@ export const postCourse = (categoryId, courseData) => async (dispatch) => {
   } catch (error) {
     dispatch(postCourseFailure(error.message));
   }
+};
+
+export const deleteCourse = (categoryId, courseId) => (dispatch) => {
+  dispatch(deleteCourseRequest());
+  axios.delete(`https://origin8lab-cu7g.onrender.com/api/v1/categories/${categoryId}/courses/${courseId}`)
+    .then(() => {
+      dispatch(deleteCourseSuccess(courseId));
+    })
+    .catch((error) => {
+      dispatch(deleteCourseFailure(error.message));
+    });
 };

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 // import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
-import { fetchCourses } from '../redux/actions/courseActions';
+import { fetchCourses, deleteCourse } from '../redux/actions/courseActions';
 // import { addToCart } from '../redux/actions/cartActions';
 import '../styles/Course.css';
 import Navigation3 from './Navigation3';
@@ -46,6 +46,10 @@ function Courses() {
     ? courses.filter((course) => course.category_id === parseInt(categoryId))
     : courses;
 
+  const handleDeleteCourse = (courseId) => {
+    dispatch(deleteCourse(categoryId, courseId));
+  };
+
   // const handleAddToCart = (course) => {
   //   dispatch(addToCart(course));
   //   userId && navigate(`/${userId.toString()}/cart`);
@@ -84,6 +88,9 @@ function Courses() {
                         </Card.Text>
                       </div>
                     </Link>
+                    {isAdmin && (
+                      <Button variant="danger" className="course-card-btn" onClick={() => handleDeleteCourse(course.id)}>Delete</Button>
+                    )}
                     <Button variant="primary" className="course-card-btn">Add to Cart</Button>
                   </Card.Body>
                 </Card>

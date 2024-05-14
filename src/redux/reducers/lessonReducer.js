@@ -7,6 +7,8 @@ const initialState = {
 const lessonReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_LESSONS_REQUEST':
+    case 'POST_LESSON_REQUEST':
+    case 'DELETE_LESSON_REQUEST':
       return {
         ...state,
         loading: true,
@@ -21,16 +23,12 @@ const lessonReducer = (state = initialState, action) => {
       };
     }
     case 'FETCH_LESSONS_FAILURE':
+    case 'POST_LESSON_FAILURE':
+    case 'DELETE_LESSON_FAILURE':
       return {
         ...state,
         loading: false,
         error: action.payload,
-      };
-    case 'POST_LESSON_REQUEST':
-      return {
-        ...state,
-        loading: true,
-        error: null,
       };
     case 'POST_LESSON_SUCCESS':
       return {
@@ -38,11 +36,11 @@ const lessonReducer = (state = initialState, action) => {
         lessons: [...state.lessons, action.payload],
         loading: false,
       };
-    case 'POST_LESSON_FAILURE':
+    case 'DELETE_LESSON_SUCCESS':
       return {
         ...state,
+        lessons: state.lessons.filter((lesson) => lesson.id !== action.payload),
         loading: false,
-        error: action.payload,
       };
     default:
       return state;

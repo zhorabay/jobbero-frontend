@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
-import { fetchCourseModules } from '../redux/actions/courseModuleActions';
+import { fetchCourseModules, deleteCourseModule } from '../redux/actions/courseModuleActions';
 import { fetchReviews } from '../redux/actions/reviewActions';
-import { fetchLessons } from '../redux/actions/lessonActions';
+import { fetchLessons, deleteLesson } from '../redux/actions/lessonActions';
 import down from '../media/down.png';
 import downblue from '../media/downblue.png';
 import book from '../media/book.png';
@@ -80,6 +80,14 @@ function Modules() {
     ? reviews.filter((review) => review.course_id === parseInt(courseId, 10))
     : [];
 
+  const handleDeleteModule = (moduleId) => {
+    dispatch(deleteCourseModule(categoryId, courseId, moduleId));
+  };
+
+  const handleDeleteLesson = (lessonId, courseModuleId) => {
+    dispatch(deleteLesson(categoryId, courseId, courseModuleId, lessonId));
+  };
+
   return (
     <>
       <Navigation3 />
@@ -138,6 +146,9 @@ function Modules() {
                         <div className="modules-btn-prt1">
                           <h4 className="module-title-h4">{module.title}</h4>
                         </div>
+                        {isAdmin && (
+                          <button type="button" className="edit-button" onClick={() => handleDeleteModule(module.id)}>Delete Module</button>
+                        )}
                         <button type="button" className="modules-expand-lessons modules-btn-prt2">
                           <img src={downblue} alt="down" className="account-down" />
                           <p className="account-down-text">{expandedModules[module.id] ? 'Collapse' : 'Expand'}</p>
@@ -150,6 +161,9 @@ function Modules() {
                             .map((lesson) => (
                               <div key={lesson.id} className="lesson-item">
                                 <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`} className="lesson-route">{lesson.title}</Link>
+                                {isAdmin && (
+                                  <button type="button" className="edit-button" onClick={() => handleDeleteLesson(lesson.id, module.id)}>Delete Lesson</button>
+                                )}
                               </div>
                             ))}
                           {isAdmin && (

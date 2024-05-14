@@ -26,7 +26,7 @@ function Navigation2() {
           <Nav className="me-auto">
             <Nav.Link href="/course" className="signin-nav-link">Courses</Nav.Link>
             <Nav.Link href="/forum" className="signin-nav-link-1">Forum</Nav.Link>
-            <Button type="button" className="nav-btn" onClick={handleClick}>Start Learning</Button>
+            <Button type="button" className="nav-btn nav2-start-learning" onClick={handleClick}>Start Learning</Button>
           </Nav>
           <Nav>
             <Nav.Link href="/login" eventKey={2}>

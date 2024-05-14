@@ -8,6 +8,7 @@ const courseModuleReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_MODULES_REQUEST':
     case 'POST_MODULE_REQUEST':
+    case 'DELETE_MODULE_REQUEST':
       return {
         ...state,
         loading: true,
@@ -21,6 +22,7 @@ const courseModuleReducer = (state = initialState, action) => {
       };
     case 'FETCH_MODULES_FAILURE':
     case 'POST_MODULE_FAILURE':
+    case 'DELETE_MODULE_FAILURE':
       return {
         ...state,
         loading: false,
@@ -30,6 +32,12 @@ const courseModuleReducer = (state = initialState, action) => {
       return {
         ...state,
         module: action.payload,
+        loading: false,
+      };
+    case 'DELETE_MODULE_SUCCESS':
+      return {
+        ...state,
+        modules: state.modules.filter((module) => module.id !== action.payload),
         loading: false,
       };
     default:

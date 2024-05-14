@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { editCategory } from '../redux/actions/categoryActions';
-import '../styles/Edit.css';
+import { editCategory, fetchCategories } from '../redux/actions/categoryActions';
 import Navigation3 from './Navigation3';
 
 const EditCategoryPage = () => {
   const { categoryId } = useParams();
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories.categories);
+  const categories = useSelector((state) => state.categories.categories.categories);
   const [category, setCategory] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    const foundCategory = categories.find((cat) => cat.id === categoryId);
+    if (!categories.length) {
+      dispatch(fetchCategories());
+    }
+  }, [dispatch, categories]);
+
+  useEffect(() => {
+    const foundCategory = categories.find((cat) => cat.id === parseInt(categoryId));
     if (foundCategory) {
       setCategory(foundCategory);
     }
@@ -26,16 +32,29 @@ const EditCategoryPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(editCategory(categoryId, category));
+    try {
+      await dispatch(editCategory(categoryId, category));
+      setSuccessMessage('Category updated successfully');
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 3000);
+    } catch (error) {
+      console.error('Error updating category:', error);
+    }
   };
+
+  if (!categories.length) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <Navigation3 />
       <div className="edit-category-container">
         <h2>Edit Category</h2>
+        {successMessage && <p>{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Title:</label>
@@ -49,13 +68,15 @@ const EditCategoryPage = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="description">Description:</label>
-            <textarea
-              id="description"
-              name="description"
-              value={category.description || ''}
+            <label htmlFor="description">Image:</label>
+            <input
+              type="text"
+              id="image"
+              name="image"
+              value={category.image || ''}
               onChange={handleChange}
-              rows="4"
+              placeholder="Image URL"
+              required
             />
           </div>
           <button type="submit" className="submit-btn">Save Changes</button>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -20,7 +20,6 @@ function Navigation() {
   const user = useSelector((state) => state.auth.user);
   const isAdmin = user && user.email === 'admin@jobbero.com';
   const isLoggedIn = !user;
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -63,29 +62,26 @@ function Navigation() {
     navigate('/categories/post-category');
   };
 
-  const handleEditCategoryClick = () => {
-    navigate('/categories/edit-category');
+  const handleEditCategoryClick = (categoryId) => {
+    navigate(`/categories/edit-category/${categoryId}`);
   };
 
-  const handleDeleteCategoryClick = () => {
+  const handleDeleteCategoryClick = (categoryId) => {
     if (window.confirm('Are you sure you want to delete this category?')) {
-      dispatch(deleteCategory(selectedCategoryId));
+      dispatch(deleteCategory(categoryId));
     }
   };
 
-  const renderAdminOptions = () => {
+  const renderAdminOptions = (category) => {
     if (isAdmin) {
       return (
         <>
-          <NavDropdown.Item className="nav-cat-dropdown" onClick={handleAddCategoryClick}>
-            Add Category
-          </NavDropdown.Item>
-          <NavDropdown.Item className="nav-cat-dropdown" onClick={handleEditCategoryClick}>
-            Edit Category
-          </NavDropdown.Item>
-          <NavDropdown.Item className="nav-cat-dropdown" onClick={handleDeleteCategoryClick}>
-            Delete Category
-          </NavDropdown.Item>
+          <Button type="button" className="edit-button" onClick={() => handleEditCategoryClick(category.id)}>
+            Edit
+          </Button>
+          <Button type="button" className="edit-button" onClick={() => handleDeleteCategoryClick(category.id)}>
+            Delete
+          </Button>
         </>
       );
     }
@@ -112,11 +108,16 @@ function Navigation() {
               id="collapsible-nav-dropdown"
             >
               {categories && categories.map((category) => (
-                <NavDropdown.Item key={category.id} className="nav-cat-dropdown" onClick={() => setSelectedCategoryId(category.id)}>
+                <NavDropdown.Item key={category.id} className="nav-cat-dropdown">
                   <Link to={`/categories/${category.id}/courses`} className="nav-cat-title">{category.title}</Link>
+                  {renderAdminOptions(category)}
                 </NavDropdown.Item>
               ))}
-              {renderAdminOptions()}
+              {isAdmin && (
+                <button type="button" className="add-category" onClick={handleAddCategoryClick}>
+                  Add Category
+                </button>
+              )}
             </NavDropdown>
             <button type="button" className="handle-click-nav" onClick={handleClickHome}>Home</button>
             <button type="button" className="handle-click-nav" onClick={handleClickCourse}>Courses</button>

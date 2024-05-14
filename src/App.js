@@ -23,6 +23,7 @@ import PostLesson from './components/PostLesson';
 import PostCategory from './components/PostCategory';
 import PostCourse from './components/PostCourse';
 import PostModule from './components/PostModule';
+import EditCategoryPage from './components/EditCategory';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -59,7 +60,7 @@ const App = () => {
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
               <Route path="/contact-us" element={<Contact />} />
               <Route path="/categories/post-category" element={<PostCategory />} />
-              <Route path="/categories/edit-category" element={<PostCategory />} />
+              <Route path="/categories/edit-category/:categoryId" element={<EditCategoryPage />} />
               <Route path="/categories/:categoryId/courses/post-course" element={<PostCourse />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/post-module" element={<PostModule />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson" element={<PostLesson />} />

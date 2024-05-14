@@ -7,6 +7,8 @@ const initialState = {
 const courseReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_COURSES_REQUEST':
+    case 'POST_COURSE_REQUEST':
+    case 'DELETE_COURSE_REQUEST':
       return {
         ...state,
         loading: true,
@@ -18,20 +20,21 @@ const courseReducer = (state = initialState, action) => {
         courses: action.payload,
         loading: false,
       };
-    case 'POST_COURSE_REQUEST':
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
     case 'POST_COURSE_SUCCESS':
       return {
         ...state,
         courses: [...state.courses, action.payload],
         loading: false,
       };
+    case 'DELETE_COURSE_SUCCESS':
+      return {
+        ...state,
+        courses: state.courses.filter((course) => course.id !== action.payload),
+        loading: false,
+      };
     case 'FETCH_COURSES_FAILURE':
     case 'POST_COURSE_FAILURE':
+    case 'DELETE_COURSE_FAILURE':
       return {
         ...state,
         loading: false,
