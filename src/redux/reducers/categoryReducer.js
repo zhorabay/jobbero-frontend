@@ -33,10 +33,51 @@ const categoryReducer = (state = initialState, action) => {
     case 'POST_CATEGORY_SUCCESS':
       return {
         ...state,
-        category: action.payload,
+        categories: [...state.categories, action.payload],
         loading: false,
       };
     case 'POST_CATEGORY_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case 'DELETE_CATEGORY_REQUEST':
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case 'DELETE_CATEGORY_SUCCESS':
+      return {
+        ...state,
+        categories: state.categories.filter((category) => category.id !== action.payload),
+        loading: false,
+      };
+    case 'DELETE_CATEGORY_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case 'EDIT_CATEGORY_REQUEST':
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case 'EDIT_CATEGORY_SUCCESS':
+      return {
+        ...state,
+        categories: state.categories.map((category) => {
+          if (category.id === action.payload.id) {
+            return action.payload;
+          }
+          return category;
+        }),
+        loading: false,
+      };
+    case 'EDIT_CATEGORY_FAILURE':
       return {
         ...state,
         loading: false,

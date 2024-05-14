@@ -7,7 +7,6 @@ import Infograph from './Infograph';
 import CategoryCarousel from './Carousel';
 import Prospects from './Prospects';
 import Vision from './Vision';
-import FeaturedCourses from './FeaturedCourses';
 import ExpertTutors from './ExpertTutors';
 import Invitation from './Invitation';
 import Footer from './Footer';
@@ -83,7 +82,6 @@ function Homepage() {
       <JobXorig />
       <CategoryCarousel />
       <Vision />
-      <FeaturedCourses userId={userId} />
       <Invitation />
       <ExpertTutors />
       <Footer />
