@@ -90,8 +90,8 @@ function Modules() {
 
   useEffect(() => {
     if (courseModulesArray.length > 0) {
-      console.log("Fetched Modules:", courseModulesArray);
-      courseModulesArray.forEach(module => {
+      console.log('Fetched Modules:', courseModulesArray);
+      courseModulesArray.forEach((module) => {
         console.log(`Module ID: ${module.id}, Payment Status: ${module.payment_status}`);
       });
     }
