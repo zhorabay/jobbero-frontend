@@ -88,6 +88,15 @@ function Modules() {
     dispatch(deleteLesson(categoryId, courseId, courseModuleId, lessonId));
   };
 
+  useEffect(() => {
+    if (courseModulesArray.length > 0) {
+      console.log("Fetched Modules:", courseModulesArray);
+      courseModulesArray.forEach(module => {
+        console.log(`Module ID: ${module.id}, Payment Status: ${module.payment_status}`);
+      });
+    }
+  }, [courseModulesArray]);
+
   return (
     <>
       <Navigation3 />
