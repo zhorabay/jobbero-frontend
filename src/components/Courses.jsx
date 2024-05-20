@@ -80,11 +80,11 @@ function Courses() {
                           <img src={time} alt="time" className="course-card-time" />
                           {course.duration}
                           {' '}
-                          Hours
+                          Weeks
                         </Card.Text>
                         <Card.Text className="course-card-price">
-                          $
-                          {course.price}
+                          20 000 NGN
+                          {/* {course.price} */}
                         </Card.Text>
                       </div>
                     </Link>
