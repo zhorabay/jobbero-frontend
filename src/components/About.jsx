@@ -30,7 +30,14 @@ function About() {
           <div className="section2-texts">
             <h4 className="about-h4">About Us</h4>
             <h3 className="about-h3">Origin8Lab Overview</h3>
-            <p className="about-text">Origin8Lab isn&apos;t just a platform—it&apos;s a movement. Born out of a desire to empower individuals with the skills they need to thrive in the digital age, we&apos;re on a mission to redefine the future of work. Our team of experts is dedicated to providing world-class training in tech, personal growth, and business development, equipping you with the tools to excel in any career path you choose.</p>
+            <p className="about-text">
+              Origin8Lab isn&apos;t just a platform—it&apos;s
+              a movement. Born out of a desire to empower individuals with the skills
+              they need to thrive in the digital age, we&apos;re on a mission to redefine
+              the future of work. Our team of experts is dedicated to providing world-class
+              training in tech, personal growth, and business development, equipping you
+              with the tools to excel in any career path you choose.
+            </p>
           </div>
         </div>
         <h2 className="about-section3">

@@ -29,27 +29,42 @@ function Prospects() {
           <div className="card">
             <img src={instructor} alt="instructor" className="card-img-1" />
             <h4 className="card-h4">Best Instructors</h4>
-            <p className="card-p">Our online courses are led by industry-leading instructors, dedicated to empowering learners with the skills they need to succeed</p>
+            <p className="card-p">
+              Our online courses are led by industry-leading
+              instructors, dedicated to empowering learners with the skills they need to succeed
+            </p>
           </div>
           <div className="card">
             <img src={education} alt="education" className="card-img-2" />
             <h4 className="card-h4">Best Curriculum</h4>
-            <p className="card-p">Experience the pinnacle of education featuring the best curriculum meticulously crafted to meet industry need and learner aspirations.</p>
+            <p className="card-p">
+              Experience the pinnacle of education featuring the
+              best curriculum meticulously crafted to meet industry need and learner aspirations.
+            </p>
           </div>
           <div className="card">
             <img src={Quality} alt="Quality" className="card-img-3" />
             <h4 className="card-h4">Certificate</h4>
-            <p className="card-p">Earn a certificate globally recognized by employers, validating your expertise and open doors to opportunities worldwide</p>
+            <p className="card-p">
+              Earn a certificate globally recognized by employers, validating
+              your expertise and open doors to opportunities worldwide
+            </p>
           </div>
           <div className="card">
             <img src={Live} alt="Live" className="card-img-4" />
             <h4 className="card-h4">Live Classes</h4>
-            <p className="card-p">Join our online course website for the best live classes, tailored to fit your schedule and learning pace, ensuring convenience</p>
+            <p className="card-p">
+              Join our online course website for the best live classes, tailored to
+              fit your schedule and learning pace, ensuring convenience
+            </p>
           </div>
           <div className="card">
             <img src={Student} alt="Student" className="card-img-5" />
             <h4 className="card-h4">Happy Students</h4>
-            <p className="card-p-5">Origin8Lab proudly boasts a track record of happy and successful students, equipped with the skills and knowledge to thrive in their careers.</p>
+            <p className="card-p-5">
+              Origin8Lab proudly boasts a track record of happy and successful students,
+              equipped with the skills and knowledge to thrive in their careers.
+            </p>
           </div>
         </div>
       </div>

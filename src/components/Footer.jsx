@@ -12,7 +12,12 @@ function Footer() {
       <div className="footer-flex">
         <div className="footer-text">
           <img src={origin8lab2} alt="origin8lab" className="footer-origin8lab" />
-          <p className="footer-p">Your partner in personal and professional development. Our platform is designed to bridge the gap between education and employment, providing job seekers and graduates with practical, job-ready skills that employers demand.</p>
+          <p className="footer-p">
+            Your partner in personal and professional
+            development. Our platform is designed to bridge the gap between
+            education and employment, providing job seekers and graduates with
+            practical, job-ready skills that employers demand.
+          </p>
           <p className="footer-p">+447471599776</p>
           <p className="footer-p">info@origin8lab.com</p>
         </div>

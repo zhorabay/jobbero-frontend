@@ -106,7 +106,14 @@ function Registration() {
                   </div>
                   <div className="registration-col">
                     <label className="registration-label">Date Of Birth:</label>
-                    <input className="registration-input" name="birthdate" value={userData.birthdate} onChange={handleChange} placeholder="dd/mm/yyyy" required />
+                    <input
+                      className="registration-input"
+                      name="birthdate"
+                      value={userData.birthdate}
+                      onChange={handleChange}
+                      placeholder="dd/mm/yyyy"
+                      required
+                    />
                   </div>
                 </div>
                 <div className="registration-row">
