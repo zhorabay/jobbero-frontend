@@ -30,6 +30,7 @@
 .course-card {
   border-radius: 39px;
   margin: 70px 20px;
+  width: 20rem;
 }
 
 .course-card-body {

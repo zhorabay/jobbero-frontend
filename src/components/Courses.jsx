@@ -69,7 +69,7 @@ function Courses() {
           <ul className="course-list">
             {filteredCourses.map((course) => (
               <li key={course.id} className="course-list-li">
-                <Card style={{ width: '20rem' }} className="course-card">
+                <Card className="course-card">
                   <Card.Img variant="top" src={course.image} className="course-card-img" />
                   <Card.Body className="course-card-body">
                     <Link to={`/categories/${categoryId}/courses/${course.id}/modules`} className="courses-link">
