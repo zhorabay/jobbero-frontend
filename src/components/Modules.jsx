@@ -145,7 +145,10 @@ function Modules() {
                 <li className="modules-list" key={module.id}>
                   {isAdmin || module.payment_status === 'paid' ? (
                     <>
-                      <h3 className="modules-week">
+                      <div className="no-access-page">
+                        The course will start on the 1st of June.
+                      </div>
+                      {/* <h3 className="modules-week">
                         Week
                         {module.week}
                       </h3>
@@ -177,7 +180,7 @@ function Modules() {
                             <Link to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`} className="nav-cat-title">Add Lesson</Link>
                           )}
                         </div>
-                      )}
+                      )} */}
                     </>
                   ) : (
                     <div className="no-access-page">
