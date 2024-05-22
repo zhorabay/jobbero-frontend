@@ -31,14 +31,19 @@ function Courses() {
 
   if (courses.length === 0) {
     return (
-      <div>
-        <span className="nav-cat-title">No courses found</span>
-        {isAdmin && (
-          <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title">
-            Add Course
-          </Link>
-        )}
-      </div>
+      <>
+        <Navigation3 />
+        <div className="courses-container">
+          <div className="courses-flex">
+            <span className="nav-cat-title-no">Courses are in progress</span>
+            {isAdmin && (
+              <Link to={`/categories/${categoryId}/courses/post-course`} className="nav-cat-title-no">
+                Add Course
+              </Link>
+            )}
+          </div>
+        </div>
+      </>
     );
   }
 
