@@ -660,6 +660,8 @@
   right: 10px;
   cursor: pointer;
   font-size: 20px;
+  border: none;
+  background-color: transparent;
 }
 
 .login-title {
