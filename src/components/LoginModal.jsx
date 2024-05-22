@@ -5,18 +5,29 @@ import { login } from '../redux/actions/authActions';
 
 function LoginModal({ onSuccess, onClose }) {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(login(formData));
-      onSuccess();
+      setError('');
+      const response = await dispatch(login(email, password));
+      if (response.success) {
+        onSuccess();
+      } else {
+        setError(response.message);
+      }
     } catch (error) {
       console.error('Login error:', error);
     }
@@ -32,10 +43,11 @@ function LoginModal({ onSuccess, onClose }) {
         <button className="close" type="button" onClick={handleClose} onKeyDown={(e) => e.key === 'Enter' && handleClose()}>X</button>
         <h2 className="login-title">Login</h2>
         <form className="login-form" onSubmit={handleSubmit}>
-          <input type="text" name="username" placeholder="Username" className="login-input" value={formData.username} onChange={handleChange} />
-          <input type="password" name="password" placeholder="Password" className="login-input" value={formData.password} onChange={handleChange} />
+          <input type="text" name="email" placeholder="Email" className="login-input" value={email} onChange={handleChange} />
+          <input type="password" name="password" placeholder="Password" className="login-input" value={password} onChange={handleChange} />
           <button type="submit" className="login-button">Login</button>
         </form>
+        {error && <div className="error-message">{error}</div>}
       </div>
     </div>
   );
