@@ -24,6 +24,7 @@ import PostCategory from './components/PostCategory';
 import PostCourse from './components/PostCourse';
 import PostModule from './components/PostModule';
 import EditCategoryPage from './components/EditCategory';
+import ChooseCourse from './components/ChooseCourse';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -81,6 +82,7 @@ const App = () => {
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
               <Route path="/contact-us" element={<Contact />} />
               <Route path="/registration" element={<Registration />} />
+              <Route path="/choose-a-course" element={<ChooseCourse />} />
             </>
           )}
         </Routes>
