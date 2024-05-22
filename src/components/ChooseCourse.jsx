@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
-import { setSelectedCourseId } from '../redux/actions/selectedCourseActions';
+import setSelectedCourseId from '../redux/actions/selectedCourseActions';
 import logoblack from '../media/logoblack.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
