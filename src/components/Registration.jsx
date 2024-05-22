@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { signUp } from '../redux/actions/userActions';
 import setSelectedCourseId from '../redux/actions/selectedCourseActions';
 import informBackendAboutPayment from './Payment';
+import 'react-datepicker/dist/react-datepicker.css';
 import logoblack from '../media/logoblack.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
@@ -19,7 +21,7 @@ function Registration() {
   const [userData, setUserData] = useState({
     name: '',
     surname: '',
-    birthdate: '',
+    birthdate: null,
     whatsapp: '',
     phone_number: '',
     email: '',
@@ -44,6 +46,10 @@ function Registration() {
     const { name, value } = e.target;
     const formattedValue = value.trim();
     setUserData({ ...userData, [name]: formattedValue });
+  };
+
+  const handleDateChange = (date) => {
+    setUserData({ ...userData, birthdate: date });
   };
 
   const handleCourseSelection = (courseId) => {
@@ -106,12 +112,12 @@ function Registration() {
                   </div>
                   <div className="registration-col">
                     <label className="registration-label">Date Of Birth:</label>
-                    <input
-                      className="registration-input"
-                      name="birthdate"
-                      value={userData.birthdate}
-                      onChange={handleChange}
-                      placeholder="dd/mm/yyyy"
+                    <DatePicker
+                      selected={userData.birthdate}
+                      onChange={handleDateChange}
+                      dateFormat="dd/MM/yyyy"
+                      placeholderText="DD/MM/YYYY"
+                      className="registration-input-datepicker"
                       required
                     />
                   </div>

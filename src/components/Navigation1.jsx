@@ -72,7 +72,7 @@ function Navigation1({ userId }) {
                   <img src={bell} alt="Categories" className="icon-img-nav1" />
                 </Nav.Link>
                 <Nav.Link className="nav-padding-log" onClick={handleLogout}>Logout</Nav.Link>
-                {logoutMessage && <p>{logoutMessage}</p>}
+                {logoutMessage && <p className="logout-message">{logoutMessage}</p>}
               </>
             )}
             {!userId && (

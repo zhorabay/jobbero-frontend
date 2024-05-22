@@ -387,12 +387,17 @@
 }
 
 .registration-input,
+.registration-input-datepicker,
 .registration-input-big {
   background-color: #d9d9d9 !important;
   border-radius: 30px !important;
   padding: 10px !important;
   font-size: 14px !important;
   color: black !important;
+}
+
+.registration-input-datepicker {
+  width: 100% !important;
 }
 
 .registration-form {
@@ -798,7 +803,8 @@
     margin: 3px 0;
   }
 
-  .registration-input {
+  .registration-input,
+  .registration-input-datepicker {
     padding: 6px !important;
     font-size: 12px !important;
   }
