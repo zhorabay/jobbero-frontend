@@ -680,17 +680,26 @@
   border-radius: 4px;
 }
 
-.login-button {
+.login-button,
+.login-btn {
   padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
+  background-color: #f6c61b;
+  color: black;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .login-button:hover {
-  background-color: #0056b3;
+  background-color: #ffbf00;
+}
+
+.login-btn {
+  margin-left: 87%;
+  border-radius: 30px;
+  padding: 6px 28px;
 }
 
 @media only screen and (max-width: 756px) {
