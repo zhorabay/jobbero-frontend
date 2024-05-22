@@ -1,29 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { fetchCourses } from '../redux/actions/courseActions';
-import setSelectedCourseId from '../redux/actions/selectedCourseActions';
+import { setSelectedCourseId } from '../redux/actions/selectedCourseActions';
 import logoblack from '../media/logoblack.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
+import LoginModal from './LoginModal';
 
 function ChooseCourse() {
   const dispatch = useDispatch();
   const coursesState = useSelector((state) => state.courses.courses);
   const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
   const navigate = useNavigate();
-  const location = useLocation();
-  const user = useSelector((state) => state.auth.user);
   const error = useSelector((state) => state.user.error);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login', { state: { from: location.pathname } });
-    } else {
-      dispatch(fetchCourses());
-    }
-  }, [dispatch, user, navigate, location.pathname]);
+    dispatch(fetchCourses());
+  }, [dispatch]);
 
   let courses = [];
   if (Array.isArray(coursesState)) {
@@ -39,12 +35,16 @@ function ChooseCourse() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!user) {
-      navigate('/login', { state: { from: location.pathname } });
-      return;
-    }
     console.log('Navigating to payment page with selectedCourseId:', selectedCourseId);
     navigate('/payment', { state: { selectedCourseId } });
+  };
+
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLoginModal(false);
   };
 
   return (
@@ -79,12 +79,15 @@ function ChooseCourse() {
                 </div>
               </div>
               <button type="submit" className="registration-btn">Next</button>
+              <button type="button" className="login-btn" onClick={handleLoginClick}>Login</button>
             </form>
             {error && <div className="text-red-500">{error}</div>}
           </div>
         </div>
       </div>
       <Footer />
+
+      {showLoginModal && <LoginModal onSuccess={handleLoginSuccess} onClose={() => setShowLoginModal(false)} />}
     </>
   );
 }
