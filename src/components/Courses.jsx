@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { fetchCourses, deleteCourse } from '../redux/actions/courseActions';
-import { addToCart } from '../redux/actions/cartActions';
+import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 import '../styles/Course.css';
 import Navigation3 from './Navigation3';
 import time from '../media/time.png';
@@ -15,6 +15,7 @@ function Courses({ userId }) {
   const navigate = useNavigate();
   const { categoryId } = useParams();
   const coursesState = useSelector((state) => state.courses.courses);
+  const cartItems = useSelector((state) => state.cart.items);
   const user = useSelector((state) => state.auth.user);
   const isAdmin = user && user.email === 'admin@jobbero.com';
 
@@ -56,6 +57,10 @@ function Courses({ userId }) {
   };
 
   const handleAddToCart = (course) => {
+    if (cartItems.length > 0) {
+      dispatch(removeFromCart(cartItems[0].id));
+    }
+
     const courseForCart = {
       id: course.id,
       title: course.title,
@@ -107,7 +112,7 @@ function Courses({ userId }) {
                     {isAdmin && (
                       <Button variant="danger" className="course-card-btn" onClick={() => handleDeleteCourse(course.id)}>Delete</Button>
                     )}
-                    <Button variant="primary" className="course-card-btn" onClick={handleAddToCart}>Add to Cart</Button>
+                    <Button variant="primary" className="course-card-btn" onClick={() => handleAddToCart(course)}>Add to Cart</Button>
                   </Card.Body>
                 </Card>
               </li>

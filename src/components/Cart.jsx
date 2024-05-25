@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Navigation3 from './Navigation3';
 import '../styles/Course.css';
@@ -8,6 +9,7 @@ import { removeFromCart } from '../redux/actions/cartActions';
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedCartItems = JSON.parse(sessionStorage.getItem('cartItems'));
@@ -26,6 +28,11 @@ function Cart() {
 
   const handleRemoveFromCart = (courseId) => {
     dispatch(removeFromCart(courseId));
+  };
+
+  const handlePayment = () => {
+    const courseIds = cartItems.map((item) => item.id);
+    navigate('/payment', { state: { courseIds } });
   };
 
   const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
@@ -64,7 +71,7 @@ function Cart() {
               $
               {totalPrice.toFixed(2)}
             </p>
-            <Button type="button" href="/registration" className="make-payment-btn">Pay</Button>
+            <Button type="button" onClick={handlePayment} className="make-payment-btn">Pay</Button>
           </div>
         </div>
       </div>

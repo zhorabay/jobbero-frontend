@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { fetchCourseModules } from '../redux/actions/courseModuleActions';
 import { fetchReviews } from '../redux/actions/reviewActions';
-import { addToCart } from '../redux/actions/cartActions';
+import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 // import { fetchLessons, deleteLesson } from '../redux/actions/lessonActions';
 import down from '../media/down.png';
 // import downblue from '../media/downblue.png';
@@ -20,6 +20,7 @@ function Modules({ userId }) {
   const navigate = useNavigate();
   const { categoryId, courseId } = useParams();
   const coursesData = useSelector((state) => state.courses.courses);
+  const cartItems = useSelector((state) => state.cart.items);
   const modules = useSelector((state) => state.module.modules);
   const reviews = useSelector((state) => state.reviews.reviews);
   // const lessons = useSelector((state) => state.lesson.lessons);
@@ -100,6 +101,10 @@ function Modules({ userId }) {
   }
 
   const handleAddToCart = (course) => {
+    if (cartItems.length > 0) {
+      dispatch(removeFromCart(cartItems[0].id));
+    }
+
     const courseForCart = {
       id: course.id,
       title: course.title,
@@ -149,7 +154,7 @@ function Modules({ userId }) {
           {showComments && courseReviews.length === 0 && (
             <p className="course-modules-about">No reviews found.</p>
           )}
-          <Button variant="primary" className="course-card-btn" onClick={handleAddToCart}>Add to Cart</Button>
+          <Button variant="primary" className="course-card-btn" onClick={() => handleAddToCart(course)}>Add to Cart</Button>
           <div className="modules-section3">
             <div className="modules-section3-expand">
               <p className="account-courses">Course Content</p>

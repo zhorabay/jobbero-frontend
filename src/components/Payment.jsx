@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import PaystackPop from '@paystack/inline-js';
 import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/logoblack.png';
 import paystackimg from '../media/paystack.png';
-import korapay from '../media/korapay.png';
+import korapay from '../media/kora.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
 
 function Payment() {
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useSelector((state) => state.auth.user);
   const [isLoading, setIsLoading] = useState(false);
-  const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
+  const selectedCourseId = location.state?.selectedCourseId;
+  const courseIds = location.state?.courseIds || [];
   const generateUniqueId = uuidv4();
 
-  const informBackendAboutPayment = async (userId) => {
+  const informBackendAboutPayment = async (userId, courseId, reference) => {
     try {
       const response = await fetch('https://origin8lab-cu7g.onrender.com/payments/success', {
         method: 'POST',
@@ -26,12 +28,11 @@ function Payment() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          reference: `TXN-${Date.now()}-${generateUniqueId}`,
-          course_id: selectedCourseId,
-          userId: user.id,
+          reference,
+          course_id: courseId,
+          userId,
         }),
       });
-      console.log('id:', userId);
 
       if (response.ok) {
         const data = await response.json();
@@ -46,26 +47,24 @@ function Payment() {
 
   const paystackPayment = async (e) => {
     e.preventDefault();
-    if (!selectedCourseId) {
-      alert('Please select a course before proceeding with the payment.');
-      return;
-    }
-
     try {
       setIsLoading(true);
-      // const totalPrice = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
+      // const totalPrice = selectedCourseId ? 20000 * 100 : courseIds.reduce((acc, courseId) => acc + 20000 * 100, 0);
 
       const paystack = new PaystackPop();
       paystack.newTransaction({
         key: 'pk_live_03a1c01d490ee49f14ad187283af346d5c2b7069',
         email: user.email,
-        // amount: totalPrice * 100,
-        amount: 20000.00 * 100,
+        amount: 20000 * 100,
         reference: `TXN-${Date.now()}-${generateUniqueId}`,
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
           alert(message);
-          informBackendAboutPayment(selectedCourseId);
+          if (selectedCourseId) {
+            informBackendAboutPayment(user.id, [selectedCourseId], transaction.reference);
+          } else {
+            courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, transaction.reference));
+          }
           navigate('/');
         },
         onCancel() {
@@ -81,15 +80,8 @@ function Payment() {
   };
 
   const koraPayment = () => {
-    if (!selectedCourseId) {
-      alert('Please select a course before proceeding with the payment.');
-      return;
-    }
-
-    setIsLoading(true);
-    const script = document.createElement('script');
-    script.src = 'https://korablobstorage.blob.core.windows.net/modal-bucket/korapay-collections.min.js';
-    script.onload = () => {
+    try {
+      setIsLoading(true);
       window.Korapay.initialize({
         key: 'pk_test_Nz7r6wgWGGquHWEkJCjW5V6DH3QMmMXzGsEZz1yQ',
         reference: `TXN-${Date.now()}-${generateUniqueId}`,
@@ -101,15 +93,23 @@ function Payment() {
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
           alert(message);
-          informBackendAboutPayment(user.id, transaction.reference);
+          if (selectedCourseId) {
+            informBackendAboutPayment(user.id, [selectedCourseId], transaction.reference);
+          } else {
+            courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, transaction.reference));
+          }
           navigate('/');
         },
         onCancel() {
           alert('You have canceled the transaction');
         },
       });
-    };
-    document.body.appendChild(script);
+    } catch (error) {
+      console.error('Error initializing transaction:', error);
+      alert('An error occurred during payment initiation');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
