@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { fetchCourseModules } from '../redux/actions/courseModuleActions';
 import { fetchReviews } from '../redux/actions/reviewActions';
+import { addToCart } from '../redux/actions/cartActions';
 // import { fetchLessons, deleteLesson } from '../redux/actions/lessonActions';
 import down from '../media/down.png';
 // import downblue from '../media/downblue.png';
@@ -12,8 +15,9 @@ import comment from '../media/comment.png';
 import '../styles/Course.css';
 import Navigation3 from './Navigation3';
 
-function Modules() {
+function Modules({ userId }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { categoryId, courseId } = useParams();
   const coursesData = useSelector((state) => state.courses.courses);
   const modules = useSelector((state) => state.module.modules);
@@ -95,6 +99,22 @@ function Modules() {
     });
   }
 
+  const handleAddToCart = (course) => {
+    const courseForCart = {
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      image: course.image,
+      duration: course.duration,
+      price: course.price,
+    };
+
+    console.log('Adding to cart:', courseForCart);
+
+    dispatch(addToCart(courseForCart));
+    userId && navigate(`/${userId.toString()}/cart`);
+  };
+
   return (
     <>
       <Navigation3 />
@@ -129,6 +149,7 @@ function Modules() {
           {showComments && courseReviews.length === 0 && (
             <p className="course-modules-about">No reviews found.</p>
           )}
+          <Button variant="primary" className="course-card-btn" onClick={handleAddToCart}>Add to Cart</Button>
           <div className="modules-section3">
             <div className="modules-section3-expand">
               <p className="account-courses">Course Content</p>
@@ -212,5 +233,13 @@ function Modules() {
     </>
   );
 }
+
+Modules.propTypes = {
+  userId: PropTypes.number,
+};
+
+Modules.defaultProps = {
+  userId: null,
+};
 
 export default Modules;

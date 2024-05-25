@@ -56,7 +56,7 @@ const App = () => {
               <Route path="/categories/:categoryId/courses" element={<Courses userId={userId} />} />
               <Route path="/all-courses" element={<Courses userId={userId} />} />
               <Route path="/:userId/cart" element={<Cart />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules" element={<Modules />} />
+              <Route path="/categories/:categoryId/courses/:courseId/modules" element={<Modules userId={userId} />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId" element={<Modules />} />
               <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
               <Route path="/contact-us" element={<Contact />} />
@@ -85,6 +85,7 @@ const App = () => {
               <Route path="/contact-us" element={<Contact />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/choose-a-course" element={<ChooseCourse />} />
+              <Route path="/payment" element={<Payment />} />
             </>
           )}
         </Routes>

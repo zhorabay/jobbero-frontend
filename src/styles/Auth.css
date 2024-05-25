@@ -495,6 +495,13 @@
   width: 95%;
 }
 
+.payment-pic {
+  width: 120px;
+  border-radius: 15px;
+  background-color: #fff;
+  padding: 21px 3px;
+}
+
 .inline-form-p {
   display: flex;
   gap: 30px;
@@ -581,6 +588,7 @@
 
 .payment-img {
   width: 90%;
+  width: 130px;
 }
 
 .payment-form {

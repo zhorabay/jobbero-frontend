@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-// import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { fetchCourses, deleteCourse } from '../redux/actions/courseActions';
-// import { addToCart } from '../redux/actions/cartActions';
+import { addToCart } from '../redux/actions/cartActions';
 import '../styles/Course.css';
 import Navigation3 from './Navigation3';
 import time from '../media/time.png';
 
-function Courses() {
+function Courses({ userId }) {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { categoryId } = useParams();
   const coursesState = useSelector((state) => state.courses.courses);
   const user = useSelector((state) => state.auth.user);
@@ -55,10 +55,21 @@ function Courses() {
     dispatch(deleteCourse(categoryId, courseId));
   };
 
-  // const handleAddToCart = (course) => {
-  //   dispatch(addToCart(course));
-  //   userId && navigate(`/${userId.toString()}/cart`);
-  // };
+  const handleAddToCart = (course) => {
+    const courseForCart = {
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      image: course.image,
+      duration: course.duration,
+      price: course.price,
+    };
+
+    console.log('Adding to cart:', courseForCart);
+
+    dispatch(addToCart(courseForCart));
+    userId && navigate(`/${userId.toString()}/cart`);
+  };
 
   return (
     <>
@@ -96,7 +107,7 @@ function Courses() {
                     {isAdmin && (
                       <Button variant="danger" className="course-card-btn" onClick={() => handleDeleteCourse(course.id)}>Delete</Button>
                     )}
-                    <Button variant="primary" className="course-card-btn">Add to Cart</Button>
+                    <Button variant="primary" className="course-card-btn" onClick={handleAddToCart}>Add to Cart</Button>
                   </Card.Body>
                 </Card>
               </li>
@@ -108,12 +119,12 @@ function Courses() {
   );
 }
 
-// Courses.propTypes = {
-//   userId: PropTypes.number,
-// };
+Courses.propTypes = {
+  userId: PropTypes.number,
+};
 
-// Courses.defaultProps = {
-//   userId: null,
-// };
+Courses.defaultProps = {
+  userId: null,
+};
 
 export default Courses;

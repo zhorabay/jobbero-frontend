@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/logoblack.png';
 import paystackimg from '../media/paystack.png';
+import korapay from '../media/korapay.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
@@ -79,6 +80,38 @@ function Payment() {
     }
   };
 
+  const koraPayment = () => {
+    if (!selectedCourseId) {
+      alert('Please select a course before proceeding with the payment.');
+      return;
+    }
+
+    setIsLoading(true);
+    const script = document.createElement('script');
+    script.src = 'https://korablobstorage.blob.core.windows.net/modal-bucket/korapay-collections.min.js';
+    script.onload = () => {
+      window.Korapay.initialize({
+        key: 'pk_test_Nz7r6wgWGGquHWEkJCjW5V6DH3QMmMXzGsEZz1yQ',
+        reference: `TXN-${Date.now()}-${generateUniqueId}`,
+        amount: 20000 * 100,
+        customer: {
+          name: user.name,
+          email: user.email,
+        },
+        onSuccess(transaction) {
+          const message = `Payment Complete! Reference ${transaction.reference}`;
+          alert(message);
+          informBackendAboutPayment(user.id, transaction.reference);
+          navigate('/');
+        },
+        onCancel() {
+          alert('You have canceled the transaction');
+        },
+      });
+    };
+    document.body.appendChild(script);
+  };
+
   return (
     <>
       <Navigation3 />
@@ -101,6 +134,15 @@ function Payment() {
                   type="radio"
                   id="inline-radio-1"
                   onClick={paystackPayment}
+                  disabled={isLoading}
+                />
+                <Form.Check
+                  inline
+                  label={<img src={korapay} alt="Korapay" className="payment-pic" />}
+                  name="group1"
+                  type="radio"
+                  id="inline-radio-2"
+                  onClick={koraPayment}
                   disabled={isLoading}
                 />
               </div>
