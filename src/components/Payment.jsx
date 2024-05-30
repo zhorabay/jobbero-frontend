@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/logoblack.png';
 import paystackimg from '../media/paystack.png';
-import korapay from '../media/kora.png';
+// import korapay from '../media/kora.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
@@ -79,38 +79,38 @@ function Payment() {
     }
   };
 
-  const koraPayment = () => {
-    try {
-      setIsLoading(true);
-      window.Korapay.initialize({
-        key: 'pk_test_Nz7r6wgWGGquHWEkJCjW5V6DH3QMmMXzGsEZz1yQ',
-        reference: `TXN-${Date.now()}-${generateUniqueId}`,
-        amount: 20000 * 100,
-        customer: {
-          name: user.name,
-          email: user.email,
-        },
-        onSuccess(transaction) {
-          const message = `Payment Complete! Reference ${transaction.reference}`;
-          alert(message);
-          if (selectedCourseId) {
-            informBackendAboutPayment(user.id, [selectedCourseId], transaction.reference);
-          } else {
-            courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, transaction.reference));
-          }
-          navigate('/');
-        },
-        onCancel() {
-          alert('You have canceled the transaction');
-        },
-      });
-    } catch (error) {
-      console.error('Error initializing transaction:', error);
-      alert('An error occurred during payment initiation');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const koraPayment = () => {
+  //   try {
+  //     setIsLoading(true);
+  //     window.Korapay.initialize({
+  //       key: 'pk_test_Nz7r6wgWGGquHWEkJCjW5V6DH3QMmMXzGsEZz1yQ',
+  //       reference: `TXN-${Date.now()}-${generateUniqueId}`,
+  //       amount: 20000 * 100,
+  //       customer: {
+  //         name: user.name,
+  //         email: user.email,
+  //       },
+  //       onSuccess(transaction) {
+  //         const message = `Payment Complete! Reference ${transaction.reference}`;
+  //         alert(message);
+  //         if (selectedCourseId) {
+  //           informBackendAboutPayment(user.id, [selectedCourseId], transaction.reference);
+  //         } else {
+  //           courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, transaction.reference));
+  //         }
+  //         navigate('/');
+  //       },
+  //       onCancel() {
+  //         alert('You have canceled the transaction');
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.error('Error initializing transaction:', error);
+  //     alert('An error occurred during payment initiation');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <>
@@ -136,7 +136,7 @@ function Payment() {
                   onClick={paystackPayment}
                   disabled={isLoading}
                 />
-                <Form.Check
+                {/* <Form.Check
                   inline
                   label={<img src={korapay} alt="Korapay" className="payment-pic" />}
                   name="group1"
@@ -144,7 +144,7 @@ function Payment() {
                   id="inline-radio-2"
                   onClick={koraPayment}
                   disabled={isLoading}
-                />
+                /> */}
               </div>
             </Form>
           </div>
