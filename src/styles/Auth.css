@@ -720,6 +720,10 @@
     min-height: 100vh;
   }
 
+  .inline-form-p {
+    flex-wrap: wrap;
+  }
+
   .payment-img {
     width: 150px;
   }

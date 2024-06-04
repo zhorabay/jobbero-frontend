@@ -18,7 +18,6 @@ function Payment() {
   const [isLoading, setIsLoading] = useState(false);
   const selectedCourseId = location.state?.selectedCourseId;
   const courseIds = location.state?.courseIds || [];
-  const generateUniqueId = uuidv4();
 
   const informBackendAboutPayment = async (userId, courseId, reference) => {
     try {
@@ -56,7 +55,7 @@ function Payment() {
         key: 'pk_live_03a1c01d490ee49f14ad187283af346d5c2b7069',
         email: user.email,
         amount: 20000 * 100,
-        reference: `TXN-${Date.now()}-${generateUniqueId}`,
+        reference: `TXN-${Date.now()}-${uuidv4()}`,
         onSuccess(transaction) {
           const message = `Payment Complete! Reference ${transaction.reference}`;
           alert(message);
@@ -82,9 +81,20 @@ function Payment() {
   // const koraPayment = () => {
   //   try {
   //     setIsLoading(true);
+  //     console.log('Initializing Korapay...');
+  //     const reference = `TXN-${Date.now()}-${uuidv4()}`;
+  //     const amount = 20000 * 100;
+  //     const customer = {
+  //       name: user.name,
+  //       email: user.email,
+  //     };
+
+  //     // Log the payload to be sent
+  //     console.log('Korapay Payload:', { reference, amount, customer });
+
   //     window.Korapay.initialize({
   //       key: 'pk_test_Nz7r6wgWGGquHWEkJCjW5V6DH3QMmMXzGsEZz1yQ',
-  //       reference: `TXN-${Date.now()}-${generateUniqueId}`,
+  //       reference: `TXN-${Date.now()}-${uuidv4()}`,
   //       amount: 20000 * 100,
   //       customer: {
   //         name: user.name,

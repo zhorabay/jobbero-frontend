@@ -172,7 +172,7 @@ function Modules({ userId }) {
                   {isAdmin || module.payment_status === 'paid' ? (
                     <>
                       <div className="no-access-page">
-                        The course will start on the 1st of June.
+                        The course will start on the 10th of June.
                       </div>
                       {/* <h3 className="modules-week">
                         Week
