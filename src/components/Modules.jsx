@@ -4,12 +4,12 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { fetchCourses } from '../redux/actions/courseActions';
-import { fetchCourseModules } from '../redux/actions/courseModuleActions';
+import { fetchCourseModules, deleteCourseModule } from '../redux/actions/courseModuleActions';
 import { fetchReviews } from '../redux/actions/reviewActions';
 import { addToCart, removeFromCart } from '../redux/actions/cartActions';
-// import { fetchLessons, deleteLesson } from '../redux/actions/lessonActions';
+import { fetchLessons, deleteLesson } from '../redux/actions/lessonActions';
 import down from '../media/down.png';
-// import downblue from '../media/downblue.png';
+import downblue from '../media/downblue.png';
 import book from '../media/book.png';
 import comment from '../media/comment.png';
 import '../styles/Course.css';
@@ -23,14 +23,14 @@ function Modules({ userId }) {
   const cartItems = useSelector((state) => state.cart.items);
   const modules = useSelector((state) => state.module.modules);
   const reviews = useSelector((state) => state.reviews.reviews);
-  // const lessons = useSelector((state) => state.lesson.lessons);
+  const lessons = useSelector((state) => state.lesson.lessons);
   const user = useSelector((state) => state.auth.user);
   const isAdmin = user && user.email === 'admin@jobbero.com';
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
   const [showComments, setShowComments] = useState(false);
-  // const [showLessons, setShowLessons] = useState(true);
-  // const [expandedModules, setExpandedModules] = useState({});
+  const [showLessons, setShowLessons] = useState(true);
+  const [expandedModules, setExpandedModules] = useState({});
 
   useEffect(() => {
     dispatch(fetchCourses());
@@ -54,16 +54,16 @@ function Modules({ userId }) {
     setShowDescription(false);
   };
 
-  // const toggleLessons = (moduleId) => {
-  //   if (!expandedModules[moduleId]) {
-  //     dispatch(fetchLessons(categoryId, courseId, moduleId));
-  //   }
-  //   setShowLessons(!showLessons);
-  //   setExpandedModules((prevExpandedModules) => ({
-  //     ...prevExpandedModules,
-  //     [moduleId]: !prevExpandedModules[moduleId],
-  //   }));
-  // };
+  const toggleLessons = (moduleId) => {
+    if (!expandedModules[moduleId]) {
+      dispatch(fetchLessons(categoryId, courseId, moduleId));
+    }
+    setShowLessons(!showLessons);
+    setExpandedModules((prevExpandedModules) => ({
+      ...prevExpandedModules,
+      [moduleId]: !prevExpandedModules[moduleId],
+    }));
+  };
 
   if (!coursesData || !coursesData.courses) {
     return <div>Loading...</div>;
@@ -85,13 +85,13 @@ function Modules({ userId }) {
     ? reviews.filter((review) => review.course_id === parseInt(courseId, 10))
     : [];
 
-  // const handleDeleteModule = (moduleId) => {
-  //   dispatch(deleteCourseModule(categoryId, courseId, moduleId));
-  // };
+  const handleDeleteModule = (moduleId) => {
+    dispatch(deleteCourseModule(categoryId, courseId, moduleId));
+  };
 
-  // const handleDeleteLesson = (lessonId, courseModuleId) => {
-  //   dispatch(deleteLesson(categoryId, courseId, courseModuleId, lessonId));
-  // };
+  const handleDeleteLesson = (lessonId, courseModuleId) => {
+    dispatch(deleteLesson(categoryId, courseId, courseModuleId, lessonId));
+  };
 
   if (courseModulesArray.length > 0) {
     console.log('Fetched Modules:', courseModulesArray);
@@ -169,23 +169,23 @@ function Modules({ userId }) {
             <ul className="modules-ul">
               {isExpanded && courseModulesArray.length > 0 && courseModulesArray.map((module) => (
                 <li className="modules-list" key={module.id}>
-                  {isAdmin || module.payment_status === 'paid' ? (
+                  {module.payment_status === 'paid'(
+                    <div className="no-access-page">
+                      The course will start on the 10th of June.
+                    </div>,
+                  )}
+                  {isAdmin || module.payment_status === 'unpaid' ? (
                     <>
-                      <div className="no-access-page">
-                        The course will start on the 10th of June.
-                      </div>
-                      {/* <h3 className="modules-week">
+                      <h3 className="modules-week">
                         Week
                         {module.week}
                       </h3>
-                      <button type="button" className="course-modules-list"
-                        onClick={() => toggleLessons(module.id)}>
+                      <button type="button" className="course-modules-list" onClick={() => toggleLessons(module.id)}>
                         <div className="modules-btn-prt1">
                           <h4 className="module-title-h4">{module.title}</h4>
                         </div>
                         {isAdmin && (
-                          <button type="button" className="edit-button"
-                            onClick={() => handleDeleteModule(module.id)}>
+                          <button type="button" className="edit-button" onClick={() => handleDeleteModule(module.id)}>
                             Delete Module
                           </button>
                         )}
@@ -202,26 +202,23 @@ function Modules({ userId }) {
                             .filter((lesson) => lesson && lesson.course_module_id === module.id)
                             .map((lesson) => (
                               <div key={lesson.id} className="lesson-item">
-                                <Link className="lesson-route"
-                                to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`}>
+                                <Link className="lesson-route" to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`}>
                                   {lesson.title}
                                 </Link>
                                 {isAdmin && (
-                                  <button type="button" className="edit-button"
-                                    onClick={() => handleDeleteLesson(lesson.id, module.id)}>
+                                  <button type="button" className="edit-button" onClick={() => handleDeleteLesson(lesson.id, module.id)}>
                                     Delete Lesson
                                   </button>
                                 )}
                               </div>
                             ))}
                           {isAdmin && (
-                            <Link className="nav-cat-title"
-                              to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`}>
+                            <Link className="nav-cat-title" to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`}>
                               Add Lesson
                             </Link>
                           )}
                         </div>
-                      )} */}
+                      )}
                     </>
                   ) : (
                     <div className="no-access-page">

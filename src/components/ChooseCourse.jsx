@@ -13,6 +13,7 @@ function ChooseCourse() {
   const dispatch = useDispatch();
   const coursesState = useSelector((state) => state.courses.courses);
   const selectedCourseId = useSelector((state) => state.selectedCourse.selectedCourseId);
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const error = useSelector((state) => state.user.error);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -79,7 +80,9 @@ function ChooseCourse() {
                 </div>
               </div>
               <button type="submit" className="registration-btn">Next</button>
-              <button type="button" className="login-btn" onClick={handleLoginClick}>Login</button>
+              {!user && (
+                <button type="button" className="login-btn" onClick={handleLoginClick}>Login</button>
+              )}
             </form>
             {error && <div className="text-red-500">{error}</div>}
           </div>
