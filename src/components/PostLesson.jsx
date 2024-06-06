@@ -7,35 +7,36 @@ import '../styles/Post.css';
 
 const PostLesson = () => {
   const { categoryId, courseId, courseModuleId } = useParams();
-  const [formData, setFormData] = useState(
-    {
-      title: '',
-      description: '',
-      video: null,
-    },
-  );
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    files: [],
+  });
   const [formError, setFormError] = useState('');
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const error = useSelector((state) => state.lesson.error);
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData({
+      ...formData,
+      files,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.description || !formData.video) {
-      setFormError('Please fill all required fields');
-      return;
-    }
-
-    if (!formData.video.type.startsWith('video/')) {
-      setFormError('Please upload a valid video file');
+    if (!formData.title || !formData.description || formData.files.length === 0) {
+      setFormError('Please fill all required fields and upload at least one file');
       return;
     }
 
     try {
       await dispatch(postLesson(categoryId, courseId, courseModuleId, formData));
-      setFormData({ title: '', description: '', video: null });
+      setFormData({ title: '', description: '', files: [] });
       setFormError('');
       alert('Lesson created successfully');
       navigate('/');
@@ -80,12 +81,25 @@ const PostLesson = () => {
               accept="video/*"
               id="video"
               name="video"
-              onChange={(e) => {
-                setFormData({
-                  ...formData,
-                  video: e.target.files[0],
-                });
-              }}
+              onChange={handleFileChange}
+            />
+
+            <label htmlFor="image">Images:</label>
+            <input
+              type="file"
+              accept="image/*"
+              id="image"
+              name="image"
+              onChange={handleFileChange}
+            />
+
+            <label htmlFor="document">Documents:</label>
+            <input
+              type="file"
+              accept=".pdf,.ppt,.pptx,.doc,.docx"
+              id="document"
+              name="document"
+              onChange={handleFileChange}
             />
           </div>
           <button type="submit">Submit</button>

@@ -62,7 +62,10 @@ export const postLesson = (categoryId, courseId, courseModuleId, formData) => (d
   formDataObj.append('lesson[course_module_id]', courseModuleId);
   formDataObj.append('lesson[title]', formData.title);
   formDataObj.append('lesson[description]', formData.description);
-  formDataObj.append('lesson[video]', formData.video);
+
+  formData.files.forEach((file) => {
+    formDataObj.append('lesson[files][]', file);
+  });
 
   axios.post(`https://origin8lab-cu7g.onrender.com/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`, formDataObj, {
     headers: {
