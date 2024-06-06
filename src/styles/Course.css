@@ -348,6 +348,22 @@ p {
   width: 17%;
 }
 
+.lesson-video {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.lesson-image {
+  width: 50%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.lesson-documents {
+  margin: 20px 0;
+}
+
 @media only screen and (max-width: 756px) {
   .courses-h2 {
     font-size: 22px;

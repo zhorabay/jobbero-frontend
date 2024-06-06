@@ -43,6 +43,32 @@ function Lessons() {
     );
   }
 
+  const filteredFiles = [];
+  const seenFiles = new Set();
+
+  lesson.files.forEach((file) => {
+    const isUnique = !seenFiles.has(`${file.name}-${file.size}-${file.content_type}`);
+
+    if (isUnique) {
+      filteredFiles.push(file);
+      seenFiles.add(`${file.name}-${file.size}-${file.content_type}`);
+    }
+  });
+
+  const videoFiles = filteredFiles.filter((file) => file.content_type.startsWith('video'));
+  const imageFiles = filteredFiles.filter((file) => file.content_type.startsWith('image'));
+  const documentFiles = filteredFiles.filter((file) => [
+    'application/pdf',
+    'application/vnd.ms-powerpoint',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  ].includes(file.content_type));
+
+  console.log('Video Files:', videoFiles);
+  console.log('Image Files:', imageFiles);
+  console.log('Document Files:', documentFiles);
+
   return (
     <>
       <Navigation3 />
@@ -52,28 +78,41 @@ function Lessons() {
             <div key={lesson.id}>
               <h2 className="lesson-h2">{lesson.title}</h2>
               <p className="lesson-description">{lesson.description}</p>
-              {lesson.files && lesson.files.map((file) => (
-                <div key={file.id}>
-                  {file.content_type.startsWith('video') && (
-                    <video controls className="lesson-video">
-                      <source src={file.url} type={file.content_type} />
-                      <track src="track" kind="captions" label="English" />
-                      Your browser does not support the video tag.
-                    </video>
-                  )}
-                  {file.content_type.startsWith('image') && (
-                    <img src={file.url} alt="Lesson" className="lesson-image" />
-                  )}
-                  {['application/pdf',
-                    'application/vnd.ms-powerpoint',
-                    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                    'application/msword',
-                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                  ].includes(file.content_type) && (
-                    <a href={file.url} target="_blank" rel="noopener noreferrer">View Document</a>
-                  )}
+
+              {videoFiles.length > 0 && (
+                <div className="lesson-videos">
+                  {videoFiles.map((file) => (
+                    <div key={file.id}>
+                      <video controls className="lesson-video">
+                        <source src={file.url} type={file.content_type} />
+                        <track src="track" kind="captions" label="English" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
+
+              {imageFiles.length > 0 && (
+                <div className="lesson-images">
+                  {imageFiles.map((file) => (
+                    <div key={file.id}>
+                      <img src={file.url} alt="Lesson" className="lesson-image" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {documentFiles.length > 0 && (
+                <div className="lesson-documents">
+                  {documentFiles.map((file) => (
+                    <div key={file.id}>
+                      <a href={file.url} target="_blank" rel="noopener noreferrer">View Document</a>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <ul className="cart-list-ul">
                 {lesson.comments && lesson.comments.map((comment) => (
                   <li key={comment.id}>{comment}</li>

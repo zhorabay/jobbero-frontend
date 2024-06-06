@@ -10,7 +10,9 @@ const PostLesson = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    files: [],
+    videos: [],
+    images: [],
+    documents: [],
   });
   const [formError, setFormError] = useState('');
   const navigate = useNavigate();
@@ -20,23 +22,48 @@ const PostLesson = () => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    setFormData({
-      ...formData,
-      files,
+    const { name } = e.target;
+
+    setFormData((prevData) => {
+      // Filter out files that are already in the state
+      const newFiles = files.filter((file) => !prevData[name].some((existingFile) => existingFile.name === file.name
+          && existingFile.size === file.size
+          && existingFile.lastModified === file.lastModified));
+
+      const updatedFiles = [...prevData[name], ...newFiles];
+      const newFormData = {
+        ...prevData,
+        [name]: updatedFiles,
+      };
+
+      console.log(`New ${name} files to add:`, newFiles);
+      console.log('Updated Form Data:', newFormData);
+      return newFormData;
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.description || formData.files.length === 0) {
+    const {
+      title, description, videos, images, documents,
+    } = formData;
+    if (!title || !description || (videos.length === 0 && images.length === 0 && documents.length === 0)) {
       setFormError('Please fill all required fields and upload at least one file');
       return;
     }
 
+    const allFiles = [...videos, ...images, ...documents];
+
+    // Log the combined files array with detailed information
+    console.log('Final Form Data:', formData);
+    console.log('Combined Files Array:', allFiles.map((file) => ({ name: file.name, size: file.size, lastModified: file.lastModified })));
+
     try {
-      await dispatch(postLesson(categoryId, courseId, courseModuleId, formData));
-      setFormData({ title: '', description: '', files: [] });
+      await dispatch(postLesson(categoryId, courseId, courseModuleId, { title, description, files: allFiles }));
+      setFormData({
+        title: '', description: '', videos: [], images: [], documents: [],
+      });
       setFormError('');
       alert('Lesson created successfully');
       navigate('/');
@@ -75,31 +102,34 @@ const PostLesson = () => {
               })}
             />
 
-            <label htmlFor="video">Video:</label>
+            <label htmlFor="videos">Video:</label>
             <input
               type="file"
               accept="video/*"
-              id="video"
-              name="video"
+              id="videos"
+              name="videos"
               onChange={handleFileChange}
+              multiple
             />
 
-            <label htmlFor="image">Images:</label>
+            <label htmlFor="images">Images:</label>
             <input
               type="file"
               accept="image/*"
-              id="image"
-              name="image"
+              id="images"
+              name="images"
               onChange={handleFileChange}
+              multiple
             />
 
-            <label htmlFor="document">Documents:</label>
+            <label htmlFor="documents">Documents:</label>
             <input
               type="file"
               accept=".pdf,.ppt,.pptx,.doc,.docx"
-              id="document"
-              name="document"
+              id="documents"
+              name="documents"
               onChange={handleFileChange}
+              multiple
             />
           </div>
           <button type="submit">Submit</button>
