@@ -16,6 +16,7 @@ const PostLesson = () => {
   });
   const [formError, setFormError] = useState('');
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const dispatch = useDispatch();
   const error = useSelector((state) => state.lesson.error);
@@ -45,19 +46,21 @@ const PostLesson = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
     const {
       title, description, videos, images, documents,
     } = formData;
+
     if (!title || !description || (videos.length === 0 && images.length === 0 && documents.length === 0)) {
       setFormError('Please fill all required fields and upload at least one file');
+      setIsSubmitting(false);
       return;
     }
 
     const allFiles = [...videos, ...images, ...documents];
-
-    // Log the combined files array with detailed information
-    console.log('Final Form Data:', formData);
-    console.log('Combined Files Array:', allFiles.map((file) => ({ name: file.name, size: file.size, lastModified: file.lastModified })));
 
     try {
       await dispatch(postLesson(categoryId, courseId, courseModuleId, { title, description, files: allFiles }));
@@ -69,6 +72,8 @@ const PostLesson = () => {
       navigate('/');
     } catch (error) {
       setFormError('An error occurred while submitting the lesson');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -132,7 +137,7 @@ const PostLesson = () => {
               multiple
             />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={isSubmitting}>Submit</button>
         </form>
         {formError && <div className="error-message">{formError}</div>}
         {error && <div className="error-message">{error}</div>}
