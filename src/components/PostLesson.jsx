@@ -25,22 +25,12 @@ const PostLesson = () => {
     const files = Array.from(e.target.files);
     const { name } = e.target;
 
-    setFormData((prevData) => {
-      // Filter out files that are already in the state
-      const newFiles = files.filter((file) => !prevData[name].some((existingFile) => existingFile.name === file.name
-          && existingFile.size === file.size
-          && existingFile.lastModified === file.lastModified));
+    const validFiles = files.filter((file) => file instanceof File);
 
-      const updatedFiles = [...prevData[name], ...newFiles];
-      const newFormData = {
-        ...prevData,
-        [name]: updatedFiles,
-      };
-
-      console.log(`New ${name} files to add:`, newFiles);
-      console.log('Updated Form Data:', newFormData);
-      return newFormData;
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: [...prevData[name], ...validFiles],
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -53,6 +43,12 @@ const PostLesson = () => {
     const {
       title, description, videos, images, documents,
     } = formData;
+
+    if (videos.length === 0 && images.length === 0 && documents.length === 0) {
+      setFormError('Please upload at least one file');
+      setIsSubmitting(false);
+      return;
+    }
 
     if (!title || !description || (videos.length === 0 && images.length === 0 && documents.length === 0)) {
       setFormError('Please fill all required fields and upload at least one file');

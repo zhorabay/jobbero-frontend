@@ -124,6 +124,11 @@
   min-height: 100vh;
 }
 
+.lesson-flex {
+  width: 90%;
+  justify-content: space-around;
+}
+
 .cart-list-ul {
   list-style: none;
 }
@@ -274,6 +279,34 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+}
+
+.course-modules-list-lp {
+  border: 2px solid #f6c71b95;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+  align-items: center;
+  width: 350px;
+}
+
+.course-modules-list-lp:hover,
+.course-modules-list-lp:active {
+  background-color: #f6c71b86;
+}
+
+.account-down-text-lp {
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.modules-ul-lp {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: beige;
 }
 
 p {

@@ -77,7 +77,6 @@ function Lessons() {
           <div className="cart-lists">
             <div key={lesson.id}>
               <h2 className="lesson-h2">{lesson.title}</h2>
-              <p className="lesson-description">{lesson.description}</p>
 
               {videoFiles.length > 0 && (
                 <div className="lesson-videos">
@@ -92,6 +91,8 @@ function Lessons() {
                   ))}
                 </div>
               )}
+
+              <p className="lesson-description">{lesson.description}</p>
 
               {imageFiles.length > 0 && (
                 <div className="lesson-images">
