@@ -169,7 +169,7 @@ function Modules({ userId }) {
             <ul className="modules-ul">
               {isExpanded && courseModulesArray.length > 0 && courseModulesArray.map((module) => (
                 <li className="modules-list" key={module.id}>
-                  {isAdmin || module.payment_status === 'unpaid' ? (
+                  {isAdmin || module.payment_status === 'paid' ? (
                     <>
                       <h3 className="modules-week">
                         Week
@@ -219,7 +219,6 @@ function Modules({ userId }) {
                     <div className="no-access-page">
                       Go to the payment to have an access to modules or explore other
                       <Link to="/all-courses" className="no-access-page-link">courses.</Link>
-                      If you have already paid, the course will start on the 10th of June.
                     </div>
                   )}
                 </li>
