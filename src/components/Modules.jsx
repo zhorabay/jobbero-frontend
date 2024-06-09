@@ -120,6 +120,12 @@ function Modules({ userId }) {
     userId && navigate(`/${userId.toString()}/cart`);
   };
 
+  const sortLessonsByTitle = (lessonsArray) => lessonsArray.sort((a, b) => {
+    const numberA = parseInt(a.title.match(/\d+/));
+    const numberB = parseInt(b.title.match(/\d+/));
+    return numberA - numberB;
+  });
+
   return (
     <>
       <Navigation3 />
@@ -193,20 +199,20 @@ function Modules({ userId }) {
                       </button>
                       {expandedModules[module.id] && (
                         <div>
-                          {lessons
-                            .filter((lesson) => lesson && lesson.course_module_id === module.id)
-                            .map((lesson) => (
-                              <div key={lesson.id} className="lesson-item">
-                                <Link className="lesson-route" to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`}>
-                                  {lesson.title}
-                                </Link>
-                                {isAdmin && (
-                                  <button type="button" className="edit-button" onClick={() => handleDeleteLesson(lesson.id, module.id)}>
-                                    Delete Lesson
-                                  </button>
-                                )}
-                              </div>
-                            ))}
+                          {sortLessonsByTitle(
+                            lessons.filter((lesson) => lesson && lesson.course_module_id === module.id),
+                          ).map((lesson) => (
+                            <div key={lesson.id} className="lesson-item">
+                              <Link className="lesson-route" to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/${lesson.id}`}>
+                                {lesson.title}
+                              </Link>
+                              {isAdmin && (
+                                <button type="button" className="edit-button" onClick={() => handleDeleteLesson(lesson.id, module.id)}>
+                                  Delete Lesson
+                                </button>
+                              )}
+                            </div>
+                          ))}
                           {isAdmin && (
                             <Link className="nav-cat-title" to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`}>
                               Add Lesson
