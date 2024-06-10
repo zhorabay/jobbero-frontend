@@ -65,10 +65,6 @@ function Lessons() {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   ].includes(file.content_type));
 
-  console.log('Video Files:', videoFiles);
-  console.log('Image Files:', imageFiles);
-  console.log('Document Files:', documentFiles);
-
   return (
     <>
       <Navigation3 />
@@ -93,6 +89,12 @@ function Lessons() {
               )}
 
               <p className="lesson-description">{lesson.description}</p>
+
+              {lesson.google_form_link && (
+                <div className="lesson-google-form">
+                  <a href={lesson.google_form_link} target="_blank" rel="noopener noreferrer">View Google Form</a>
+                </div>
+              )}
 
               {imageFiles.length > 0 && (
                 <div className="lesson-images">

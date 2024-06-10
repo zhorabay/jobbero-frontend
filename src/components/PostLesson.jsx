@@ -10,6 +10,7 @@ const PostLesson = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    google_form_link: '',
     videos: [],
     images: [],
     documents: [],
@@ -41,17 +42,11 @@ const PostLesson = () => {
     setIsSubmitting(true);
 
     const {
-      title, description, videos, images, documents,
+      title, description, google_form_link, videos, images, documents,
     } = formData;
 
-    if (videos.length === 0 && images.length === 0 && documents.length === 0) {
-      setFormError('Please upload at least one file');
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (!title || !description || (videos.length === 0 && images.length === 0 && documents.length === 0)) {
-      setFormError('Please fill all required fields and upload at least one file');
+    if (!title || !description) {
+      setFormError('Please fill all required fields');
       setIsSubmitting(false);
       return;
     }
@@ -59,9 +54,9 @@ const PostLesson = () => {
     const allFiles = [...videos, ...images, ...documents];
 
     try {
-      await dispatch(postLesson(categoryId, courseId, courseModuleId, { title, description, files: allFiles }));
+      await dispatch(postLesson(categoryId, courseId, courseModuleId, { title, description, google_form_link, files: allFiles }));
       setFormData({
-        title: '', description: '', videos: [], images: [], documents: [],
+        title: '', description: '', google_form_link: '', videos: [], images: [], documents: [],
       });
       setFormError('');
       alert('Lesson created successfully');
@@ -100,6 +95,18 @@ const PostLesson = () => {
               onChange={(e) => setFormData({
                 ...formData,
                 description: e.target.value,
+              })}
+            />
+
+            <label htmlFor="google_form_link">Google Form Link:</label>
+            <input
+              type="url"
+              id="google_form_link"
+              name="google_form_link"
+              value={formData.google_form_link}
+              onChange={(e) => setFormData({
+                ...formData,
+                google_form_link: e.target.value,
               })}
             />
 
