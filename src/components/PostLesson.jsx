@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import { postLesson } from '../redux/actions/lessonActions';
 import Navigation3 from './Navigation3';
 import '../styles/Post.css';
@@ -11,7 +10,7 @@ const PostLesson = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    google_form_links: [{ id: uuidv4(), url: '' }],
+    google_form_links: [''],
     videos: [],
     images: [],
     documents: [],
@@ -35,10 +34,9 @@ const PostLesson = () => {
     }));
   };
 
-  const handleLinkChange = (id, e) => {
-    const newLinks = formData.google_form_links.map((link) => (
-      link.id === id ? { ...link, url: e.target.value } : link
-    ));
+  const handleLinkChange = (index, e) => {
+    const newLinks = [...formData.google_form_links];
+    newLinks[index] = e.target.value;
     setFormData((prevData) => ({
       ...prevData,
       google_form_links: newLinks,
@@ -48,7 +46,7 @@ const PostLesson = () => {
   const addLinkField = () => {
     setFormData((prevData) => ({
       ...prevData,
-      google_form_links: [...prevData.google_form_links, { id: uuidv4(), url: '' }],
+      google_form_links: [...prevData.google_form_links, ''],
     }));
   };
 
@@ -77,7 +75,7 @@ const PostLesson = () => {
         title, description, google_form_links: googleFormLinks, files: allFiles,
       }));
       setFormData({
-        title: '', description: '', google_form_links: [{ id: uuidv4(), url: '' }], videos: [], images: [], documents: [],
+        title: '', description: '', google_form_links: [''], videos: [], images: [], documents: [],
       });
       setFormError('');
       alert('Lesson created successfully');
@@ -119,15 +117,15 @@ const PostLesson = () => {
               })}
             />
 
-            {formData.google_form_links.map((link) => (
-              <div key={link.id}>
-                <label htmlFor={`google_form_link_${link.id}`}>Google Form Link:</label>
+            {formData.google_form_links.map((link, index) => (
+              <div key={link.id || index}>
+                <label htmlFor={`google_form_link_${index}`}>Google Form Link:</label>
                 <input
                   type="url"
-                  id={`google_form_link_${link.id}`}
+                  id={`google_form_link_${index}`}
                   name="google_form_links"
-                  value={link.url}
-                  onChange={(e) => handleLinkChange(link.id, e)}
+                  value={link}
+                  onChange={(e) => handleLinkChange(index, e)}
                 />
               </div>
             ))}

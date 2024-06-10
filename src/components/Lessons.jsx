@@ -92,7 +92,7 @@ function Lessons() {
 
               {lesson.google_form_link && (
                 <div className="lesson-google-form">
-                  <a href={lesson.google_form_link} target="_blank" rel="noopener noreferrer">View Google Form</a>
+                  <a href={lesson.google_form_link} target="_blank" rel="noopener noreferrer">View the assessment</a>
                 </div>
               )}
 
