@@ -54,7 +54,9 @@ const PostLesson = () => {
     const allFiles = [...videos, ...images, ...documents];
 
     try {
-      await dispatch(postLesson(categoryId, courseId, courseModuleId, { title, description, google_form_link, files: allFiles }));
+      await dispatch(postLesson(categoryId, courseId, courseModuleId, {
+        title, description, google_form_link, files: allFiles,
+      }));
       setFormData({
         title: '', description: '', google_form_link: '', videos: [], images: [], documents: [],
       });
