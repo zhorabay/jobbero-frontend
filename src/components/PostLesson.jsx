@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { postLesson } from '../redux/actions/lessonActions';
 import Navigation3 from './Navigation3';
 import '../styles/Post.css';
@@ -10,7 +11,7 @@ const PostLesson = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    google_form_link: '',
+    google_form_links: [{ id: uuidv4(), url: '' }],
     videos: [],
     images: [],
     documents: [],
@@ -34,6 +35,23 @@ const PostLesson = () => {
     }));
   };
 
+  const handleLinkChange = (id, e) => {
+    const newLinks = formData.google_form_links.map((link) => (
+      link.id === id ? { ...link, url: e.target.value } : link
+    ));
+    setFormData((prevData) => ({
+      ...prevData,
+      google_form_links: newLinks,
+    }));
+  };
+
+  const addLinkField = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      google_form_links: [...prevData.google_form_links, { id: uuidv4(), url: '' }],
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,7 +60,7 @@ const PostLesson = () => {
     setIsSubmitting(true);
 
     const {
-      title, description, google_form_link, videos, images, documents,
+      title, description, google_form_links, videos, images, documents,
     } = formData;
 
     if (!title || !description) {
@@ -52,13 +70,14 @@ const PostLesson = () => {
     }
 
     const allFiles = [...videos, ...images, ...documents];
+    const googleFormLinks = google_form_links.map((link) => link.url);
 
     try {
       await dispatch(postLesson(categoryId, courseId, courseModuleId, {
-        title, description, google_form_link, files: allFiles,
+        title, description, google_form_links: googleFormLinks, files: allFiles,
       }));
       setFormData({
-        title: '', description: '', google_form_link: '', videos: [], images: [], documents: [],
+        title: '', description: '', google_form_links: [{ id: uuidv4(), url: '' }], videos: [], images: [], documents: [],
       });
       setFormError('');
       alert('Lesson created successfully');
@@ -100,17 +119,19 @@ const PostLesson = () => {
               })}
             />
 
-            <label htmlFor="google_form_link">Google Form Link:</label>
-            <input
-              type="url"
-              id="google_form_link"
-              name="google_form_link"
-              value={formData.google_form_link}
-              onChange={(e) => setFormData({
-                ...formData,
-                google_form_link: e.target.value,
-              })}
-            />
+            {formData.google_form_links.map((link) => (
+              <div key={link.id}>
+                <label htmlFor={`google_form_link_${link.id}`}>Google Form Link:</label>
+                <input
+                  type="url"
+                  id={`google_form_link_${link.id}`}
+                  name="google_form_links"
+                  value={link.url}
+                  onChange={(e) => handleLinkChange(link.id, e)}
+                />
+              </div>
+            ))}
+            <button type="button" onClick={addLinkField}>Add Another Link</button>
 
             <label htmlFor="videos">Video:</label>
             <input
