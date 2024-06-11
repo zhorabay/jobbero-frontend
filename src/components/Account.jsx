@@ -12,18 +12,11 @@ function Account() {
   const [isExpanded, setIsExpanded] = useState(true);
   const signedInUser = useSelector((state) => state.auth.user);
   const courses = useSelector((state) => state.courses.courses);
-  // const paidCourses = useSelector((state) => state.courses.paidCourses);
 
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchCourses());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     dispatch(fetchPaidCourses(user.id));
-  //   }
-  // }, [dispatch, user]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -45,7 +38,6 @@ function Account() {
             <div className="account-section21">
               <div className="account-text">
                 <h3 className="account-h3">{signedInUser.courses ? signedInUser.courses.length : 0}</h3>
-                {/* <h3 className="account-h3">{paidCourses ? paidCourses.length : 0}</h3> */}
                 <p className="account-p">Courses</p>
               </div>
               <hr className="account-hr" />
@@ -74,15 +66,18 @@ function Account() {
             {isExpanded && courses && Array.isArray(courses) && (
               <div className="account-list">
                 {courses.map((course) => (
-                  <button type="button" className="account-course-list" key={signedInUser.course.id}>
-                    <div className="button-prt1">
-                      <h4 className="account-h4">{course.title}</h4>
-                    </div>
-                    <div className="button-prt2">
-                      <p className="account-status">In Progress</p>
-                      <img src={down} alt="down" className="account-down-2" />
-                    </div>
-                  </button>
+                  <div key={course.id} className="account-course">
+                    <h4 className="account-h4">{course.title}</h4>
+                    <ul>
+                      {course.course_modules.map((module) => (
+                        module.lessons.map((lesson) => (
+                          lesson.payment_status === 'paid' && (
+                            <li key={lesson.id}>{lesson.title}</li>
+                          )
+                        ))
+                      ))}
+                    </ul>
+                  </div>
                 ))}
               </div>
             )}

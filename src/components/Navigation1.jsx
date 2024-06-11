@@ -9,6 +9,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { logoutUser } from '../redux/actions/authActions';
+import signin from '../media/signin.png';
 import cart from '../media/cart.png';
 import bell from '../media/bell.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -65,6 +66,9 @@ function Navigation1({ userId }) {
           <Nav className="me-auto navpart2">
             {userId && (
               <>
+                <Nav.Link href="/my-profile" eventKey={2}>
+                  <img src={signin} alt="signin" className="brand-img my-prof-img" id="brand" />
+                </Nav.Link>
                 <Nav.Link href={`/${userId}/cart`}>
                   <img src={cart} alt="Categories" className="icon-img-nav1" />
                 </Nav.Link>
