@@ -24,7 +24,7 @@ const SignIn = () => {
         setError(response.message);
       }
     } catch (error) {
-      setError('An error occurred');
+      setError(error.message);
     }
   };
 
