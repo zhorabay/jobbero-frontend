@@ -67,3 +67,27 @@ export const signUp = (userData, selectedCourseId, userId) => async (dispatch) =
     return false;
   }
 };
+
+export const fetchUserCoursesRequest = () => ({
+  type: 'FETCH_USER_COURSES_REQUEST',
+});
+
+export const fetchUserCoursesSuccess = (courses) => ({
+  type: 'FETCH_USER_COURSES_SUCCESS',
+  payload: courses,
+});
+
+export const fetchUserCoursesFailure = (error) => ({
+  type: 'FETCH_USER_COURSES_FAILURE',
+  payload: error,
+});
+
+export const fetchUserCourses = (userId) => async (dispatch) => {
+  dispatch(fetchUserCoursesRequest());
+  try {
+    const response = await axios.get(`https://origin8lab-cu7g.onrender.com/api/v1/users/${userId}/courses`);
+    dispatch(fetchUserCoursesSuccess(response.data));
+  } catch (error) {
+    dispatch(fetchUserCoursesFailure(error.message));
+  }
+};

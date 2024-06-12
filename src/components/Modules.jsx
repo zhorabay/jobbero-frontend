@@ -8,6 +8,7 @@ import { fetchCourseModules, deleteCourseModule } from '../redux/actions/courseM
 import { fetchReviews } from '../redux/actions/reviewActions';
 import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 import { fetchLessons, deleteLesson } from '../redux/actions/lessonActions';
+import { fetchUserCourses } from '../redux/actions/userActions';
 import down from '../media/down.png';
 import downblue from '../media/downblue.png';
 import book from '../media/book.png';
@@ -25,6 +26,7 @@ function Modules({ userId }) {
   const reviews = useSelector((state) => state.reviews.reviews);
   const lessons = useSelector((state) => state.lesson.lessons);
   const user = useSelector((state) => state.auth.user);
+  const userCourses = useSelector((state) => state.auth.userCourses);
   const isAdmin = user && user.email === 'admin@jobbero.com';
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
@@ -38,7 +40,10 @@ function Modules({ userId }) {
       dispatch(fetchCourseModules(categoryId, courseId));
       dispatch(fetchReviews(categoryId, courseId));
     }
-  }, [dispatch, categoryId, courseId]);
+    if (userId) {
+      dispatch(fetchUserCourses(userId));
+    }
+  }, [dispatch, categoryId, courseId, userId]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -93,13 +98,6 @@ function Modules({ userId }) {
     dispatch(deleteLesson(categoryId, courseId, courseModuleId, lessonId));
   };
 
-  if (courseModulesArray.length > 0) {
-    console.log('Fetched Modules:', courseModulesArray);
-    courseModulesArray.forEach((module) => {
-      console.log(`Module ID: ${module.id}, Payment Status: ${module.payment_status}`);
-    });
-  }
-
   const handleAddToCart = (course) => {
     if (cartItems.length > 0) {
       dispatch(removeFromCart(cartItems[0].id));
@@ -125,6 +123,9 @@ function Modules({ userId }) {
     const numberB = parseInt(b.title.match(/\d+/));
     return numberA - numberB;
   });
+
+  // Check if the user has paid for the course
+  const hasPaidForCourse = userCourses && userCourses.some((paidCourse) => paidCourse.id === parseInt(courseId, 10));
 
   return (
     <>
@@ -175,7 +176,7 @@ function Modules({ userId }) {
             <ul className="modules-ul">
               {isExpanded && courseModulesArray.length > 0 && courseModulesArray.map((module) => (
                 <li className="modules-list" key={module.id}>
-                  {isAdmin || module.payment_status === 'paid' ? (
+                  {isAdmin || hasPaidForCourse ? (
                     <>
                       <h3 className="modules-week">
                         Week
@@ -214,18 +215,13 @@ function Modules({ userId }) {
                             </div>
                           ))}
                           {isAdmin && (
-                            <Link className="nav-cat-title" to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`}>
-                              Add Lesson
-                            </Link>
+                            <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/post-lesson`} className="nav-cat-title">Add Lesson</Link>
                           )}
                         </div>
                       )}
                     </>
                   ) : (
-                    <div className="no-access-page">
-                      Go to the payment to have an access to modules or explore other
-                      <Link to="/all-courses" className="no-access-page-link">courses.</Link>
-                    </div>
+                    <p>Please purchase this course to access the content.</p>
                   )}
                 </li>
               ))}
@@ -238,11 +234,7 @@ function Modules({ userId }) {
 }
 
 Modules.propTypes = {
-  userId: PropTypes.number,
-};
-
-Modules.defaultProps = {
-  userId: null,
+  userId: PropTypes.number.isRequired,
 };
 
 export default Modules;

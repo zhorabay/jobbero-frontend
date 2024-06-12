@@ -67,7 +67,7 @@ function Navigation1({ userId }) {
             {userId && (
               <>
                 <Nav.Link href="/my-profile" eventKey={2}>
-                  <img src={signin} alt="signin" className="brand-img my-prof-img" id="brand" />
+                  <img src={signin} alt="signin" className="icon-img-nav1" />
                 </Nav.Link>
                 <Nav.Link href={`/${userId}/cart`}>
                   <img src={cart} alt="Categories" className="icon-img-nav1" />

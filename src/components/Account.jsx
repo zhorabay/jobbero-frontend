@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '../redux/actions/userActions';
-import { fetchCourses } from '../redux/actions/courseActions';
+import { fetchUserCourses } from '../redux/actions/userActions';
 import down from '../media/down.png';
 import signin from '../media/sign-blue.png';
 import '../styles/Auth.css';
@@ -11,16 +10,17 @@ function Account() {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(true);
   const signedInUser = useSelector((state) => state.auth.user);
-  const courses = useSelector((state) => state.courses.courses);
+  const userCourses = useSelector((state) => state.user.courses);
 
   useEffect(() => {
-    dispatch(fetchUsers());
-    dispatch(fetchCourses());
-  }, [dispatch]);
+    dispatch(fetchUserCourses(signedInUser.id));
+  }, [dispatch, signedInUser.id]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  const paidCourses = userCourses.filter((course) => course.payment_status === 'paid');
 
   return (
     <>
@@ -37,7 +37,7 @@ function Account() {
             </div>
             <div className="account-section21">
               <div className="account-text">
-                <h3 className="account-h3">{signedInUser.courses ? signedInUser.courses.length : 0}</h3>
+                <h3 className="account-h3">{paidCourses.length}</h3>
                 <p className="account-p">Courses</p>
               </div>
               <hr className="account-hr" />
@@ -63,20 +63,21 @@ function Account() {
               <img src={down} alt="down" className="account-down" />
               Expand All
             </button>
-            {isExpanded && courses && Array.isArray(courses) && (
+            {isExpanded && (
               <div className="account-list">
-                {courses.map((course) => (
+                {paidCourses.map((course) => (
                   <div key={course.id} className="account-course">
                     <h4 className="account-h4">{course.title}</h4>
-                    <ul>
-                      {course.course_modules.map((module) => (
-                        module.lessons.map((lesson) => (
-                          lesson.payment_status === 'paid' && (
+                    {course.modules.map((module) => (
+                      <div key={module.id} className="account-module">
+                        <h5 className="account-h5">{module.title}</h5>
+                        <ul>
+                          {module.lessons.map((lesson) => (
                             <li key={lesson.id}>{lesson.title}</li>
-                          )
-                        ))
-                      ))}
-                    </ul>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
                 ))}
               </div>

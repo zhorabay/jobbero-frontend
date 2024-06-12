@@ -10,7 +10,7 @@ const PostLesson = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    google_form_links: [''],
+    google_form_links: [],
     videos: [],
     images: [],
     documents: [],
@@ -61,26 +61,31 @@ const PostLesson = () => {
       title, description, google_form_links, videos, images, documents,
     } = formData;
 
+    console.log('Form Data on Submit:', formData);
+    console.log('Google Form Links on Submit:', google_form_links);
+
     if (!title || !description) {
       setFormError('Please fill all required fields');
+      console.error('Form validation error: Missing title or description');
       setIsSubmitting(false);
       return;
     }
 
     const allFiles = [...videos, ...images, ...documents];
-    const googleFormLinks = google_form_links.map((link) => link.url);
 
     try {
       await dispatch(postLesson(categoryId, courseId, courseModuleId, {
-        title, description, google_form_links: googleFormLinks, files: allFiles,
+        title, description, google_form_links, files: allFiles,
       }));
+      console.log('Lesson created successfully');
       setFormData({
-        title: '', description: '', google_form_links: [''], videos: [], images: [], documents: [],
+        title: '', description: '', google_form_links: [], videos: [], images: [], documents: [],
       });
       setFormError('');
       alert('Lesson created successfully');
       navigate('/');
     } catch (error) {
+      console.error('Error during lesson creation:', error);
       setFormError('An error occurred while submitting the lesson');
     } finally {
       setIsSubmitting(false);

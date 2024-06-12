@@ -63,8 +63,16 @@ export const postLesson = (categoryId, courseId, courseModuleId, formData) => (d
   formDataObj.append('lesson[title]', formData.title);
   formDataObj.append('lesson[description]', formData.description);
 
+  formData.google_form_links.forEach((link, index) => {
+    formDataObj.append(`lesson[google_form_links][${index}]`, link);
+  });
+
   formData.files.forEach((file) => {
     formDataObj.append('lesson[files][]', file);
+  });
+
+  formDataObj.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
   });
 
   axios.post(`https://origin8lab-cu7g.onrender.com/api/v1/categories/${categoryId}/courses/${courseId}/course_modules/${courseModuleId}/lessons`, formDataObj, {
