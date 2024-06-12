@@ -40,10 +40,10 @@ function Modules({ userId }) {
       dispatch(fetchCourseModules(categoryId, courseId));
       dispatch(fetchReviews(categoryId, courseId));
     }
-    if (userId) {
-      dispatch(fetchUserCourses(userId));
+    if (categoryId) {
+      dispatch(fetchUserCourses(categoryId));
     }
-  }, [dispatch, categoryId, courseId, userId]);
+  }, [dispatch, categoryId, courseId, categoryId]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -124,7 +124,6 @@ function Modules({ userId }) {
     return numberA - numberB;
   });
 
-  // Check if the user has paid for the course
   const hasPaidForCourse = userCourses && userCourses.some((paidCourse) => paidCourse.id === parseInt(courseId, 10));
 
   return (
@@ -215,7 +214,9 @@ function Modules({ userId }) {
                             </div>
                           ))}
                           {isAdmin && (
-                            <Link to={`/categories/${categoryId}/courses/${courseId}/modules/${module.id}/lessons/post-lesson`} className="nav-cat-title">Add Lesson</Link>
+                            <Link className="nav-cat-title" to={`/categories/${categoryId}/courses/${categoryId}/modules/${module.id}/post-lesson`}>
+                              Add Lesson
+                            </Link>
                           )}
                         </div>
                       )}

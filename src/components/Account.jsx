@@ -20,7 +20,7 @@ function Account() {
     setIsExpanded(!isExpanded);
   };
 
-  const paidCourses = userCourses.filter((course) => course.payment_status === 'paid');
+  const paidCourses = userCourses.filter((course) => course.modules.some((module) => module.payment_status === 'paid'));
 
   return (
     <>

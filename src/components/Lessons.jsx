@@ -90,10 +90,14 @@ function Lessons() {
 
               <p className="lesson-description">{lesson.description}</p>
 
-              {lesson.google_form_link && (
-                <div className="lesson-google-form">
-                  <a href={lesson.google_form_link} target="_blank" rel="noopener noreferrer">View the assessment</a>
-                </div>
+              {lesson.google_form_links && lesson.google_form_links.length > 0 && (
+                <ul className="lesson-google-form">
+                  {lesson.google_form_links.map((link) => (
+                    <li key={link.id}>
+                      <a href={link} target="_blank" rel="noopener noreferrer">View Assessment</a>
+                    </li>
+                  ))}
+                </ul>
               )}
 
               {imageFiles.length > 0 && (

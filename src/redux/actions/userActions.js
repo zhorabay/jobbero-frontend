@@ -82,10 +82,10 @@ export const fetchUserCoursesFailure = (error) => ({
   payload: error,
 });
 
-export const fetchUserCourses = (userId) => async (dispatch) => {
+export const fetchUserCourses = (categoryId) => async (dispatch) => {
   dispatch(fetchUserCoursesRequest());
   try {
-    const response = await axios.get(`https://origin8lab-cu7g.onrender.com/api/v1/users/${userId}/courses`);
+    const response = await axios.get(`https://origin8lab-cu7g.onrender.com/api/v1/categories/${categoryId}/courses`);
     dispatch(fetchUserCoursesSuccess(response.data));
   } catch (error) {
     dispatch(fetchUserCoursesFailure(error.message));
