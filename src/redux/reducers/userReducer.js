@@ -1,7 +1,7 @@
 const initialState = {
   users: [],
   user: null,
-  courses: [],
+  userCourses: [],
   loading: false,
   error: null,
 };
@@ -33,7 +33,7 @@ const userReducer = (state = initialState, action) => {
     case 'FETCH_USER_COURSES_SUCCESS':
       return {
         ...state,
-        courses: action.payload,
+        userCourses: action.payload,
         loading: false,
         error: null,
       };

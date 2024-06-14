@@ -26,7 +26,10 @@ function Modules({ userId }) {
   const reviews = useSelector((state) => state.reviews.reviews);
   const lessons = useSelector((state) => state.lesson.lessons);
   const user = useSelector((state) => state.auth.user);
-  const userCourses = useSelector((state) => state.auth.userCourses);
+  const userCourses = useSelector((state) => {
+    console.log('State userCourses:', state.user.userCourses);
+    return state.user.userCourses;
+  });
   const isAdmin = user && user.email === 'admin@jobbero.com';
   const [isExpanded, setIsExpanded] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
@@ -35,15 +38,16 @@ function Modules({ userId }) {
   const [expandedModules, setExpandedModules] = useState({});
 
   useEffect(() => {
+    console.log('Dispatching fetch actions...');
     dispatch(fetchCourses());
     if (categoryId && courseId) {
       dispatch(fetchCourseModules(categoryId, courseId));
       dispatch(fetchReviews(categoryId, courseId));
     }
-    if (categoryId) {
-      dispatch(fetchUserCourses(categoryId));
+    if (userId) {
+      dispatch(fetchUserCourses(userId));
     }
-  }, [dispatch, categoryId, courseId, categoryId]);
+  }, [dispatch, categoryId, courseId, userId]);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -126,6 +130,8 @@ function Modules({ userId }) {
 
   const hasPaidForCourse = userCourses && userCourses.some((paidCourse) => paidCourse.id === parseInt(courseId, 10));
 
+  console.log('userCourses:', userCourses);
+  console.log('courseId:', courseId);
   return (
     <>
       <Navigation3 />
