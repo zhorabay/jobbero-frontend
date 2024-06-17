@@ -27,6 +27,8 @@ function Registration() {
     email: '',
     nationality: '',
     gender: 'Choose',
+    password: '',
+    password_confirmation: '',
   });
   const user = useSelector((state) => state.auth.user);
   const error = useSelector((state) => state.user.error);
@@ -140,6 +142,16 @@ function Registration() {
                   <div className="registration-col">
                     <label className="registration-label">Nationality:</label>
                     <input className="registration-input" name="nationality" value={userData.nationality} onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="registration-row">
+                  <div className="registration-col">
+                    <label className="registration-label">Password:</label>
+                    <input className="registration-input" name="password" type="password" value={userData.password} onChange={handleChange} required />
+                  </div>
+                  <div className="registration-col">
+                    <label className="registration-label">Password Confirmation:</label>
+                    <input className="registration-input" name="password_confirmation" type="password" value={userData.password_confirmation} onChange={handleChange} required />
                   </div>
                 </div>
               </div>
