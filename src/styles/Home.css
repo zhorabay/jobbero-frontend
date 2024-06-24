@@ -170,8 +170,14 @@
   width: 60%;
 }
 
-.JobXorig-img-x {
-  width: 70%;
+.JobXorig-img-o,
+.JobXorig-img-j {
+  width: 50%;
+  padding: 15px 0;
+}
+
+.JobXorig-img-r {
+  width: 15%;
   padding: 15px 0;
 }
 
@@ -179,6 +185,15 @@
   font-family: "Cabin Sketch", sans-serif;
   font-size: 27px;
   color: #fff;
+}
+
+.job-rectangle {
+  border-radius: 80px;
+  border: none;
+  background-color: #d9d9d9;
+  display: flex;
+  padding: 1px 40px;
+  margin: 20px auto;
 }
 
 .card {

@@ -1,6 +1,8 @@
 import React from 'react';
 import together from '../media/together.png';
-import origXjob from '../media/origXjob.png';
+import origin8lab from '../media/origin8lab2.png';
+import origXjob from '../media/rings.png';
+import jobbero from '../media/jobbero.png';
 import '../styles/Home.css';
 
 function JobXorig() {
@@ -12,7 +14,11 @@ function JobXorig() {
         </div>
         <div className="JobXorig-text">
           <h2 className="JobXorig-h2">From Learning to Earning:Origin8Lab & Jobbero Unite!</h2>
-          <img src={origXjob} alt="JobXorig" className="JobXorig-img-x" />
+          <div className="job-rectangle">
+            <img src={origin8lab} alt="JobXoriglab" className="JobXorig-img-o" />
+            <img src={origXjob} alt="JobXorig" className="JobXorig-img-r" />
+            <img src={jobbero} alt="JobXorigjob" className="JobXorig-img-j" />
+          </div>
           <h2 className="JobXorig-h2">
             Empowering Dreams, Empowering Lives! Our partnership
             aims to equip individuals with essential skills and connect
