@@ -355,6 +355,8 @@ p {
 
 .lesson-video {
   width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
   border: 1px solid black;
 }
 
@@ -379,12 +381,6 @@ p {
 
 .account-down {
   width: 17%;
-}
-
-.lesson-video {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px 0;
 }
 
 .lesson-image {
