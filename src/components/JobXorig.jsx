@@ -13,16 +13,22 @@ function JobXorig() {
           <img src={together} alt="origin8lab" className="JobXorig-together" />
         </div>
         <div className="JobXorig-text">
-          <h2 className="JobXorig-h2">From Learning to Earning:Origin8Lab & Jobbero Unite!</h2>
+          <h2 className="JobXorig-h2">
+            From Learning to Earning:Origin8Lab & Jobbero Unite!
+          </h2>
           <div className="job-rectangle">
-            <img src={origin8lab} alt="JobXoriglab" className="JobXorig-img-o" />
+            <img
+              src={origin8lab}
+              alt="JobXoriglab"
+              className="JobXorig-img-o"
+            />
             <img src={origXjob} alt="JobXorig" className="JobXorig-img-r" />
             <img src={jobbero} alt="JobXorigjob" className="JobXorig-img-j" />
           </div>
           <h2 className="JobXorig-h2">
-            Empowering Dreams, Empowering Lives! Our partnership
-            aims to equip individuals with essential skills and connect
-            them with exciting job opportunities!
+            Empowering Dreams, Empowering Lives! Our partnership aims to equip
+            individuals with essential skills and connect them with exciting job
+            opportunities!
           </h2>
         </div>
       </div>

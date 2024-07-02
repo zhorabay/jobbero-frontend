@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import PaystackPop from '@paystack/inline-js';
 import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
+
 import logoblack from '../media/logoblack.png';
 import paystackimg from '../media/paystack.png';
 // import korapay from '../media/kora.png';
@@ -21,17 +22,20 @@ function Payment() {
 
   const informBackendAboutPayment = async (userId, courseId, reference) => {
     try {
-      const response = await fetch('https://origin8lab-cu7g.onrender.com/payments/success', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://origin8lab-cu7g.onrender.com/payments/success',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            reference,
+            course_id: courseId,
+            userId,
+          }),
         },
-        body: JSON.stringify({
-          reference,
-          course_id: courseId,
-          userId,
-        }),
-      });
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -60,9 +64,17 @@ function Payment() {
           const message = `Payment Complete! Reference ${transaction.reference}`;
           alert(message);
           if (selectedCourseId) {
-            informBackendAboutPayment(user.id, [selectedCourseId], transaction.reference);
+            informBackendAboutPayment(
+              user.id,
+              [selectedCourseId],
+              transaction.reference,
+            );
           } else {
-            courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, transaction.reference));
+            courseIds.forEach((courseId) => informBackendAboutPayment(
+              user.id,
+              courseId,
+              transaction.reference,
+            ));
           }
           navigate('/');
         },
@@ -77,6 +89,10 @@ function Payment() {
       setIsLoading(false);
     }
   };
+
+  // const dollarPaystackPayment = () => {
+  //   navigate('https://paystack.com/pay/epqikqysw3');
+  // };
 
   // const koraPayment = () => {
   //   try {
@@ -129,7 +145,10 @@ function Payment() {
         <div className="registration-flex">
           <div className="registration-section1">
             <img src={logoblack} alt="Logo" className="registration-logo" />
-            <p className="registration-p">Empower Yourself with Origin8Lab: Enroll Today and Thrive Tomorrow!</p>
+            <p className="registration-p">
+              Empower Yourself with Origin8Lab: Enroll Today and Thrive
+              Tomorrow!
+            </p>
           </div>
           <div className="payment-section2">
             <div className="rsection3">
@@ -139,7 +158,14 @@ function Payment() {
               <div key="column-radio" className="mb-3 inline-form-p">
                 <Form.Check
                   inline
-                  label={<img src={paystackimg} alt="Paystack" className="payment-img" />}
+                  label={
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <img
+                      src={paystackimg}
+                      alt="Paystack"
+                      className="payment-img"
+                    />
+                  }
                   name="group1"
                   type="radio"
                   id="inline-radio-1"

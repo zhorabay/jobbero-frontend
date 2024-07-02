@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  BrowserRouter as Router, Routes, Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginSuccess } from './redux/actions/authActions';
 import SignInForm from './components/signin';
@@ -49,22 +47,55 @@ const App = () => {
           {isAuthenticated ? (
             <>
               <Route path="/*" element={<Home />} />
-              <Route path="/email-confirmation" element={<EmailConfirmation />} />
+              <Route
+                path="/email-confirmation"
+                element={<EmailConfirmation />}
+              />
               <Route path="/my-profile" element={<Account />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
-              <Route path="/categories/:categoryId/courses" element={<Courses userId={userId} />} />
-              <Route path="/all-courses" element={<Courses userId={userId} />} />
+              <Route
+                path="/categories/:categoryId/courses"
+                element={<Courses userId={userId} />}
+              />
+              <Route
+                path="/all-courses"
+                element={<Courses userId={userId} />}
+              />
               <Route path="/:userId/cart" element={<Cart />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules" element={<Modules userId={userId} />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId" element={<Modules />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules"
+                element={<Modules userId={userId} />}
+              />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId"
+                element={<Modules />}
+              />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId"
+                element={<Lessons />}
+              />
               <Route path="/contact-us" element={<Contact />} />
-              <Route path="/categories/post-category" element={<PostCategory />} />
-              <Route path="/categories/edit-category/:categoryId" element={<EditCategoryPage />} />
-              <Route path="/categories/:categoryId/courses/post-course" element={<PostCourse />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules/post-module" element={<PostModule />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson" element={<PostLesson />} />
+              <Route
+                path="/categories/post-category"
+                element={<PostCategory />}
+              />
+              <Route
+                path="/categories/edit-category/:categoryId"
+                element={<EditCategoryPage />}
+              />
+              <Route
+                path="/categories/:categoryId/courses/post-course"
+                element={<PostCourse />}
+              />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules/post-module"
+                element={<PostModule />}
+              />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/post-lesson"
+                element={<PostLesson />}
+              />
               <Route path="/payment" element={<Payment />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/choose-a-course" element={<ChooseCourse />} />
@@ -77,11 +108,23 @@ const App = () => {
               <Route path="/*" element={<Home />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/privacy-policy" element={<Policy />} />
-              <Route path="/categories/:categoryId/courses" element={<Courses />} />
+              <Route
+                path="/categories/:categoryId/courses"
+                element={<Courses />}
+              />
               <Route path="/all-courses" element={<Courses />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules" element={<Modules />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId" element={<Modules />} />
-              <Route path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId" element={<Lessons />} />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules"
+                element={<Modules />}
+              />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId"
+                element={<Modules />}
+              />
+              <Route
+                path="/categories/:categoryId/courses/:courseId/modules/:courseModuleId/lessons/:lessonId"
+                element={<Lessons />}
+              />
               <Route path="/contact-us" element={<Contact />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/choose-a-course" element={<ChooseCourse />} />
