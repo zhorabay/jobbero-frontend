@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   user: null,
   isAuthenticated: false,
+  userCountry: '',
 };
 
 const authSlice = createSlice({
@@ -19,6 +20,9 @@ const authSlice = createSlice({
       console.error('Login success payload is invalid:', action.payload);
       return state;
     },
+    setUserCountry(state, action) {
+      return { ...state, userCountry: action.payload };
+    },
   },
   loginFailure(state) {
     sessionStorage.removeItem('token');
@@ -32,5 +36,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess, loginFailure, logout } = authSlice.actions;
+export const {
+  loginSuccess, loginFailure, logout, setUserCountry,
+} = authSlice.actions;
 export default authSlice.reducer;

@@ -1,4 +1,5 @@
 const countryCodes = [
+  { code: 'Choose', name: 'Select Country', dial_code: '' },
   { code: 'AF', name: 'Afghanistan', dial_code: '+93' },
   { code: 'AL', name: 'Albania', dial_code: '+355' },
   { code: 'DZ', name: 'Algeria', dial_code: '+213' },

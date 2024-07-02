@@ -13,6 +13,7 @@ import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
 import countryCodes from '../locales/countries';
+import { setUserCountry } from '../redux/reducers/authReducer';
 
 function Registration() {
   const dispatch = useDispatch();
@@ -65,23 +66,28 @@ function Registration() {
 
   const handleCourseSelection = (courseId) => {
     dispatch(setSelectedCourseId(courseId));
-    console.log('courseId:', courseId);
+    // console.log('courseId:', courseId);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted!');
+    if (selectedCountryCode === 'Choose') {
+      alert('Please select a country code');
+      return;
+    }
+    dispatch(setUserCountry(selectedCountryCode));
+    // console.log('Form submitted!');
     setLoading(true);
     try {
       const response = await dispatch(signUp(userData, selectedCourseId));
-      console.log('response:', response);
+      // console.log('response:', response);
       if (response) {
         const { token } = response;
         sessionStorage.setItem('token', token);
-        console.log(
-          'Navigating to payment page with selectedCourseId:',
-          selectedCourseId,
-        );
+        // console.log(
+        //   'Navigating to payment page with selectedCourseId:',
+        //   selectedCourseId,
+        // );
         navigate('/payment', { state: { selectedCourseId } });
         informBackendAboutPayment(user.id);
       }
@@ -174,14 +180,12 @@ function Registration() {
                   <div className="registration-col">
                     <label className="registration-label">Phone Number:</label>
                     <div className="" style={{ display: 'flex', gap: '10px' }}>
-                      <select id="countryCode" className="registration-country-code" value={selectedCountryCode} onChange={handleCountryChange}>
+                      <select id="countryCode" className="registration-country-code" value={selectedCountryCode} onChange={handleCountryChange} required>
                         {countryCodes.map((country) => (
                           <option key={country.code} value={country.name} title={`${country.name}`}>
                             {country.code}
                             {' '}
-                            (
-                            {country.dial_code}
-                            )
+                            {country.dial_code ? `(${country.dial_code})` : ''}
                           </option>
                         ))}
                       </select>
@@ -222,7 +226,12 @@ function Registration() {
                 </div>
                 <div className="registration-row">
                   <div className="registration-col">
-                    <label className="registration-label">Password:</label>
+                    <label className="registration-label">
+                      Password
+                      {' '}
+                      <span style={{ fontSize: '12px', fontWeight: 'normal' }}>(at least 6 characters)</span>
+                      :
+                    </label>
                     <input
                       className="registration-input"
                       name="password"
@@ -290,8 +299,8 @@ function Registration() {
                     <input className="registration-input" />
                   </div>
                 </div>
-                <div className="registration-row">
-                  <div className="registration-col">
+                <div className="">
+                  <div className="registration-col" style={{ columnSpan: 2 }}>
                     <label className="registration-label">
                       Any Special Requirements or Accommodations Needed?
                     </label>

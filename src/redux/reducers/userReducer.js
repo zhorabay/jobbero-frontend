@@ -4,6 +4,7 @@ const initialState = {
   userCourses: [],
   loading: false,
   error: null,
+  userCountry: '',
 };
 
 const userReducer = (state = initialState, action) => {
@@ -44,6 +45,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case 'SET_USER_COUNTRY':
+      return {
+        ...state,
+        userCountry: action.payload,
       };
     default:
       return state;

@@ -15,7 +15,7 @@ import Footer from './Footer';
 function Payment() {
   const navigate = useNavigate();
   const location = useLocation();
-  const user = useSelector((state) => state.auth.user);
+  const { user, userCountry } = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const selectedCourseId = location.state?.selectedCourseId;
   const courseIds = location.state?.courseIds || [];
@@ -90,9 +90,9 @@ function Payment() {
     }
   };
 
-  // const dollarPaystackPayment = () => {
-  //   navigate('https://paystack.com/pay/epqikqysw3');
-  // };
+  const dollarPaystackPayment = () => {
+    window.location.href = 'https://paystack.com/pay/epqikqysw3';
+  };
 
   // const koraPayment = () => {
   //   try {
@@ -159,17 +159,18 @@ function Payment() {
                 <Form.Check
                   inline
                   label={
-                    // eslint-disable-next-line react/jsx-wrap-multilines
-                    <img
-                      src={paystackimg}
-                      alt="Paystack"
-                      className="payment-img"
-                    />
+                    (
+                      <img
+                        src={paystackimg}
+                        alt="Paystack"
+                        className="payment-img"
+                      />
+                  )
                   }
                   name="group1"
                   type="radio"
                   id="inline-radio-1"
-                  onClick={paystackPayment}
+                  onClick={userCountry.toLowerCase() === 'nigeria' ? paystackPayment : dollarPaystackPayment}
                   disabled={isLoading}
                 />
                 {/* <Form.Check
