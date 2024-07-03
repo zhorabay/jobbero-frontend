@@ -3,6 +3,7 @@ import contactimg from '../media/contactimg.png';
 import origin8lab2 from '../media/origin8lab2.png';
 import phone from '../media/phone.png';
 import mail from '../media/mail.png';
+import address from '../media/address.png';
 import phoneicon from '../media/phoneicon.png';
 import mailicon from '../media/mailicon.png';
 import nameicon from '../media/nameicon.png';
@@ -42,6 +43,10 @@ function Contact() {
               <p className="about-text">
                 <img src={mail} alt="mail" className="mail-img" />
                 info@origin8lab.com
+              </p>
+              <p className="about-text">
+                <img src={address} alt="mail" className="mail-img" />
+                Plot 6 Block 27 Bashorun Ogunmola Estate Akobo, Ibadan Oyo NG
               </p>
             </div>
           </div>

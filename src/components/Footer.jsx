@@ -20,6 +20,7 @@ function Footer() {
           </p>
           <p className="footer-p">+447471599776</p>
           <p className="footer-p">info@origin8lab.com</p>
+          <p className="footer-p">Shude Technology Resources LTD 2024 ©</p>
         </div>
         <ul className="footer-social">
           <li className="footer-sm">
@@ -47,6 +48,9 @@ function Footer() {
           </li>
           <li className="footer-link">
             <Link to="/sitemap" className="footer-link-a">Sitemap</Link>
+          </li>
+          <li className="footer-link">
+            <Link to="/refund" className="footer-link-a">Refund Policy</Link>
           </li>
         </ul>
       </div>

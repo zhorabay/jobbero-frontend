@@ -23,6 +23,7 @@ import PostCourse from './components/PostCourse';
 import PostModule from './components/PostModule';
 import EditCategoryPage from './components/EditCategory';
 import ChooseCourse from './components/ChooseCourse';
+import Refund from './components/Refund';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -100,6 +101,7 @@ const App = () => {
               <Route path="/registration" element={<Registration />} />
               <Route path="/choose-a-course" element={<ChooseCourse />} />
               <Route path="/login" element={<SignInForm />} />
+              <Route path="/refund" element={<Refund />} />
             </>
           ) : (
             <>
@@ -129,6 +131,7 @@ const App = () => {
               <Route path="/registration" element={<Registration />} />
               <Route path="/choose-a-course" element={<ChooseCourse />} />
               <Route path="/payment" element={<Payment />} />
+              <Route path="/refund" element={<Refund />} />
             </>
           )}
         </Routes>

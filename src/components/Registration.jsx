@@ -1,7 +1,8 @@
 // eslint-disable
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 import DatePicker from 'react-datepicker';
 import { fetchCourses } from '../redux/actions/courseActions';
 import { signUp } from '../redux/actions/userActions';
@@ -308,9 +309,24 @@ function Registration() {
                   </div>
                 </div>
               </div>
-              <button type="submit" className="registration-btn">
-                Next
-              </button>
+              <Form.Check
+                type="checkbox"
+                className="signup-checkbox registration-section5"
+                label={(
+                  <>
+                    Agree to Origin8Lab Company&apos;s
+                    {' '}
+                    <Link to="/terms" className="signup-checkbox-link">Terms of Use</Link>
+                    {' '}
+                    and
+                    {' '}
+                    <Link to="/privacy-policy" className="signup-checkbox-link">Privacy Policy</Link>
+                    .
+                  </>
+                )}
+                required
+              />
+              <button type="submit" className="registration-btn">Next</button>
             </form>
             {error && <div className="text-red-500">{error}</div>}
             {loading && (
