@@ -411,6 +411,12 @@
   width: 10em;
 }
 
+.reg-code-phone {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .registration-input-datepicker {
   width: 100% !important;
 }
@@ -420,11 +426,15 @@
   padding-top: 20px;
 }
 
-.registration-row {
+.personal-info-wrapper {
+  display: grid;  grid-template-columns: 50% 50%;
+}
+
+/* .registration-row {
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 10px;
-}
+} */
 
 .registration-col {
   display: flex;
@@ -747,9 +757,27 @@
     width: 150px;
   }
 
-  .registration-row {
-    flex-direction: column;
+  .personal-info-wrapper {
+    grid-template-columns: 100% !important;
   }
+
+  .course-title-reg {
+    font-size: 13px;
+  }
+
+  .reg-code-phone {
+    flex-direction: column;
+    /* width: 100% !important; */
+    /* gap: 10px; */
+  }
+
+  .registration-country-code {
+    width: 100%;
+  }
+
+  /* .registration-row {
+    flex-direction: column;
+  } */
 
   .signin-girl {
     display: none;
@@ -828,11 +856,12 @@
     font-size: 13px;
   }
 
-  .registration-col {
+  /* .registration-col {
     margin: 3px 0;
-  }
+  } */
 
   .registration-input,
+  .registration-country-code,
   .registration-input-datepicker {
     padding: 6px !important;
     font-size: 12px !important;
