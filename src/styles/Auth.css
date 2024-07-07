@@ -427,7 +427,8 @@
 }
 
 .personal-info-wrapper {
-  display: grid;  grid-template-columns: 50% 50%;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
 /* .registration-row {
@@ -767,7 +768,9 @@
 
   .reg-code-phone {
     flex-direction: column;
+
     /* width: 100% !important; */
+
     /* gap: 10px; */
   }
 
