@@ -106,36 +106,36 @@ function Payment() {
         name: user.name,
         email: user.email,
       };
-  
-      console.log('Flutterwave Payload:', { reference, amount, currency, customer });
-  
+
+      console.log('Flutterwave Payload:', {
+        reference, amount, currency, customer,
+      });
+
       window.FlutterwaveCheckout({
-        public_key: 'FLWPUBK_TEST-SANDBOXDEMOKEY-X',
+        public_key: 'FLWPUBK_TEST-91063d904b3eb0a8de72c3af1500b105-X',
         tx_ref: reference,
-        amount: amount,
-        currency: currency,
+        amount,
+        currency,
         payment_options: 'card, mobilemoney, ussd',
         customer: {
           email: customer.email,
           name: customer.name,
         },
-        callback: function (data) {
-          const { status, transaction_id, tx_ref } = data;
+        callback(data) {
+          const { status, tx_ref } = data;
           if (status === 'successful') {
             alert(`Payment Complete! Reference ${tx_ref}`);
             if (selectedCourseId) {
               informBackendAboutPayment(user.id, [selectedCourseId], tx_ref);
             } else {
-              courseIds.forEach((courseId) =>
-                informBackendAboutPayment(user.id, courseId, tx_ref)
-              );
+              courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, tx_ref));
             }
             navigate('/');
           } else {
             alert('Payment failed. Please try again.');
           }
         },
-        onclose: function () {
+        onclose() {
           alert('You have canceled the transaction');
         },
         customizations: {
@@ -150,7 +150,7 @@ function Payment() {
     } finally {
       setIsLoading(false);
     }
-  };    
+  };
 
   return (
     <>

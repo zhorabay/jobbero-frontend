@@ -105,6 +105,8 @@ function Courses({ userId }) {
                         </Card.Text>
                         <Card.Text className="course-card-price">
                           20 000 NGN
+                          <br />
+                          $14
                           {/* {course.price} */}
                         </Card.Text>
                       </div>
