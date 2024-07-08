@@ -4,10 +4,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import PaystackPop from '@paystack/inline-js';
 import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
-
-import logoblack from '../media/logoblack.png';
+import logoblack from '../media/origin8lab2.png';
 import paystackimg from '../media/paystack.png';
-// import korapay from '../media/kora.png';
+import flutterwave from '../media/flutterwave.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
@@ -94,49 +93,64 @@ function Payment() {
     window.location.href = 'https://paystack.com/pay/epqikqysw3';
   };
 
-  // const koraPayment = () => {
-  //   try {
-  //     setIsLoading(true);
-  //     console.log('Initializing Korapay...');
-  //     const reference = `TXN-${Date.now()}-${uuidv4()}`;
-  //     const amount = 20000 * 100;
-  //     const customer = {
-  //       name: user.name,
-  //       email: user.email,
-  //     };
-
-  //     // Log the payload to be sent
-  //     console.log('Korapay Payload:', { reference, amount, customer });
-
-  //     window.Korapay.initialize({
-  //       key: 'pk_test_Nz7r6wgWGGquHWEkJCjW5V6DH3QMmMXzGsEZz1yQ',
-  //       reference: `TXN-${Date.now()}-${uuidv4()}`,
-  //       amount: 20000 * 100,
-  //       customer: {
-  //         name: user.name,
-  //         email: user.email,
-  //       },
-  //       onSuccess(transaction) {
-  //         const message = `Payment Complete! Reference ${transaction.reference}`;
-  //         alert(message);
-  //         if (selectedCourseId) {
-  //           informBackendAboutPayment(user.id, [selectedCourseId], transaction.reference);
-  //         } else {
-  //           courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, transaction.reference));
-  //         }
-  //         navigate('/');
-  //       },
-  //       onCancel() {
-  //         alert('You have canceled the transaction');
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error('Error initializing transaction:', error);
-  //     alert('An error occurred during payment initiation');
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+  const flutterwavePayment = () => {
+    try {
+      setIsLoading(true);
+      console.log('Initializing Flutterwave...');
+      const reference = `TXN-${Date.now()}-${uuidv4()}`;
+      const amountInNaira = 20000;
+      const amountInDollar = 14;
+      const amount = userCountry.toLowerCase() === 'nigeria' ? amountInNaira : amountInDollar;
+      const currency = userCountry.toLowerCase() === 'nigeria' ? 'NGN' : 'USD';
+      const customer = {
+        name: user.name,
+        email: user.email,
+      };
+  
+      console.log('Flutterwave Payload:', { reference, amount, currency, customer });
+  
+      window.FlutterwaveCheckout({
+        public_key: 'FLWPUBK_TEST-SANDBOXDEMOKEY-X',
+        tx_ref: reference,
+        amount: amount,
+        currency: currency,
+        payment_options: 'card, mobilemoney, ussd',
+        customer: {
+          email: customer.email,
+          name: customer.name,
+        },
+        callback: function (data) {
+          const { status, transaction_id, tx_ref } = data;
+          if (status === 'successful') {
+            alert(`Payment Complete! Reference ${tx_ref}`);
+            if (selectedCourseId) {
+              informBackendAboutPayment(user.id, [selectedCourseId], tx_ref);
+            } else {
+              courseIds.forEach((courseId) =>
+                informBackendAboutPayment(user.id, courseId, tx_ref)
+              );
+            }
+            navigate('/');
+          } else {
+            alert('Payment failed. Please try again.');
+          }
+        },
+        onclose: function () {
+          alert('You have canceled the transaction');
+        },
+        customizations: {
+          title: 'Origin8Lab Payment',
+          description: 'Payment for selected courses',
+          logo: logoblack,
+        },
+      });
+    } catch (error) {
+      console.error('Error initializing transaction:', error);
+      alert('An error occurred during payment initiation');
+    } finally {
+      setIsLoading(false);
+    }
+  };    
 
   return (
     <>
@@ -173,15 +187,15 @@ function Payment() {
                   onClick={userCountry.toLowerCase() === 'nigeria' ? paystackPayment : dollarPaystackPayment}
                   disabled={isLoading}
                 />
-                {/* <Form.Check
+                <Form.Check
                   inline
-                  label={<img src={korapay} alt="Korapay" className="payment-pic" />}
+                  label={<img src={flutterwave} alt="Flutterwave" className="payment-img" />}
                   name="group1"
                   type="radio"
                   id="inline-radio-2"
-                  onClick={koraPayment}
+                  onClick={flutterwavePayment}
                   disabled={isLoading}
-                /> */}
+                />
               </div>
             </Form>
           </div>

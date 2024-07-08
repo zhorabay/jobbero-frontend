@@ -269,7 +269,7 @@ function Registration() {
                       >
                         {course.title}
                         {' '}
-                        (20,000 NGN)
+                        (20,000 NGN/$14)
                       </label>
                     </div>
                   ))}
