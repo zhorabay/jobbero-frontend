@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Form from 'react-bootstrap/Form';
 import logoblack from '../media/origin8lab2.png';
 import paystackimg from '../media/paystack.png';
-import flutterwave from '../media/flutterwave.png';
+// import flutterwave from '../media/flutterwave.png';
 import '../styles/Auth.css';
 import Navigation3 from './Navigation3';
 import Footer from './Footer';
@@ -93,64 +93,50 @@ function Payment() {
     window.location.href = 'https://paystack.com/pay/epqikqysw3';
   };
 
-  const flutterwavePayment = () => {
-    try {
-      setIsLoading(true);
-      console.log('Initializing Flutterwave...');
-      const reference = `TXN-${Date.now()}-${uuidv4()}`;
-      const amountInNaira = 20000;
-      const amountInDollar = 14;
-      const amount = userCountry.toLowerCase() === 'nigeria' ? amountInNaira : amountInDollar;
-      const currency = userCountry.toLowerCase() === 'nigeria' ? 'NGN' : 'USD';
-      const customer = {
-        name: user.name,
-        email: user.email,
-      };
+  // const flutterwavePayment = () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const reference = `TXN-${Date.now()}-${uuidv4()}`;
+  //     const amount = userCountry.toLowerCase() === 'nigeria' ? 20000 : 14;
+  //     const currency = userCountry.toLowerCase() === 'nigeria' ? 'NGN' : 'USD';
+  //     const customer = { name: user.name, email: user.email };
 
-      console.log('Flutterwave Payload:', {
-        reference, amount, currency, customer,
-      });
+  //     console.log('Flutterwave Payload:', {
+  //       reference, amount, currency, customer,
+  //     });
 
-      window.FlutterwaveCheckout({
-        public_key: 'FLWPUBK_TEST-91063d904b3eb0a8de72c3af1500b105-X',
-        tx_ref: reference,
-        amount,
-        currency,
-        payment_options: 'card, mobilemoney, ussd',
-        customer: {
-          email: customer.email,
-          name: customer.name,
-        },
-        callback(data) {
-          const { status, tx_ref } = data;
-          if (status === 'successful') {
-            alert(`Payment Complete! Reference ${tx_ref}`);
-            if (selectedCourseId) {
-              informBackendAboutPayment(user.id, [selectedCourseId], tx_ref);
-            } else {
-              courseIds.forEach((courseId) => informBackendAboutPayment(user.id, courseId, tx_ref));
-            }
-            navigate('/');
-          } else {
-            alert('Payment failed. Please try again.');
-          }
-        },
-        onclose() {
-          alert('You have canceled the transaction');
-        },
-        customizations: {
-          title: 'Origin8Lab Payment',
-          description: 'Payment for selected courses',
-          logo: logoblack,
-        },
-      });
-    } catch (error) {
-      console.error('Error initializing transaction:', error);
-      alert('An error occurred during payment initiation');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     window.FlutterwaveCheckout({
+  //       public_key: 'FLWPUBK_TEST-91063d904b3eb0a8de72c3af1500b105-X',
+  //       tx_ref: reference,
+  //       amount,
+  //       currency,
+  //       payment_options: 'card, mobilemoney, ussd',
+  //       customer,
+  //       callback({ status, tx_ref }) {
+  //         if (status === 'successful') {
+  //           alert(`Payment Complete! Reference ${tx_ref}`);
+  //           informBackendAboutPayment(user.id, [selectedCourseId || courseIds], tx_ref);
+  //           navigate('/');
+  //         } else {
+  //           alert('Payment failed. Please try again.');
+  //         }
+  //       },
+  //       onclose() {
+  //         alert('You have canceled the transaction');
+  //       },
+  //       customizations: {
+  //         title: 'Origin8Lab Payment',
+  //         description: 'Payment for selected courses',
+  //         logo: logoblack,
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.error('Error initializing transaction:', error);
+  //     alert('An error occurred during payment initiation');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <>
@@ -187,7 +173,7 @@ function Payment() {
                   onClick={userCountry.toLowerCase() === 'nigeria' ? paystackPayment : dollarPaystackPayment}
                   disabled={isLoading}
                 />
-                <Form.Check
+                {/* <Form.Check
                   inline
                   label={<img src={flutterwave} alt="Flutterwave" className="payment-img" />}
                   name="group1"
@@ -195,7 +181,7 @@ function Payment() {
                   id="inline-radio-2"
                   onClick={flutterwavePayment}
                   disabled={isLoading}
-                />
+                /> */}
               </div>
             </Form>
           </div>
